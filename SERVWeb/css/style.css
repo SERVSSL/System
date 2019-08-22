@@ -154,14 +154,14 @@ h1, h2, h3, h4
 	background-position:3px; 
 }
 
-/* Water */
+/* Milk */
 .calendarSlot8
 {
-	background-color:#e2f5ff;
-	background-image: url('/img/Water.png');
+	background-color:#ffffff;
+	background-image: url('/img/Milk.png');
 	background-repeat:no-repeat;
-	background-size: 14px 14px;
-	background-position:3px; 
+	background-size: 16px 16px;
+	background-position:2px; 
 }
 
 .calendarSlot9

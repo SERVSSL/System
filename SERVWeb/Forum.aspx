@@ -1,40 +1,19 @@
-﻿<%@ Page Language="C#" Inherits="SERVWeb.Forum"%>
-<%@ Register TagPrefix="SERV" TagName="TopControl" Src="TopControl.ascx" %>
-<%@ Register TagPrefix="SERV" TagName="Panels" Src="Panels.ascx" %>
+﻿<%@ Page Language="C#" Inherits="SERVWeb.Forum" MasterPageFile="~/Master.master" %>
+<%@ MasterType VirtualPath="~/Master.master" %>
 <%@ Import Namespace="SERVWeb" %>
 
-<!DOCTYPE html>
-<html>
-    
-    <head>
-        <title><%=SERVGlobal.SystemName%> - The Forum</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <%=SERVGlobal.CSSInclude()%>
-        <link rel="stylesheet" href="/css/smoothness/jquery-ui-1.10.3.custom.min.css" />
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/icons.css" />
-        <link rel="icon" type="image/png" href="img/logo.png">
-        <script src="/js/jquery-1.10.1.min.js"></script>
-        <script src="/js/jquery-ui-1.10.3.custom.min.js"></script>
-        <%=SERVGlobal.MainJSInclude()%>	
-		<style type="text/css">
-			html { height: 100% }
-			body { height: 100%; margin: 0px; padding: 0; }
-		</style>
-    </head>
+<asp:Content ContentPlaceHolderID="titlePlaceholder" ID="titlePlaceholderContent" runat="server">The Forum</asp:Content>
+<asp:Content ContentPlaceHolderID="contentPlaceholder" ID="contentPlaceholderContent" runat="server">
 
-    <body style="overflow:hidden">
-        
-        <script src="/js/bootstrap.min.js"></script>			
-		<SERV:TopControl runat="server" id="topControl" />
-      
-		<iframe src="<%=SERVGlobal.ForumURL%>" style="width:100%; height:100%"  frameborder="0">
-		</iframe>
-		<script>
-			_loaded();
-			loadNewsBanner();
-		</script>
-	</body>
-</html>
+	<div class="row">
+		<div class="span12">
+			<p><a href="<%=SERVGlobal.ForumURL%>" target="_blank" class="btn btn-primary">Open the SERV S&SL Forum</a></p>
+		</div>
+	</div>
 
+	<script>
+		_loaded();
+		initFeedback();
+	</script>
 
+</asp:Content>
