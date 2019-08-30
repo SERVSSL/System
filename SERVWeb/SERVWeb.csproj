@@ -124,7 +124,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\smoothness\images\animated-overlay.gif" />
+    <Content Include="css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="css\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="css\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="css\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="css\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="css\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="css\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="css\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="css\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="css\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="css\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="css\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="css\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="css\smoothness\jquery-ui-1.10.3.custom.css" />
+    <Content Include="css\smoothness\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="img\GreyHelicopter.png" />
     <Content Include="img\Milk.png" />
+    <Content Include="img\quesPin.png" />
+    <Content Include="img\spinnerLarge.gif" />
     <Content Include="Service\Service.asmx" />
     <Content Include="Master.master" />
     <Content Include="js\bootstrap.js" />
@@ -411,6 +430,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="FolderProfile.pubxml" />
     <None Include="web.config.dockerdeploy" />
   </ItemGroup>
 </Project>
