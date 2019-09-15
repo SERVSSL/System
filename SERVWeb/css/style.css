@@ -173,6 +173,15 @@ h1, h2, h3, h4
 	background-position:3px; 
 }
 
+.calendarSlot10
+{
+	background-color:#fffee8;
+	background-image: url('/img/sample.png');
+	background-repeat:no-repeat;
+	background-size: 14px 14px;
+	background-position:3px; 
+}
+
 .rosterNew
 {
 	background-color: #dff0d8;

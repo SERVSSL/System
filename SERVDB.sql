@@ -896,7 +896,7 @@ INSERT INTO `SERV`.`Calendar` (`CalendarID`, `Name`, `SimpleCalendar`, `SimpleDa
 INSERT INTO `SERV`.`Calendar` (`CalendarID`, `Name`, `SimpleCalendar`, `SimpleDaysIncrement`, `SequentialDayCount`, `VolunteerRemainsFree`, `RequiredTagID`, `DefaultRequirement`, `SortOrder`, `LastGenerated`, `GeneratedUpTo`, `GroupID`) VALUES (DEFAULT, 'Hooleygan', 1, 14, NULL, 0, 7, 1, 3, NULL, NULL, 1);
 INSERT INTO `SERV`.`Calendar` (`CalendarID`, `Name`, `SimpleCalendar`, `SimpleDaysIncrement`, `SequentialDayCount`, `VolunteerRemainsFree`, `RequiredTagID`, `DefaultRequirement`, `SortOrder`, `LastGenerated`, `GeneratedUpTo`, `GroupID`) VALUES (DEFAULT, 'Milk', 0, 0, NULL, 1, 0, 0, 300, NULL, NULL, 1);
 INSERT INTO `SERV`.`Calendar` (`CalendarID`, `Name`, `SimpleCalendar`, `SimpleDaysIncrement`, `SequentialDayCount`, `VolunteerRemainsFree`, `RequiredTagID`, `DefaultRequirement`, `SortOrder`, `LastGenerated`, `GeneratedUpTo`, `GroupID`) VALUES (DEFAULT, 'Daytime Blood', 0, 0, NULL, 0, 7, 0, 400, NULL, NULL, 1);
-
+INSERT INTO `SERV`.`Calendar` (`CalendarID`, `Name`, `SimpleCalendar`, `SimpleDaysIncrement`, `SequentialDayCount`, `VolunteerRemainsFree`, `RequiredTagID`, `DefaultRequirement`,`SortOrder`, `LastGenerated`, `GeneratedUpTo`, `GroupID`) VALUES (10, 'Daytime Sample', 0, 0, NULL, 0, 7, 0, 450, NULL, NULL, 1);
 
 COMMIT;
 

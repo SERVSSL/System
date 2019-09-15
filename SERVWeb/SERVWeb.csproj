@@ -143,6 +143,7 @@
     <Content Include="img\GreyHelicopter.png" />
     <Content Include="img\Milk.png" />
     <Content Include="img\quesPin.png" />
+    <Content Include="img\sample.png" />
     <Content Include="img\spinnerLarge.gif" />
     <Content Include="Service\Service.asmx" />
     <Content Include="Master.master" />
