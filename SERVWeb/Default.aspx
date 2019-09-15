@@ -20,6 +20,7 @@
 			<asp:TextBox runat="server" id="txtPassword" TextMode="password" Style="width:250px; height:30px; font-size:medium"/><br/>
 			<asp:Button runat="server" id="cmdLogin" Text="Login" class="btn btn-primary btn-lg" onclick="cmdLoginClick" Style="width:265px; height:40px;"/><br/>
 			<asp:Literal runat="server" id="litServerClient"></asp:Literal><br/>
+		    <a href="PasswordReset.aspx">Forgot password</a><br/><br/>
 			<p class="small">If you are interested in using the SERV system<br/>for your organisation, please <a href="http://www.servssl.org.uk/contact">contact us</a>.</p>
 		</div>
 	</div>
