@@ -400,17 +400,17 @@ namespace SERVBLL
 			return false;
 		}
 
-		public void SendPasswordResetEmail(Member m, string newPass, int userID)
+		public void SendPasswordResetEmail(Member m, string token, int userID)
 		{
 			SendEmail(m.EmailAddress, "SERV System Password Reset", 
 				string.Format("Hi {0},\r\n\r\n" + 
-					"Somebody requested a new password for your SERV SSL System account (NOT the Forum). Your new password is:\r\n\r\n" + 
-					"{1}\r\n\r\n" + "If you did not request this, please note that this IS STILL your new password.  This may have been done for you by a system administrator.  If you think this was done in error, please report it on the forum.\r\n\r\n" + 
-					"We suggest you now change your password to something more memorable.\r\n\r\n" + 
-					"Please goto http://system.servssl.org.uk ASAP.\r\n\r\n" +
+					"Somebody requested a new password for your SERV SSL System account (NOT the Forum).\r\n\r\n" +
+					"To reset your password please click this link:\r\n\r\n" + 
+					"https://system.servssl.org.uk/SetPassword.aspx?t={1} \r\n\r\n" +
+					"If you don't use this link within 1 hour, it will expire. To get a new password reset link, visit https://system.servssl.org.uk/PasswordReset.aspx \r\n\r\n" +
 					"Thanks,\r\n\r\n" + 
 					"SERV SSL System {2}", 
-					m.FirstName, newPass, MessageBLL.FOOTER), userID);
+					m.FirstName, token, MessageBLL.FOOTER), userID);
 		}
 
 		public void SendNewMemberEmail(Member member, int userId)

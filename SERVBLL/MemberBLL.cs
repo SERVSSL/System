@@ -147,10 +147,11 @@ namespace SERVBLL
 			member.MemberID = 0;
 			int ret = Create(member);
 			User u = GetUserForMember(ret);
+			var token = new PasswordResetBLL().GetToken(member.EmailAddress);
 			try
 			{
 				new MessageBLL().SendNewMemberEmail(member, u.UserID);
-				SendPasswordReset(member.EmailAddress);
+				SendPasswordReset(member.EmailAddress, token);
 			}
 			catch(Exception e)
 			{
@@ -231,15 +232,11 @@ namespace SERVBLL
 			new MemberDAL().SetPasswordHash(username, passwordHash);
 		}
 
-		public void SendPasswordReset(string username)
+		public void SendPasswordReset(string username, string token)
 		{
 			Member m = GetByEmail(username);
 			if (m == null) { return; }
-			string newPass = m.MobileNumber.Replace(" ", "") + m.PostCode.Replace(" ", "").ToLower() + new Random().Next(9999);
-			newPass = newPass.Replace(" ", "").ToLower();
-			string passHash = SERV.Utils.Authentication.Hash(m.EmailAddress.ToLower().Trim() + newPass);
-			new MessageBLL().SendPasswordResetEmail(m, newPass, GetUserForMember(m.MemberID).UserID);
-			SetPassword(m.EmailAddress, passHash);
+			new MessageBLL().SendPasswordResetEmail(m, token, GetUserForMember(m.MemberID).UserID);
 		}
 
 		/// <summary>
