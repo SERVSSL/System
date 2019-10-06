@@ -19,7 +19,7 @@ namespace SERVBLL
 
 		private const string FROM = "noreply@system.servssl.org.uk";
 		private const string SERVER = "localhost";
-		public static string FOOTER = "\r\n\r\n\r\nThis message was sent from an unattended mailbox by the SERV SSL System.  Do not reply to this mail.  If you need to make contact, please use the Forum to PM Tristan Phillips.\r\n";
+		public static string FOOTER = "\r\n\r\n\r\nThis message was sent from an unattended mailbox by the SERV SSL System.  Do not reply to this mail.  If you need to make contact, please use the Forum http://servssl.org.uk/members/ \r\n";
 
 		public MessageBLL()
 		{
