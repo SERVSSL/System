@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SERVDataContract.DbLinq;
 
 namespace SERVDAL
@@ -26,6 +27,17 @@ namespace SERVDAL
 		public void Dispose()
 		{
 			_db.Dispose();
+		}
+
+		public PasswordReset FindByToken(string token)
+		{
+			return _db.PasswordReset.FirstOrDefault(x => x.Token == token);
+		}
+
+		public void Delete(PasswordReset passwordReset)
+		{
+			_db.PasswordReset.DeleteOnSubmit(passwordReset);
+			_db.SubmitChanges();
 		}
 	}
 }

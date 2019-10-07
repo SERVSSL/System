@@ -27,5 +27,18 @@ namespace SERVBLL
 				return Convert.ToBase64String(tokenData);
 			}
 		}
+
+		public string GetEmailByToken(string token)
+		{
+			using (var dal = new PasswordResetDal())
+			{
+				var passwordReset = dal.FindByToken(token);
+				if (passwordReset == null)
+					return null;
+				dal.Delete(passwordReset);
+				var age = DateTime.Now - passwordReset.CreateDate;
+				return age.TotalHours>1 ? null : passwordReset.EmailAddress;
+			}
+		}
 	}
 }

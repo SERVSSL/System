@@ -56,6 +56,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
@@ -153,6 +154,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\style.css" />
+    <Content Include="SetPassword.aspx" />
     <Content Include="TopControl.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="ViewMember.aspx" />
@@ -255,6 +257,13 @@
     </Compile>
     <Compile Include="Master.master.designer.cs">
       <DependentUpon>Master.master</DependentUpon>
+    </Compile>
+    <Compile Include="SetPassword.aspx.cs">
+      <DependentUpon>SetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SetPassword.aspx.designer.cs">
+      <DependentUpon>SetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="TopControl.ascx.cs">
       <DependentUpon>TopControl.ascx</DependentUpon>
