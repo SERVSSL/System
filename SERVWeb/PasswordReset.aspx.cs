@@ -1,3 +1,4 @@
+using System.Web;
 
 namespace SERVWeb
 {
@@ -6,7 +7,6 @@ namespace SERVWeb
 
 	public partial class PasswordReset : System.Web.UI.Page
 	{
-
 		protected void cmdResetClick(object src, EventArgs e)
 		{
 			var emailAddress = txtEmail.Text.Trim();
@@ -14,13 +14,12 @@ namespace SERVWeb
 
 			var passwordResetBll = new PasswordResetBLL();
 			var token = passwordResetBll.GetToken(emailAddress);
-
 			if (token == null)
 				return;
-			new MemberBLL().SendPasswordReset(emailAddress, token);
+
+			new MemberBLL().SendPasswordReset(emailAddress, HttpUtility.UrlEncode(token));
 			Response.Redirect("Login.aspx");
 		}
-
 	}
 }
 
