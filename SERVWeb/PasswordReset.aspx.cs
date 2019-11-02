@@ -12,13 +12,20 @@ namespace SERVWeb
 			var emailAddress = txtEmail.Text.Trim();
 			if (emailAddress == string.Empty) { return; }
 
+			SendPasswordResetEmail(emailAddress);
+
+			resetForm.Visible = false;
+			submittedMessage.Visible = true;
+		}
+
+		private static void SendPasswordResetEmail(string emailAddress)
+		{
 			var passwordResetBll = new PasswordResetBLL();
 			var token = passwordResetBll.GetToken(emailAddress);
 			if (token == null)
 				return;
 
 			new MemberBLL().SendPasswordReset(emailAddress, HttpUtility.UrlEncode(token));
-			Response.Redirect("Login.aspx");
 		}
 	}
 }

@@ -20,7 +20,11 @@ namespace SERVWeb {
 		protected System.Web.UI.WebControls.TextBox txtEmail;
 		
 		protected System.Web.UI.WebControls.Button cmdChange;
-		
+
+		protected System.Web.UI.WebControls.Panel resetForm;
+		protected System.Web.UI.WebControls.Panel submittedMessage;
+
+
 		public new SERVWeb.Master Master {
 			get {
 				return ((SERVWeb.Master)(base.Master));
