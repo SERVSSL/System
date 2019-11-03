@@ -1,11 +1,8 @@
+using System;
+using SERVBLL;
 
 namespace SERVWeb
 {
-	using System;
-	using System.Web;
-	using System.Web.UI;
-	using SERVDataContract;
-	using SERVBLL;
 
 	public partial class ChangePassword : System.Web.UI.Page
 	{
@@ -17,15 +14,34 @@ namespace SERVWeb
 
 		protected void cmdChangeClick (object src, EventArgs e)
 		{
-			if (txtNewPassword.Text.Trim() == string.Empty) { return; }
-			User u = new Service().Login(txtEmail.Text.ToLower().Trim(), SERV.Utils.Authentication.Hash(txtEmail.Text.ToLower().Trim() + txtOldPassword.Text));
-			if (u != null && txtNewPassword.Text == txtNewPassword2.Text)
+			var newPassword = txtNewPassword.Text.Trim();
+			if (newPassword.Length<8)
 			{
-				new MemberBLL().SetPassword(u.Member.EmailAddress, SERV.Utils.Authentication.Hash(u.Member.EmailAddress.ToLower().Trim() + txtNewPassword.Text));
-				Response.Redirect("Home.aspx?success=yes");
+				SetErrorMessage("New password must be at least eight characters long");
+				return;
 			}
+
+			if (newPassword != txtNewPassword2.Text.Trim())
+			{
+				SetErrorMessage("New password and confirm password do not match");
+				return;
+			}
+
+			var emailAddress = SERVGlobal.User.Member.EmailAddress.Trim().ToLower();
+			var u = new Service().Login(emailAddress, SERV.Utils.Authentication.Hash(emailAddress + txtOldPassword.Text));
+			if (u==null)
+			{
+				SetErrorMessage("Old password entered incorrectly");
+				return;
+			}
+			new MemberBLL().SetPassword(u.Member.EmailAddress, SERV.Utils.Authentication.Hash(newPassword + txtNewPassword.Text.Trim()));
+			Response.Redirect("Home.aspx?success=yes");
 		}
 
+		private void SetErrorMessage(string message)
+		{
+			litErrors.Text = string.Format("<script>niceAlert('{0}');</script>", message);
+		}
 	}
 }
 

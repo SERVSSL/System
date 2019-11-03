@@ -26,7 +26,8 @@ namespace SERVWeb {
 		protected System.Web.UI.WebControls.TextBox txtNewPassword2;
 		
 		protected System.Web.UI.WebControls.Button cmdChange;
-		
+		protected System.Web.UI.WebControls.Literal litErrors;
+
 		public new SERVWeb.Master Master {
 			get {
 				return ((SERVWeb.Master)(base.Master));
