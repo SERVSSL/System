@@ -546,6 +546,16 @@ CREATE TABLE IF NOT EXISTS `SERV`.`SystemSetting` (
   PRIMARY KEY (`SystemSettingID`))
 ENGINE = InnoDB;
 
+
+CREATE TABLE IF NOT EXISTS `SERV`.`PasswordReset` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Token` VARCHAR(100) NOT NULL,
+  `EmailAddress` VARCHAR(60) NOT NULL,
+  `CreateDate` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB;
+
+
 USE `SERV` ;
 
 -- -----------------------------------------------------

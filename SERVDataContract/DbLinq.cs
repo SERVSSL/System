@@ -231,6 +231,14 @@ namespace SERVDataContract.DbLinq
 				return this.GetTable <VehicleType>();
 			}
 		}
+
+		public Table<PasswordReset> PasswordReset
+		{
+			get
+			{
+				return this.GetTable <PasswordReset>();
+			}
+		}
 	}
 	
 	#region Start MONO_STRICT
@@ -7133,5 +7141,140 @@ namespace SERVDataContract.DbLinq
 			entity.VehicleType = null;
 		}
 		#endregion
+	}
+	
+	[Table(Name="PasswordReset")]
+	public partial class PasswordReset : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	{
+		
+		private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
+
+		private int _id;
+		private string _token;
+		private string _emailAddress;
+		private System.DateTime _createDate;
+		
+		
+		#region Extensibility Method Declarations
+		partial void OnCreated();
+
+		partial void OnIdChanging(int value);
+		partial void OnIdChanged();
+
+		partial void OnTokenChanged();
+		partial void OnTokenChanging(string value);
+
+		partial void OnEmailAddressChanged();
+		partial void OnEmailAddressChanging(string value);
+	
+		partial void OnCreateDateChanged();
+		partial void OnCreateDateChanging(DateTime value);
+	
+		#endregion
+		
+		
+		public PasswordReset()
+		{
+			this.OnCreated();
+		}
+
+		[Column(Storage = "_id", Name = "Id", DbType = "int", IsPrimaryKey = true, IsDbGenerated = true, AutoSync = AutoSync.Never, CanBeNull = false)]
+		[DebuggerNonUserCode()]
+		public int Id
+		{
+			get
+			{
+				return _id;
+			}
+			set
+			{
+				if (_id == value) return;
+				OnIdChanging(value);
+				SendPropertyChanging();
+				_id = value;
+				SendPropertyChanged("Id");
+				OnIdChanged();
+			}
+		}
+		
+		[Column(Storage="_token", Name= "Token", DbType="varchar(100)", AutoSync=AutoSync.Never)]
+		[DebuggerNonUserCode()]
+		public string Token
+		{
+			get
+			{
+				return _token;
+			}
+			set
+			{
+				if (_token == value) return;
+				OnTokenChanging(value);
+				SendPropertyChanging();
+				_token = value;
+				SendPropertyChanged("Token");
+				OnTokenChanged();
+			}
+		}
+
+		[Column(Storage = "_emailAdress", Name = "EmailAddress", DbType = "varchar(60)", AutoSync = AutoSync.Never)]
+		[DebuggerNonUserCode()]
+		public string EmailAddress
+		{
+			get
+			{
+				return _emailAddress;
+			}
+			set
+			{
+				if (_emailAddress == value) return;
+				OnEmailAddressChanging(value);
+				SendPropertyChanging();
+				_emailAddress = value;
+				SendPropertyChanged("EmailAddress");
+				OnEmailAddressChanged();
+			}
+		}
+
+		[Column(Storage = "_createDate", Name = "CreateDate", DbType = "datetime", AutoSync = AutoSync.Never)]
+		[DebuggerNonUserCode()]
+		public DateTime CreateDate
+		{
+			get
+			{
+				return _createDate;
+			}
+			set
+			{
+				if (_createDate == value) return;
+				OnCreateDateChanging(value);
+				SendPropertyChanging();
+				_createDate = value;
+				SendPropertyChanged("CreateDate");
+				OnCreateDateChanged();
+			}
+		}
+
+		public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
+		
+		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
+			if ((h != null))
+			{
+				h(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(string propertyName)
+		{
+			System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
+			if ((h != null))
+			{
+				h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
 	}
 }

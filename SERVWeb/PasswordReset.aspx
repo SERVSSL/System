@@ -4,12 +4,17 @@
 <asp:Content ContentPlaceHolderID="contentPlaceholder" ID="contentPlaceholderContent" runat="server">
 
 <h3>Reset Your Password</h3>
-<p>Enter your email address and a new password will be sent to you.</p>
-<p>When you press 'Reset' you will be directed to the login page.  Check your email and use the new password you are sent.<p/>
-<label>Email Address:</label>
-<asp:TextBox runat="server" id="txtEmail" />
-<br/><br/>
-<asp:Button runat="server" id="cmdChange" Text="Reset" class="btn btn-primary btn-lg readOnlyHidden" onclick="cmdResetClick"/>
+<asp:Panel runat="server" id="resetForm">
+    <p>Enter your email address and we will send you a link to reset your password.</p>
+    <label>Email Address:</label>
+    <asp:TextBox runat="server" id="txtEmail" />
+    <p></p>
+    <asp:Button runat="server" id="cmdChange" Text="Reset" class="btn btn-primary btn-lg readOnlyHidden" onclick="cmdResetClick"/>
+</asp:Panel>
+
+<asp:Panel runat="server" id="submittedMessage" Visible="False">
+    <p>An email has been sent to you with instructions on how to reset your password. It is valid for one hour, so please check your email.</p>
+</asp:Panel>
 
 <script>
 	_loaded();

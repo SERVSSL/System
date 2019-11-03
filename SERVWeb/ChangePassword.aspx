@@ -6,14 +6,17 @@
 <asp:Content ContentPlaceHolderID="contentPlaceholder" ID="contentPlaceholderContent" runat="server">
 
 <h3>Change Your Password</h3>
-<label>Email Address:</label>
-<asp:TextBox runat="server" id="txtEmail" />
+
+
+<asp:Literal runat="server" ID="litErrors"></asp:Literal>
+    
+<p>Your password needs to be at least eight characters</p>
 
 <label>Old Password:</label>
 <asp:TextBox runat="server" id="txtOldPassword" TextMode="password"/>
 <label>New Password:</label>
 <asp:TextBox runat="server" id="txtNewPassword" TextMode="password"/>
-<label>New Password:</label>
+<label>Confirm New Password:</label>
 <asp:TextBox runat="server" id="txtNewPassword2" TextMode="password"/>
 
 <br/><br/>
