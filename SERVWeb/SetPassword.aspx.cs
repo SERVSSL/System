@@ -28,6 +28,7 @@ namespace SERVWeb
 			if (newPassword != txtConfirmPassword.Text.Trim())
 			{
 				errMessage.InnerText = "Passwords do not match";
+				return;
 			}
 			var token = hdnToken.Value;
 			var passwordResetBll = new PasswordResetBLL();
