@@ -146,6 +146,7 @@
     <Content Include="img\quesPin.png" />
     <Content Include="img\sample.png" />
     <Content Include="img\spinnerLarge.gif" />
+    <Content Include="MilkRunLog.aspx" />
     <Content Include="Service\Service.asmx" />
     <Content Include="Master.master" />
     <Content Include="js\bootstrap.js" />
@@ -247,6 +248,13 @@
     <Content Include="js\GA.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MilkRunLog.aspx.cs">
+      <DependentUpon>MilkRunLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MilkRunLog.aspx.designer.cs">
+      <DependentUpon>MilkRunLog.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Service\Service.asmx.cs">
       <DependentUpon>Service.asmx</DependentUpon>
       <SubType>Component</SubType>
