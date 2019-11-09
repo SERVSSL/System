@@ -5,7 +5,17 @@
 <asp:Content ContentPlaceHolderID="contentPlaceholder" ID="contentPlaceholderContent" runat="server">
 
     <div>
-        <h3>Controller Log</h3>
+        <h3>Controller Log - Milk Runs</h3>
+        
+        
+        <div class="row">
+            <div class="span4 input-prepend">
+                <button type="button" class="btn" onclick="" id="btnBloodRun" disabled>Controller</button>
+                <input type="text" id="txtController" style="width:150px" class="controllers" placeholder="Choose the controller" /> 
+            </div>
+        </div>
+        <br/>
+
 
         <div class="row">
 
@@ -15,11 +25,59 @@
                     <div class="span4">
 
                         <label>Rider / Driver:</label>
-                        <input type="text" id="txtAARider" class="riders" placeholder="Choose the rider / driver" />
+                        <input type="text" id="txtRider" class="riders" placeholder="Choose the rider / driver" />
+                        
+                        <label>Run Date:</label>
+                        <input type="text" id="txtShiftDate" class="date" />
+
+                        <label>Collect Time:</label>
+                        <input type="text" id="txtPickupTime" placeholder="HH:MM" />
+
+                        <label>Deliver Time:</label>
+                        <input type="text" id="txtDeliverTime" placeholder="HH:MM" />
+
+                        <label>Home Safe Time:</label>
+                        <input type="text" id="txtReturnTime" placeholder="HH:MM" />
+                        <br/><br/>
                     </div>
+                    
+                    <div class="span4">
+                        <label>Vehicle:</label>
+                        <div class="btn-group">
+                            <button type="button" class="btn" disabled id="btnAAVehicle">Select the vehicle</button>
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                            <ul class="dropdown-menu" id="lstAAVehicles">
+                            </ul>
+                        </div>
+                        
+                        <label>Collect from postcode:</label>
+                        <input type="text" id="txtOrigin" class="locations" placeholder="First half of postcode" />
+
+                        <label>Collect from:</label>
+                        <input type="text" id="txtOrigin" class="locations" placeholder="Type and Choose" onblur="originSelected();"/>
+                        
+                        <label>Taken To:</label>
+                        <input type="text" id="txtDrop" class="locations" placeholder="First half of postcode" />
+
+                        <label>Notes:</label>
+                        <textarea id="txtNotes" maxlength="599" data-bind="value: vm.Notes"></textarea>
+
                     </div>
+
+                 </div>
             </fieldset>
         </div>
+        
+        <hr/>
+        <div class="row">
+            <div class="span6">
+                <button type="button" class="btn btn-primary btn-lg readOnlyHidden" id="cmdSave" onclick="saveRun()"><i class="icon-ok icon-white"></i> Save Run</button> 
+            </div>
+            <div class="span6 pull-right readOnlyHidden" style="text-align:right">
+                <button type="button" class="btn btn-lg readOnlyHidden" id="cmdNotRun" onclick="saveNotRun()" style="display:none"><i class="icon-remove icon-red"></i> Not Completed</button>
+            </div>
+        </div>
+
     </div>
 
 </asp:Content>
