@@ -269,3 +269,14 @@ h1, h2, h3, h4
     margin-top: -10px;
     margin-bottom: 10px;
 }
+
+.milk-icon {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url('../img/milk-bottle.png');
+    background-repeat: no-repeat;
+    margin-top: 1px;
+}

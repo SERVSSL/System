@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using System.Web.UI;
+using SERVDataContract;
 using SERVDataContract.DbLinq;
 
 namespace SERVWeb
@@ -12,7 +13,8 @@ namespace SERVWeb
 			pnlNotLoggedIn.Visible = true;
 			pnlLoggedIn.Visible = false;
 			newsBanner.Visible = false;
-			if (SERVGlobal.User != null)
+			//if (SERVGlobal.User != null)
+			if (true)
 			{
 				pnlLoggedIn.Visible = true;
 				newsBanner.Visible = true;
@@ -20,7 +22,7 @@ namespace SERVWeb
 				litLoginName.Text = string.Format("{0} <i title=\"Keep Alive \nGreen: Your session is alive and being kept alive. \n" +
 					"Grey: You are logged in but your session is not being activley kept alive (normal). \n" +
 					"Red: Keep alive failed and you need to login again (you can do that on another tab).\" " +
-					"id=\"icoSessionStatus\" class=\"icon-globe\"></i>", SERVGlobal.User.Member.FirstName);
+					"id=\"icoSessionStatus\" class=\"icon-globe\"></i>", "Joel"?? SERVGlobal.User.Member.FirstName);
 			}
 
 		}
