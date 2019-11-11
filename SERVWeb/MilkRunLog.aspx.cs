@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SERVWeb
 {
@@ -12,6 +7,12 @@ namespace SERVWeb
 		protected void Page_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		protected string MemberName()
+		{
+			return "Joel";
+			//return string.Format("{0} {1}", SERVGlobal.User.Member.LastName, SERVGlobal.User.Member.FirstName);
 		}
 	}
 }

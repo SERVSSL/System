@@ -51,7 +51,7 @@
                         </div>
                         
                         <label>Collect from postcode:</label>
-                        <input type="text" id="txtOrigin" class="locations" placeholder="First half of postcode" />
+                        <input type="text" id="txtOrigin" placeholder="First half of postcode" />
 
                         <label>Collect from:</label>
                         <input type="text" id="txtOrigin" class="locations" placeholder="Type and Choose" onblur="originSelected();"/>
@@ -79,6 +79,11 @@
         </div>
 
     </div>
-
+    <script>
+        _loaded();
+        $("#txtController").val("<%=MemberName()%>");
+        listLocations(null);
+    </script>
+    <script src="js/MilkLog.js"></script>
 </asp:Content>
 

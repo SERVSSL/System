@@ -147,6 +147,7 @@
     <Content Include="img\quesPin.png" />
     <Content Include="img\sample.png" />
     <Content Include="img\spinnerLarge.gif" />
+    <Content Include="js\MilkLog.js" />
     <Content Include="MilkRunLog.aspx" />
     <Content Include="Service\Service.asmx" />
     <Content Include="Master.master" />
