@@ -44,20 +44,21 @@
                     <div class="span4">
                         <label>Vehicle:</label>
                         <div class="btn-group">
-                            <button type="button" class="btn" disabled id="btnAAVehicle">Select the vehicle</button>
+                            <button type="button" class="btn" disabled id="btnVehicle">Select the vehicle</button>
                             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                            <ul class="dropdown-menu" id="lstAAVehicles">
+                            <ul class="dropdown-menu" id="lstVehicles">
                             </ul>
                         </div>
+                        <br/><br/>
                         
                         <label>Collect from postcode:</label>
-                        <input type="text" id="txtOrigin" placeholder="First half of postcode" />
+                        <input type="text" id="txtOriginPostcode" placeholder="First half of postcode" />
 
-                        <label>Collect from:</label>
+                        <label>Collect from hospital:</label>
                         <input type="text" id="txtOrigin" class="locations" placeholder="Type and Choose" onblur="originSelected();"/>
                         
                         <label>Taken To:</label>
-                        <input type="text" id="txtDrop" class="locations" placeholder="First half of postcode" />
+                        <input type="text" id="txtDrop" class="locations" placeholder="Type and Choose" />
 
                         <label>Notes:</label>
                         <textarea id="txtNotes" maxlength="599" data-bind="value: vm.Notes"></textarea>
@@ -80,9 +81,7 @@
 
     </div>
     <script>
-        _loaded();
         $("#txtController").val("<%=MemberName()%>");
-        listLocations(null);
     </script>
     <script src="js/MilkLog.js"></script>
 </asp:Content>
