@@ -53,17 +53,19 @@ Serv.Milklog = {
     },
     GetDataForSave: function() {
         return {
-            controllerMemberId: getControllerId($("#txtController").val()),
-            riderMemberId: getMemberId($("#txtRider").val()),
-            runDate: $("#txtShiftDate").val(),
-            collectTime: $("#txtPickupTime").val(),
-            deliverTime: $("#txtDeliverTime").val(),
-            homeSafeTime: $("#txtReturnTime").val(),
-            vehicleTypeId: Serv.Milklog.SelectedVehicleId,
-            originPostcode: $("#txtOriginPostcode").val(),
-            originLocationId: getLocationId($("#txtOrigin").val()),
-            deliverToLocationId: getLocationId($("#txtDrop").val()),
-            notes: $("#txtNotes").val()
+            model: {
+                controllerMemberId: getControllerId($("#txtController").val()),
+                riderMemberId: getMemberId($("#txtRider").val()),
+                runDate: $("#txtShiftDate").val(),
+                collectTime: $("#txtPickupTime").val(),
+                deliverTime: $("#txtDeliverTime").val(),
+                homeSafeTime: $("#txtReturnTime").val(),
+                vehicleTypeId: Serv.Milklog.SelectedVehicleId,
+                originPostcode: $("#txtOriginPostcode").val(),
+                originLocationId: getLocationId($("#txtOrigin").val()),
+                deliverToLocationId: getLocationId($("#txtDrop").val()),
+                notes: $("#txtNotes").val()
+            }
         };
     },
     OnSave: function() {

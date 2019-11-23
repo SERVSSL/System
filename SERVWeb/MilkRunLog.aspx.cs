@@ -11,7 +11,7 @@ namespace SERVWeb
 
 		protected string MemberName()
 		{
-			return "Joel";
+			return "Bodden Brendon";
 			//return string.Format("{0} {1}", SERVGlobal.User.Member.LastName, SERVGlobal.User.Member.FirstName);
 		}
 	}

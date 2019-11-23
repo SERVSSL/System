@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SERVDataContract;
 using SERVBLL;
 using System.Data;
+using SERVBLL.ViewModel;
 
 namespace SERVWeb
 {
@@ -292,10 +293,9 @@ namespace SERVWeb
 		}
 
 	    [WebMethod(EnableSession = true)]
-		public bool LogMilkRun(int controllerMemberId, int riderMemberId, string runDate, string collectTime, string deliverTime, string homeSafeTime,
-			int vehicleTypeId, string originPostcode, int originLocationId, int deliverToLocationId, string notes)
+		public bool LogMilkRun(MilkRunViewModel model)
 		{
-			var logMessage = $"controllerMemberId [{controllerMemberId}], riderMemberId [{riderMemberId}], runDate [{runDate}], collectTime [{collectTime}], deliverTime [{deliverTime}], homeSafeTime  [{homeSafeTime}], vehicleTypeId  [{vehicleTypeId}], originPostcode [{originPostcode}], originLocationId [{originLocationId}], deliverToLocationId [{deliverToLocationId}], notes [{notes}]";
+			var logMessage = $"controllerMemberId [{model.ControllerMemberId}], riderMemberId [{model.RiderMemberId}], runDate [{model.RunDate}], collectTime [{model.collectTime}], deliverTime [{model.deliverTime}], homeSafeTime  [{model.homeSafeTime}], vehicleTypeId  [{model.vehicleTypeId}], originPostcode [{model.originPostcode}], originLocationId [{model.originLocationId}], deliverToLocationId [{model.deliverToLocationId}], notes [{model.notes}]";
 		    _logger.Debug(logMessage);
 
 			return true;
