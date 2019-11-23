@@ -81,12 +81,10 @@ Serv.Milklog = {
             niceAlert("What did the rider / driver travel on or in?");
             return false;
         }
-        var originPostcode = $("#txtOriginPostcode").val();
-        var originLocationId = getLocationId($("#txtOrigin").val());
-        if (originPostcode) {
-            //dd   
-        } else if (originLocationId===0) {
-            //
+        var originResult = Serv.Milklog.OriginValidate($("#txtOriginPostcode").val(), $("#txtOrigin").val());
+        if (!originResult.isvalid) {
+            niceAlert(originResult.errorMessage);
+            return false;
         }
         var dropLocationId = getLocationId($("#txtDrop").val());
         if (dropLocationId === 0) {
@@ -94,9 +92,17 @@ Serv.Milklog = {
             return false;
         }
 
-
         return true;
 
+    },
+    OriginValidate: function(originPostcode, originHospitalName) {
+        var originLocationId = getLocationId(originHospitalName);
+        if (originPostcode) {
+            return { isvalid: true };
+        } else if (originLocationId > 0) {
+            return { isvalid: true };
+        }
+        return { isvalid: false, errorMessage: "Where did we collect? Must enter either a pickup postcode or hospital" };
     }
 };
 
