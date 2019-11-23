@@ -10,7 +10,8 @@ namespace SERVWeb
 
 	public class Service : System.Web.Services.WebService
     {
-		
+	    private static Logger _logger = new Logger();
+
 		private SERVDataContract.User CurrentUser()
 		{
 			if (System.Web.HttpContext.Current.Session["User"] == null) { return null; }
@@ -289,6 +290,16 @@ namespace SERVWeb
 				controllerMemberId, CurrentUser().UserID, _deliverDateTime, _returnDateTime,
 				riderMemberId, vehicleTypeId, boxesOutCsv, boxesInCsv, notes);
 		}
+
+	    [WebMethod(EnableSession = true)]
+		public bool LogMilkRun(int controllerMemberId, int riderMemberId, string runDate, string collectTime, string deliverTime, string homeSafeTime,
+			int vehicleTypeId, string originPostcode, int originLocationId, int deliverToLocationId, string notes)
+		{
+			var logMessage = $"controllerMemberId [{controllerMemberId}], riderMemberId [{riderMemberId}], runDate [{runDate}], collectTime [{collectTime}], deliverTime [{deliverTime}], homeSafeTime  [{homeSafeTime}], vehicleTypeId  [{vehicleTypeId}], originPostcode [{originPostcode}], originLocationId [{originLocationId}], deliverToLocationId [{deliverToLocationId}], notes [{notes}]";
+		    _logger.Debug(logMessage);
+
+			return true;
+	    }
 
 		[WebMethod(EnableSession = true)]
 		public bool SendSMSMessage(string numbers, string message, bool fromServ)

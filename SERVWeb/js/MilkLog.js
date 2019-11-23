@@ -48,7 +48,29 @@ Serv.Milklog = {
         if (!Serv.Milklog.Validate()) {
             return;
         }
-        niceAlert("You pressed Save");
+        var data = JSON.stringify(Serv.Milklog.GetDataForSave());
+        callServerSide("Service/Service.asmx/LogMilkRun", data, Serv.Milklog.OnSave, Serv.Milklog.OnError);
+    },
+    GetDataForSave: function() {
+        return {
+            controllerMemberId: getControllerId($("#txtController").val()),
+            riderMemberId: getMemberId($("#txtRider").val()),
+            runDate: $("#txtShiftDate").val(),
+            collectTime: $("#txtPickupTime").val(),
+            deliverTime: $("#txtDeliverTime").val(),
+            homeSafeTime: $("#txtReturnTime").val(),
+            vehicleTypeId: Serv.Milklog.SelectedVehicleId,
+            originPostcode: $("#txtOriginPostcode").val(),
+            originLocationId: getLocationId($("#txtOrigin").val()),
+            deliverToLocationId: getLocationId($("#txtDrop").val()),
+            notes: $("#txtNotes").val()
+        };
+    },
+    OnSave: function() {
+        niceAlert("Data saved");
+    },
+    OnError: function (xhr, ajaxOptions, thrownError) {
+        niceAlert("Warning Data not saved. Please try again and if that does not work contact tech support via the forum");
     },
     Validate: function() {
         var controllerId = getControllerId($("#txtController").val());
@@ -91,9 +113,7 @@ Serv.Milklog = {
             niceAlert("Where did we drop off?  You MUST choose an item from the list or type it exactly.");
             return false;
         }
-
         return true;
-
     },
     OriginValidate: function(originPostcode, originHospitalName) {
         var originLocationId = getLocationId(originHospitalName);
