@@ -11,7 +11,9 @@ namespace SERVWeb
 
 		protected string MemberName()
 		{
-			return $"{SERVGlobal.User.Member.LastName} {SERVGlobal.User.Member.FirstName}";
+			return SERVGlobal.User == null
+				? null
+				: $"{SERVGlobal.User.Member.LastName} {SERVGlobal.User.Member.FirstName}";
 		}
 	}
 }
