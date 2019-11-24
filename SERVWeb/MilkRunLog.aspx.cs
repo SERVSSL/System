@@ -15,5 +15,20 @@ namespace SERVWeb
 				? null
 				: $"{SERVGlobal.User.Member.LastName} {SERVGlobal.User.Member.FirstName}";
 		}
+
+		protected override void OnLoad(EventArgs e)
+		{
+			SERVGlobal.AssertAuthentication();
+			if (IsAdding())
+			{
+				SERVGlobal.AssertAuthentication((int)SERVDataContract.UserLevel.Controller, "Sorry, only controllers and above have access to contribute to the controller log.");
+			}
+		}
+
+		private bool IsAdding()
+		{
+			return Request["RunLogID"] == null 
+			       || !int.TryParse(Request["RunLogID"], out _);
+		}
 	}
 }
