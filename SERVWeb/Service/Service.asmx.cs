@@ -296,6 +296,7 @@ namespace SERVWeb
 	    [WebMethod(EnableSession = true)]
 		public bool LogMilkRun(MilkRunViewModel model)
 		{
+			Authenticate();
 			var logMessage = $"controllerMemberId [{model.ControllerMemberId}], riderMemberId [{model.RiderMemberId}], runDate [{model.RunDate}], collectTime [{model.CollectTime}], deliverTime [{model.DeliverTime}], homeSafeTime  [{model.HomeSafeTime}], vehicleTypeId  [{model.VehicleTypeId}], originPostcode [{model.OriginPostcode}], originLocationId [{model.OriginLocationId}], deliverToLocationId [{model.DeliverToLocationId}], notes [{model.Notes}]";
 		    _logger.Debug(logMessage);
 			model.CreatedByUserId = CurrentUser().UserID;
