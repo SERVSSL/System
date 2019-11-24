@@ -295,10 +295,10 @@ namespace SERVWeb
 	    [WebMethod(EnableSession = true)]
 		public bool LogMilkRun(MilkRunViewModel model)
 		{
-			var logMessage = $"controllerMemberId [{model.ControllerMemberId}], riderMemberId [{model.RiderMemberId}], runDate [{model.RunDate}], collectTime [{model.collectTime}], deliverTime [{model.deliverTime}], homeSafeTime  [{model.homeSafeTime}], vehicleTypeId  [{model.vehicleTypeId}], originPostcode [{model.originPostcode}], originLocationId [{model.originLocationId}], deliverToLocationId [{model.deliverToLocationId}], notes [{model.notes}]";
+			var logMessage = $"controllerMemberId [{model.ControllerMemberId}], riderMemberId [{model.RiderMemberId}], runDate [{model.RunDate}], collectTime [{model.CollectTime}], deliverTime [{model.DeliverTime}], homeSafeTime  [{model.HomeSafeTime}], vehicleTypeId  [{model.VehicleTypeId}], originPostcode [{model.OriginPostcode}], originLocationId [{model.OriginLocationId}], deliverToLocationId [{model.DeliverToLocationId}], notes [{model.Notes}]";
 		    _logger.Debug(logMessage);
-
-			return true;
+			var result = new MilkLogBLL().Save(model);
+			return result;
 	    }
 
 		[WebMethod(EnableSession = true)]
