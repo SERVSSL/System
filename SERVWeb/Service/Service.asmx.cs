@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SERVDataContract;
 using SERVBLL;
 using System.Data;
+using SERVBLL.Mappers;
 using SERVBLL.ViewModel;
 
 namespace SERVWeb
@@ -297,7 +298,8 @@ namespace SERVWeb
 		{
 			var logMessage = $"controllerMemberId [{model.ControllerMemberId}], riderMemberId [{model.RiderMemberId}], runDate [{model.RunDate}], collectTime [{model.CollectTime}], deliverTime [{model.DeliverTime}], homeSafeTime  [{model.HomeSafeTime}], vehicleTypeId  [{model.VehicleTypeId}], originPostcode [{model.OriginPostcode}], originLocationId [{model.OriginLocationId}], deliverToLocationId [{model.DeliverToLocationId}], notes [{model.Notes}]";
 		    _logger.Debug(logMessage);
-			var result = new MilkLogBLL().Save(model);
+			model.CreatedByUserId = CurrentUser().UserID;
+			var result = new MilkLogBLL(new MilkRunMapper()).Save(model);
 			return result;
 	    }
 
@@ -349,7 +351,7 @@ namespace SERVWeb
 			return new MemberBLL().Login(username, passwordHash);
 		}
 
-		[WebMethod(EnableSession = true)]
+	    [WebMethod(EnableSession = true)]
 		public bool Impersonate(int memberId)
 		{
 			Authenticate();
