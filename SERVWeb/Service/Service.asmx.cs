@@ -353,6 +353,17 @@ namespace SERVWeb
 		}
 
 	    [WebMethod(EnableSession = true)]
+	    public bool LoginUser(string username, string password)
+	    {
+		    var user = new MemberBLL().Login(username, SERV.Utils.Authentication.Hash(username.Trim().ToLower() + password));
+		    if (user == null)
+			    return false;
+
+		    SERVGlobal.User = user;
+		    return true;
+	    }
+
+		[WebMethod(EnableSession = true)]
 		public bool Impersonate(int memberId)
 		{
 			Authenticate();
@@ -374,8 +385,7 @@ namespace SERVWeb
 			}
 			return new ShiftBLL().TakeControl(CurrentUser().MemberID, overrideNumber);
 		}
-
-
+		
 		[WebMethod(EnableSession = true)]
 		public string[] GetMemberUniqueRuns()
 		{
