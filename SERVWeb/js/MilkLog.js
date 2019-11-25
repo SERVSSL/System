@@ -42,7 +42,7 @@ Serv.Milklog = {
                 }
             }
             if ($(this).val()) {
-                $("#txCollect").val("");
+                $("#txtCollect").val("");
             }
         });
     },
