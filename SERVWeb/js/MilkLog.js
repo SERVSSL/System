@@ -29,7 +29,7 @@ Serv.Milklog = {
         Serv.Milklog.SelectedVehicleId = vehicleTypeId;
     },
     InitialisePostcodeField: function() {
-        $("#txtOriginPostcode").keypress(function(e) {
+        $("#txtCollectPostcode").keypress(function(e) {
             var charInput = e.keyCode;
             if ((charInput >= 97) && (charInput <= 122)) { // lowercase
                 if (!e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
@@ -42,7 +42,7 @@ Serv.Milklog = {
                 }
             }
             if ($(this).val()) {
-                $("#txtOrigin").val("");
+                $("#txCollect").val("");
             }
         });
     },
@@ -63,8 +63,8 @@ Serv.Milklog = {
                 deliverTime: $("#txtDeliverTime").val(),
                 homeSafeTime: $("#txtReturnTime").val(),
                 vehicleTypeId: Serv.Milklog.SelectedVehicleId,
-                originPostcode: $("#txtOriginPostcode").val(),
-                originLocationId: getLocationId($("#txtOrigin").val()),
+                collectPostcode: $("#txtCollectPostcode").val(),
+                collectionLocationId: getLocationId($("#txtCollect").val()),
                 deliverToLocationId: getLocationId($("#txtDrop").val()),
                 notes: $("#txtNotes").val()
             }
@@ -107,9 +107,9 @@ Serv.Milklog = {
             niceAlert("What did the rider / driver travel on or in?");
             return false;
         }
-        var originResult = Serv.Milklog.OriginValidate($("#txtOriginPostcode").val(), $("#txtOrigin").val());
-        if (!originResult.isvalid) {
-            niceAlert(originResult.errorMessage);
+        var collectResult = Serv.Milklog.CollectValidate($("#txtCollectPostcode").val(), $("#txtCollect").val());
+        if (!collectResult.isvalid) {
+            niceAlert(collectResult.errorMessage);
             return false;
         }
         var dropLocationId = getLocationId($("#txtDrop").val());
@@ -119,22 +119,22 @@ Serv.Milklog = {
         }
         return true;
     },
-    OriginValidate: function(originPostcode, originHospitalName) {
-        var originLocationId = getLocationId(originHospitalName);
-        if (originPostcode) {
+    CollectValidate: function (collectPostcode, collectHospitalName) {
+        var collectionLocationId = getLocationId(collectHospitalName);
+        if (collectPostcode) {
             return { isvalid: true };
-        } else if (originLocationId > 0) {
+        } else if (collectionLocationId > 0) {
             return { isvalid: true };
         }
-        return { isvalid: false, errorMessage: "Where did we collect? Must enter either a pickup postcode or hospital" };
+        return { isvalid: false, errorMessage: "Where did we collect? Must enter either a collection postcode or hospital" };
     },
     InitialiseLocationFields: function () {
         listLocations(null);
         $(".locations").autocomplete({ source: locationNames });
-        $("#txtOrigin").autocomplete({
+        $("#txtCollect").autocomplete({
             source: locationNames, change: function (event, ui) {
                 if ($(this).val()) {
-                    $("#txtOriginPostcode").val("");
+                    $("#txtCollectPostcode").val("");
                 }
             }
         });

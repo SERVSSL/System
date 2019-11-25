@@ -9,8 +9,8 @@
 		public string DeliverTime {get;set;} 
 		public string HomeSafeTime {get;set;}
 		public int VehicleTypeId {get;set;} 
-		public string OriginPostcode {get;set;} 
-		public int OriginLocationId {get;set;} 
+		public string CollectPostcode {get;set;} 
+		public int CollectionLocationId {get;set;} 
 		public int DeliverToLocationId {get;set;} 
 		public string Notes { get; set; }
 

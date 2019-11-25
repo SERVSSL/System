@@ -68,7 +68,7 @@ namespace Serv.Tests.SERVBLL.Mappers
 		[Test]
 		public void ShouldMapCollectionLocationId()
 		{
-			_input.OriginLocationId = 222;
+			_input.CollectionLocationId = 222;
 			var result = _classUnderTest.Map(_input);
 			result.CollectionLocationID.Should().Be(222);
 		}
@@ -136,7 +136,7 @@ namespace Serv.Tests.SERVBLL.Mappers
 		[Test]
 		public void ShouldOriginLocationId()
 		{
-			_input.OriginLocationId = 333;
+			_input.CollectionLocationId = 333;
 			var result = _classUnderTest.Map(_input);
 			result.OriginLocationID.Should().Be(333);
 		}
