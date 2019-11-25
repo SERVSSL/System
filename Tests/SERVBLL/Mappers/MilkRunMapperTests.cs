@@ -1,11 +1,11 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 using SERVBLL.Mappers;
 using SERVBLL.ViewModel;
-using System;
 
-namespace Tests.SERVBLL.Mappers
+namespace Serv.Tests.SERVBLL.Mappers
 {
 	[TestFixture]
 	public class MilkRunMapperTests
@@ -88,7 +88,7 @@ namespace Tests.SERVBLL.Mappers
 		}
 
 		[Test]
-		public void ShouldMapFinalDestinationLocationID()
+		public void ShouldMapFinalDestinationLocationId()
 		{
 			_input.DeliverToLocationId = 234;
 			var result = _classUnderTest.Map(_input);
@@ -157,7 +157,7 @@ namespace Tests.SERVBLL.Mappers
 		}
 
 		[Test]
-		public void ShouldMapDeliverToLocationID()
+		public void ShouldMapDeliverToLocationId()
 		{
 			_input.DeliverToLocationId = 42;
 			var result = _classUnderTest.Map(_input);

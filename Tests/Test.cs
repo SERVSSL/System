@@ -1,15 +1,15 @@
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
 using SERVBLL;
 
-namespace SERVTests
+namespace Serv.Tests
 {
     [TestFixture()]
     public class Tests
     {
 
 		[Test]
-		public void SMS()
+		public void Sms()
 		{
 			//SERV.Utils.Messaging.SendTextMessage("447429386911", "this is a test with some + more ' ! & % characters");
 		}
