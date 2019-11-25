@@ -5,8 +5,7 @@
 <asp:Content ContentPlaceHolderID="contentPlaceholder" ID="contentPlaceholderContent" runat="server">
 
     <div>
-        <h3>Controller Log - Milk Runs</h3>
-        
+        <h3>Controller Log - Milk Runs</h3>        
         
         <div class="row">
             <div class="span4 input-prepend">

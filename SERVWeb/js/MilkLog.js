@@ -14,6 +14,7 @@ Serv.Milklog = {
         $("#cmdSave").click(function() {
             Serv.Milklog.SaveRun();
         });
+        Serv.Milklog.CollectInputsInitialise();
         _loaded();
 
     },
@@ -42,6 +43,10 @@ Serv.Milklog = {
                     e.preventDefault();
                 }
             }
+            if ($(this).val()) {
+                $("#txtOrigin").val("");
+            }
+
         });
     },
     SaveRun: function() {
@@ -125,6 +130,22 @@ Serv.Milklog = {
             return { isvalid: true };
         }
         return { isvalid: false, errorMessage: "Where did we collect? Must enter either a pickup postcode or hospital" };
+    },
+    CollectInputsInitialise: function () {
+        $('#txtOriginPostcode').bind('input', function () {
+            console.log('this actually works');
+        });
+        //$("#txtOriginPostcode").change(function () {
+        //    var x = $(this).val();
+        //    if (x) {
+        //        $("#txtOrigin").val("");
+        //    }
+        //});
+        //$("#txtOrigin").change(function () {
+        //    if ($(this).val()) {
+        //        $("#txtOriginPostcode").val("");
+        //    }
+        //});
     }
 };
 
