@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using System;
-using SERVDataContract.DbLinq;
 using SERVBLL;
 
 namespace SERVTests
@@ -23,13 +22,6 @@ namespace SERVTests
 			Assert.IsFalse(new CalendarBLL().IsWeekA(new DateTime(2014,01,08)));
 			Assert.IsTrue(new CalendarBLL().IsWeekA(new DateTime(2014,06,18)));
 			Assert.IsFalse(new CalendarBLL().IsWeekA(new DateTime(2014,06,24)));
-		}
-
-		[Test]
-		public void FindWeekABStarts()
-		{
-			Assert.IsTrue(new CalendarBLL().GetCurrentWeekAStartDate().Day == 16);
-			Assert.IsTrue(new CalendarBLL().GetCurrentWeekBStartDate().Day == 23);
 		}
 
 		[Test]
