@@ -3,8 +3,7 @@ if (!window.Serv) Serv = {};
 Serv.Milklog = {
     Initialise: function() {
         Serv.Milklog.InitialiseCalendar();
-        listLocations(null);
-        $(".locations").autocomplete({ source: locationNames });
+        Serv.Milklog.InitialiseLocationFields();
         listControllers(null);
         $(".controllers").autocomplete({ source: controllerNames });
         listMembersWithTag("Milk", null);
@@ -14,7 +13,6 @@ Serv.Milklog = {
         $("#cmdSave").click(function() {
             Serv.Milklog.SaveRun();
         });
-        Serv.Milklog.CollectInputsInitialise();
         _loaded();
 
     },
@@ -46,7 +44,6 @@ Serv.Milklog = {
             if ($(this).val()) {
                 $("#txtOrigin").val("");
             }
-
         });
     },
     SaveRun: function() {
@@ -131,21 +128,17 @@ Serv.Milklog = {
         }
         return { isvalid: false, errorMessage: "Where did we collect? Must enter either a pickup postcode or hospital" };
     },
-    CollectInputsInitialise: function () {
-        $('#txtOriginPostcode').bind('input', function () {
-            console.log('this actually works');
+    InitialiseLocationFields: function () {
+        listLocations(null);
+        $(".locations").autocomplete({ source: locationNames });
+        $("#txtOrigin").autocomplete({
+            source: locationNames, change: function (event, ui) {
+                if ($(this).val()) {
+                    $("#txtOriginPostcode").val("");
+                }
+            }
         });
-        //$("#txtOriginPostcode").change(function () {
-        //    var x = $(this).val();
-        //    if (x) {
-        //        $("#txtOrigin").val("");
-        //    }
-        //});
-        //$("#txtOrigin").change(function () {
-        //    if ($(this).val()) {
-        //        $("#txtOriginPostcode").val("");
-        //    }
-        //});
+
     }
 };
 

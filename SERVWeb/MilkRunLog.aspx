@@ -54,7 +54,7 @@
                         <input type="text" id="txtOriginPostcode" placeholder="First half of postcode" />
 
                         <label>Collect from hospital:</label>
-                        <input type="text" id="txtOrigin" class="locations" placeholder="Type and Choose" onblur="originSelected();"/>
+                        <input type="text" id="txtOrigin" placeholder="Type and Choose" onblur="originSelected();"/>
                         
                         <label>Taken To:</label>
                         <input type="text" id="txtDrop" class="locations" placeholder="Type and Choose" />
