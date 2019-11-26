@@ -91,15 +91,15 @@ Serv.Milklog = {
             niceAlert("What shift date are you logging against?");
             return false;
         }
-        if (!isValidTime($("#txtPickupTime").val())) {
+        if (!Serv.Milklog.IsValidTime($("#txtPickupTime").val())) {
             niceAlert("Please use 24 hour HH:MM time formats (Collect Time)");
             return false;
         }
-        if (!isValidTime($("#txtDeliverTime").val())) {
+        if (!Serv.Milklog.IsValidTime($("#txtDeliverTime").val())) {
             niceAlert("Please use 24 hour HH:MM time formats (Deliver Time)");
             return false;
         }
-        if (!isValidTime($("#txtReturnTime").val())) {
+        if (!Serv.Milklog.IsValidTime($("#txtReturnTime").val())) {
             niceAlert("Please use 24 hour HH:MM time formats (Home Safe Time)");
             return false;
         }
@@ -118,6 +118,15 @@ Serv.Milklog = {
             return false;
         }
         return true;
+    },
+    IsValidTime: function(timeValue) {
+        if (!timeValue) {
+            return false;
+        }
+        if (/^([01]\d|2[0-3]):([0-5]\d)$/.test(timeValue)) {
+            return true;
+        }
+        return false;
     },
     CollectValidate: function (collectPostcode, collectHospitalName) {
         var collectionLocationId = getLocationId(collectHospitalName);
