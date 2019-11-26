@@ -10,7 +10,7 @@
     <button type="button" class="btn btn-success" onclick="window.location.reload();">Enter another</button>
 </div>
 
-    <div>
+    <div id="entry" >
         <h3>Controller Log - Milk Runs</h3>        
         
         <div class="row">

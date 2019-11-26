@@ -694,6 +694,12 @@ namespace SERVBLL
 			return new RunLogDAL().Report_RunLog();
 		}
 
+		public bool IsMilkRun(int runLogId)
+		{
+			var dal = new RunLogDAL();
+			var runlog = dal.Get(runLogId);
+			return runlog.RunLogType == "M";
+		}
 	}
 }
 

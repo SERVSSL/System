@@ -1,4 +1,6 @@
 
+using SERVBLL;
+
 namespace SERVWeb
 {
 	using System;
@@ -57,6 +59,8 @@ namespace SERVWeb
 
 		protected override void OnLoad (EventArgs e)
 		{
+			if(IsMilkRun())
+				Response.Redirect($"MilkRunLog.aspx?RunLogID={RunLogID}");
 			if (Request["Delete"] != null)
 			{
 				SERVGlobal.AssertAuthentication((int)SERVDataContract.UserLevel.Admin, "Sorry, only administrators can delete from the controller log.");
@@ -69,6 +73,16 @@ namespace SERVWeb
 			}
 		}
 
+		private bool IsMilkRun()
+		{
+			if (RunLogID<0)
+			{
+				return false;
+			}
+
+			var runLogBll = new RunLogBLL();
+			return runLogBll.IsMilkRun(RunLogID);
+		}
 	}
 }
 
