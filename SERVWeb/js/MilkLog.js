@@ -71,7 +71,7 @@ Serv.Milklog = {
         };
     },
     OnSave: function() {
-        niceAlert("Data saved");
+        $("#successPanel").slideDown();
     },
     OnError: function (xhr, ajaxOptions, thrownError) {
         niceAlert("Warning Data not saved. Please try again and if that does not work contact tech support via the forum");

@@ -4,6 +4,12 @@
 <asp:Content ContentPlaceHolderID="titlePlaceholder" ID="titlePlaceholderContent" runat="server">Controller Log - Milk</asp:Content>
 <asp:Content ContentPlaceHolderID="contentPlaceholder" ID="contentPlaceholderContent" runat="server">
 
+<div id="successPanel" style="display:none" class="hero-unit">
+    <h2>Success!</h2>	
+    <p><span id="successMessage">Super . . .</span> </p>	
+    <button type="button" class="btn btn-success" onclick="window.location.reload();">Enter another</button>
+</div>
+
     <div>
         <h3>Controller Log - Milk Runs</h3>        
         
