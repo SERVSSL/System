@@ -66,9 +66,28 @@ namespace Serv.Tests.SERVBLL.Mappers
 		}
 
 		[Test]
-		public void ShouldMapCollectionLocationId()
+		public void ShouldMapCollectionLocationId_WhenCollectPostcodeIsNull()
 		{
 			_input.CollectionLocationId = 222;
+			_input.CollectPostcode = null;
+			var result = _classUnderTest.Map(_input);
+			result.CollectionLocationID.Should().Be(222);
+		}
+
+		[Test]
+		public void ShouldMapCollectionLocationId_WhenCollectPostcodeIsEmpty()
+		{
+			_input.CollectionLocationId = 222;
+			_input.CollectPostcode = "";
+			var result = _classUnderTest.Map(_input);
+			result.CollectionLocationID.Should().Be(222);
+		}
+
+		[Test]
+		public void ShouldMapCollectionLocationId_WhenCollectPostcodeIsWhiteSpace()
+		{
+			_input.CollectionLocationId = 222;
+			_input.CollectPostcode = "  ";
 			var result = _classUnderTest.Map(_input);
 			result.CollectionLocationID.Should().Be(222);
 		}
@@ -204,6 +223,31 @@ namespace Serv.Tests.SERVBLL.Mappers
 		{
 			var result = _classUnderTest.Map(_input);
 			result.AcceptedDateTime.Should().BeNull();
+		}
+
+		[Test]
+		public void ShouldMapRunLogType()
+		{
+			var result = _classUnderTest.Map(_input);
+			result.RunLogType.Should().Be("M");
+		}
+
+		[Test]
+		public void ShouldMapCollectionPostcode()
+		{
+			_input.CollectPostcode = "GU14";
+			var result = _classUnderTest.Map(_input);
+			result.CollectionPostcode.Should().Be("GU14");
+		}
+
+		[Test]
+		public void ShouldMapCollectionLocationID_To_PrivateAddress_WhenCollectionPostcode()
+		{
+			const int privateAddressLocationId = 19;
+			_input.CollectPostcode = "GU14";
+			_input.CollectionLocationId = 1;
+			var result = _classUnderTest.Map(_input);
+			result.CollectionLocationID.Should().Be(privateAddressLocationId);
 		}
 	}
 }

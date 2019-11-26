@@ -13,6 +13,7 @@ namespace SERVBLL.Mappers
 	{
 		public RunLog Map(MilkRunViewModel model)
 		{
+			const int privateAddressLocationId = 19;
 			if (!DateTime.TryParse(model.RunDate, out var dutyDate))
 			{
 				throw new ArgumentException($"RunDate {model.RunDate} is not a valid date");
@@ -21,13 +22,18 @@ namespace SERVBLL.Mappers
 			var collectDateTime = ToDateTime(model.CollectTime, dutyDate);
 			var deliverDateTime = ToDateTime(model.DeliverTime, dutyDate);
 			var homeSafe = ToDateTime(model.HomeSafeTime, dutyDate);
+			var collectionLocationId = string.IsNullOrWhiteSpace(model.CollectPostcode)
+				? model.CollectionLocationId
+				: privateAddressLocationId;
 
 			return new RunLog
 			{
+				RunLogType = "M",
 				CreatedByUserID = model.CreatedByUserId,
 				CreateDate = DateTime.Now,
 				DutyDate = dutyDate,
-				CollectionLocationID = model.CollectionLocationId,
+				CollectionLocationID = collectionLocationId,
+				CollectionPostcode = model.CollectPostcode,
 				CollectDateTime = collectDateTime,
 				DeliverDateTime = deliverDateTime,
 				FinalDestinationLocationID = model.DeliverToLocationId,
