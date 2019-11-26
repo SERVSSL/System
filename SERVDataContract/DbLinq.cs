@@ -4929,6 +4929,8 @@ namespace SERVDataContract.DbLinq
 		private System.Nullable<System.DateTime> _collectDateTime;
 		
 		private int _collectionLocationID;
+
+		private string _collectionPostcode;
 		
 		private int _controllerMemberID;
 		
@@ -4957,6 +4959,8 @@ namespace SERVDataContract.DbLinq
 		private System.Nullable<int> _riderMemberID;
 		
 		private int _runLogID;
+
+		private string _runLogType;
 		
 		private int _urgency;
 		
@@ -5008,7 +5012,11 @@ namespace SERVDataContract.DbLinq
 		partial void OnCollectionLocationIDChanged();
 		
 		partial void OnCollectionLocationIDChanging(int value);
-		
+
+		partial void OnCollectionPostcodeChanging(string value);
+
+		partial void OnCollectionPostcodeChanged();
+
 		partial void OnControllerMemberIDChanged();
 		
 		partial void OnControllerMemberIDChanging(int value);
@@ -5064,6 +5072,10 @@ namespace SERVDataContract.DbLinq
 		partial void OnRunLogIDChanged();
 		
 		partial void OnRunLogIDChanging(int value);
+		
+		partial void OnRunLogTypeChanged();
+		
+		partial void OnRunLogTypeChanging(string value);
 		
 		partial void OnUrgencyChanged();
 		
@@ -5248,6 +5260,28 @@ namespace SERVDataContract.DbLinq
 					this._collectionLocationID = value;
 					this.SendPropertyChanged("CollectionLocationID");
 					this.OnCollectionLocationIDChanged();
+				}
+			}
+		}
+
+		[Column(Storage = "_collectionPostcode", Name = "CollectionPostcode", DbType = "varchar(8)", AutoSync = AutoSync.Never)]
+		[DebuggerNonUserCode()]
+		public string CollectionPostcode
+		{
+			get
+			{
+				return this._collectionPostcode;
+			}
+			set
+			{
+				if (((_collectionPostcode == value)
+				     == false))
+				{
+					this.OnCollectionPostcodeChanging(value);
+					this.SendPropertyChanging();
+					this._collectionPostcode = value;
+					this.SendPropertyChanged("CollectionPostcode");
+					this.OnCollectionPostcodeChanged();
 				}
 			}
 		}
@@ -5556,6 +5590,28 @@ namespace SERVDataContract.DbLinq
 					this._runLogID = value;
 					this.SendPropertyChanged("RunLogID");
 					this.OnRunLogIDChanged();
+				}
+			}
+		}
+
+		[Column(Storage = "_runLogType", Name = "RunLogType", DbType = "varchar(2)", AutoSync = AutoSync.Never)]
+		[DebuggerNonUserCode()]
+		public string RunLogType
+		{
+			get
+			{
+				return this._runLogType;
+			}
+			set
+			{
+				if (((_runLogType == value)
+				     == false))
+				{
+					this.OnRunLogTypeChanging(value);
+					this.SendPropertyChanging();
+					this._runLogType = value;
+					this.SendPropertyChanged("RunLogType");
+					this.OnRunLogTypeChanged();
 				}
 			}
 		}
