@@ -51,6 +51,7 @@
     <Compile Include="ControllerBLL.cs" />
     <Compile Include="ShiftBLL.cs" />
     <Compile Include="CalendarBLL.cs" />
+    <Compile Include="ViewModel\MilkRunEditViewModel.cs" />
     <Compile Include="ViewModel\MilkRunViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
