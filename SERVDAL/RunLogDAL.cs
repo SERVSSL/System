@@ -290,7 +290,8 @@ namespace SERVDAL
 		public DataTable Report_RunLog()
 		{
 			string sql = "select RunLogID as ID, date_format(DutyDate, '%Y-%m-%d') as 'DutyDate', " +
-				"coalesce(date_format(CallDateTime, '%Y-%m-%d %H:%i'), 'N/A') as 'CallDateTime', cf.Location as 'CallFrom', cl.Location as 'From', " +
+				"coalesce(date_format(CallDateTime, '%Y-%m-%d %H:%i'), 'N/A') as 'CallDateTime', cf.Location as 'CallFrom', " +
+			    "CASE WHEN rl.RunLogType='M' THEN Concat(cl.Location,' ', rl.CollectionPostcode) ELSE cl.Location END 'From', " +
 				"dl.Location as 'To', coalesce(date_format(rl.CollectDateTime, '%H:%i'), 'NOT ACCEPTED') as Collected, " +
 				"date_format(rl.DeliverDateTime, '%H:%i') as Delivered, " +
 			             //"timediff(rl.DeliverDateTime, rl.CollectDateTime) as 'Run Time', " +
