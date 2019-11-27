@@ -311,6 +311,12 @@ namespace SERVDAL
 			return ret;
 		}
 
+		public DataTable GetMilkRunLog(int runLogId)
+		{
+			var sql = "select ";
+			return ExecuteSQL(sql);
+		}
+
 		public void Dispose()
 		{
 			db.Dispose();

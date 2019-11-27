@@ -1,4 +1,6 @@
 ﻿using System;
+using SERVBLL;
+using SERVBLL.Mappers;
 
 namespace SERVWeb
 {
@@ -22,7 +24,9 @@ namespace SERVWeb
 			if (IsAdding())
 			{
 				SERVGlobal.AssertAuthentication((int)SERVDataContract.UserLevel.Controller, "Sorry, only controllers and above have access to contribute to the controller log.");
+				return;
 			}
+			var editModel = new MilkLogBLL(new MilkRunMapper()).GetRunLogForEdit(Request["RunLogID"]);
 		}
 
 		private bool IsAdding()
