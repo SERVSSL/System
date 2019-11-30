@@ -313,7 +313,16 @@ namespace SERVDAL
 
 		public DataTable GetMilkRunLog(int runLogId)
 		{
-			var sql = "select ";
+			var sql = $@"select concat(cm.FirstName, ' ', cm.LastName) as Controller, concat(rm.FirstName, ' ', rm.LastName) as Rider,
+	DATE_FORMAT(rl.DutyDate,'%d %b %Y') as DutyDate, DATE_FORMAT(rl.CollectDateTime,'%H:%i') as CollectTime, DATE_FORMAT(rl.DeliverDateTime,'%H:%i') as DeliverTime,DATE_FORMAT(rl.HomeSafeDateTime,'%H:%i') as HomeSafeTime,v.VehicleType as 'Vehicle',rl.CollectionPostcode,
+	cl.Location as 'CollectionHospital', dl.Location as 'TakenTo', rl.Notes
+	from RunLog rl 
+	 left join Member rm on rm.MemberID = rl.RiderMemberID 
+	 left join Member cm on cm.MemberID = rl.ControllerMemberID
+	 left join VehicleType v on v.VehicleTypeID = rl.VehicleTypeID
+	 left join Location cl on cl.LocationID = rl.CollectionLocationID
+	 left join Location dl on dl.LocationID = rl.DeliverToLocationID
+	where RunLogID={runLogId} and RunLogType='M'";
 			return ExecuteSQL(sql);
 		}
 

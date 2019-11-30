@@ -82,8 +82,23 @@
         </div>
 
     </div>
+    
     <script>
-        $("#txtController").val("<%=MemberName()%>");
+        $("#txtController").val("<%=Model.Controller%>");
+        $("#txtRider").val("<%=Model.Rider%>");
+        $("#txtShiftDate").val("<%=Model.DutyDate%>");
+        $("#txtPickupTime").val("<%=Model.CollectTime%>");
+        $("#txtDeliverTime").val("<%=Model.DeliverTime%>");
+        $("#txtReturnTime").val("<%=Model.HomeSafeTime%>");
+        $("#btnVehicle").text("<%=Model.Vehicle%>");
+        if ("<%=Model.CollectionPostcode%>".length>0) {
+            $("#txtCollectPostcode").val("<%=Model.CollectionPostcode%>");
+        } else {
+            $("#txtCollect").val("<%=Model.CollectionHospital%>");
+        }
+        $("#txtDrop").val("<%=Model.TakenTo%>");
+        $("#txtNotes").val("<%=Model.Notes%>");
+
     </script>
     <script src="js/MilkLog.js"></script>
 </asp:Content>
