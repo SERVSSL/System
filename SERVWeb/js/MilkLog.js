@@ -73,6 +73,15 @@ Serv.Milklog = {
     },
     OnSave: function() {
         $("#successPanel").slideDown();
+        const urlParams = new URLSearchParams(window.location.search);
+        const runLogId = urlParams.get('RunLogID');
+        if (runLogId) {
+            $("#btnAdd").hide();
+            $("#editmessage").show();
+            $("#viewedit").attr("href", "/MilkRunLog.aspx?RunLogID="+runLogId);
+        } else {
+            $("#btnEdit").hide();
+        }
         $("#entry").slideUp();
     },
     OnError: function (xhr, ajaxOptions, thrownError) {

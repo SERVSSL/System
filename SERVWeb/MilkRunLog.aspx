@@ -6,8 +6,9 @@
 
 <div id="successPanel" style="display:none" class="hero-unit">
     <h2>Success!</h2>	
-    <p><span id="successMessage">Super . . .</span> </p>	
-    <button type="button" class="btn btn-success" onclick="window.location.reload();">Enter another</button>
+    <p><span id="successMessage">Super . . .</span> <span style="display:none" id="editmessage">you updated <a id="viewedit">this record</a></span></p>	
+    <button id="btnAdd" type="button" class="btn btn-primary" onclick="window.location.reload();">Enter another</button>
+    <button id="btnEdit" type="button" class="btn btn-primary" onclick="window.location.href = '/RecentRuns.aspx';">Back to Run Log</button>
 </div>
 
     <div id="entry" >
@@ -33,7 +34,7 @@
                         <input type="text" id="txtRider" class="riders" placeholder="Choose the rider / driver" />
                         
                         <label>Run Date:</label>
-                        <input type="text" id="txtShiftDate" class="date" />
+                        <input type="text" id="txtShiftDate" class="date" autocomplete="off" />
 
                         <label>Collect Time:</label>
                         <input type="text" id="txtPickupTime" placeholder="HH:MM" />
