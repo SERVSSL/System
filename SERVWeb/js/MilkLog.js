@@ -15,6 +15,7 @@ Serv.Milklog = {
         });
         keepAlive();
         _loaded();
+        Serv.Milklog.WarnOnUnload();
     },
     SelectedVehicleId: 0,
     InitialiseCalendar: function() {
@@ -26,6 +27,10 @@ Serv.Milklog = {
     VehicleSelected: function (vehicleTypeId, vehicleType)
     {
         $("#btnVehicle").text(vehicleType);
+    },
+    WarnOnUnload: function()
+    {
+        window.onbeforeunload = function () { return 'You will lose all data you have entered!' };
     },
     InitialisePostcodeField: function() {
         $("#txtCollectPostcode").keypress(function(e) {

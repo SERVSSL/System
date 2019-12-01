@@ -6,9 +6,9 @@
 
 <div id="successPanel" style="display:none" class="hero-unit">
     <h2>Success!</h2>	
-    <p><span id="successMessage">Super . . .</span> <span style="display:none" id="editmessage">you updated <a id="viewedit">this record</a></span></p>	
-    <button id="btnAdd" type="button" class="btn btn-primary" onclick="window.location.reload();">Enter another</button>
-    <button id="btnEdit" type="button" class="btn btn-primary" onclick="window.location.href = '/RecentRuns.aspx';">Back to Run Log</button>
+    <p><span id="successMessage">Super . . .</span> <span style="display:none" id="editmessage">you updated <a onclick="window.onbeforeunload=null;" id="viewedit">this record</a></span></p>	
+    <button id="btnAdd" type="button" class="btn btn-primary" onclick="window.onbeforeunload=null;window.location.reload();">Enter another</button>
+    <button id="btnEdit" type="button" class="btn btn-primary" onclick="window.onbeforeunload=null;window.location.href = '/RecentRuns.aspx';">Back to Run Log</button>
 </div>
 
     <div id="entry" >
