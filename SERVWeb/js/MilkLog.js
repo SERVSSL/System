@@ -13,8 +13,8 @@ Serv.Milklog = {
         $("#cmdSave").click(function() {
             Serv.Milklog.SaveRun();
         });
+        keepAlive();
         _loaded();
-
     },
     SelectedVehicleId: 0,
     InitialiseCalendar: function() {
