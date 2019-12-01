@@ -80,6 +80,9 @@
             <div class="span6">
                 <button type="button" class="btn btn-primary btn-lg readOnlyHidden" id="cmdSave"><i class="icon-ok icon-white"></i> Save Run</button> 
             </div>
+            <div class="span6 pull-right" style="text-align:right">
+                <a href="/RecentRuns.aspx" class="btn btn-info" role="button">Cancel</a>
+            </div>
         </div>
 
     </div>
