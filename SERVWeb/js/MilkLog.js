@@ -114,6 +114,16 @@ Serv.Milklog = {
             niceAlert("Please use 24 hour HH:MM time formats (Home Safe Time)");
             return false;
         }
+
+        if ($("#txtPickupTime").val() >= $("#txtDeliverTime").val()) {
+            niceAlert("Deliver time should be after Collect time");
+            return false;
+        }
+        if ($("#txtDeliverTime").val() >= $("#txtReturnTime").val()) {
+            niceAlert("Home Safe time should be after Deliver time");
+            return false;
+        }
+
         if (!$("#btnVehicle").text()) {
             niceAlert("What did the rider / driver travel on or in?");
             return false;
