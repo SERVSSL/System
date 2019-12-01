@@ -51,6 +51,7 @@ Serv.Milklog = {
         });
     },
     SaveRun: function() {
+        $("#txtCollectPostcode").val($("#txtCollectPostcode").val().trim());
         if (!Serv.Milklog.Validate()) {
             return;
         }
@@ -157,7 +158,10 @@ Serv.Milklog = {
     CollectValidate: function (collectPostcode, collectHospitalName) {
         var collectionLocationId = getLocationId(collectHospitalName);
         if (collectPostcode) {
-            return { isvalid: true };
+            if (collectPostcode.length > 1 && collectPostcode.length < 5) {
+                return { isvalid: true };
+            }
+            return { isvalid: false, errorMessage: "Collection postcode should be between 1 and 4 characters long" };
         } else if (collectionLocationId > 0) {
             return { isvalid: true };
         }
