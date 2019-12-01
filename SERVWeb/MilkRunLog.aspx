@@ -23,7 +23,7 @@
 
 
         <div class="row">
-
+            <input type="hidden" id="txtRunLogId" value="<%=Model.RunLogId%>" />
             <fieldset>
 
                 <div id="Milk">
@@ -90,7 +90,9 @@
         $("#txtPickupTime").val("<%=Model.CollectTime%>");
         $("#txtDeliverTime").val("<%=Model.DeliverTime%>");
         $("#txtReturnTime").val("<%=Model.HomeSafeTime%>");
-        $("#btnVehicle").text("<%=Model.Vehicle%>");
+        if ("<%=Model.Vehicle%>".length > 0) {
+            $("#btnVehicle").text("<%=Model.Vehicle%>");
+        }
         if ("<%=Model.CollectionPostcode%>".length>0) {
             $("#txtCollectPostcode").val("<%=Model.CollectionPostcode%>");
         } else {

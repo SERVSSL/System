@@ -294,10 +294,10 @@ namespace SERVDAL
 			    "CASE WHEN rl.RunLogType='M' THEN Concat(cl.Location,' ', rl.CollectionPostcode) ELSE cl.Location END 'From', " +
 				"dl.Location as 'To', coalesce(date_format(rl.CollectDateTime, '%H:%i'), 'NOT ACCEPTED') as Collected, " +
 				"date_format(rl.DeliverDateTime, '%H:%i') as Delivered, " +
-			             //"timediff(rl.DeliverDateTime, rl.CollectDateTime) as 'Run Time', " +
-			             "fl.Location as 'Destination', concat(m.FirstName, ' ', m.LastName) as Rider, " +
+						 //"timediff(rl.DeliverDateTime, rl.CollectDateTime) as 'Run Time', " +
+						 "fl.Location as 'Destination', concat(m.LastName, ' ', m.FirstName) as Rider, " +
 			             "v.VehicleType as 'Vehicle', rl.Description as 'Consignment', " +
-			             "concat(c.FirstName, ' ', c.LastName) as Controller from RunLog rl " +
+						 "concat(c.LastName, ' ', c.FirstName) as Controller from RunLog rl " +
 			             "left join Member m on m.MemberID = rl.RiderMemberID " +
 			             "join Member c on c.MemberID = rl.ControllerMemberID " +
 			             "join Location cf on cf.LocationID = rl.CallFromLocationID " +
@@ -313,7 +313,7 @@ namespace SERVDAL
 
 		public DataTable GetMilkRunLog(int runLogId)
 		{
-			var sql = $@"select concat(cm.FirstName, ' ', cm.LastName) as Controller, concat(rm.FirstName, ' ', rm.LastName) as Rider,
+			var sql = $@"select concat(cm.LastName, ' ', cm.FirstName) as Controller, concat(rm.LastName, ' ', rm.FirstName) as Rider,
 	DATE_FORMAT(rl.DutyDate,'%d %b %Y') as DutyDate, DATE_FORMAT(rl.CollectDateTime,'%H:%i') as CollectTime, DATE_FORMAT(rl.DeliverDateTime,'%H:%i') as DeliverTime,DATE_FORMAT(rl.HomeSafeDateTime,'%H:%i') as HomeSafeTime,v.VehicleType as 'Vehicle',rl.CollectionPostcode,
 	cl.Location as 'CollectionHospital', dl.Location as 'TakenTo', rl.Notes
 	from RunLog rl 
@@ -326,11 +326,22 @@ namespace SERVDAL
 			return ExecuteSQL(sql);
 		}
 
+		public int? GetVehicleId(string vehicleType)
+		{
+			var vehicle = db.VehicleType.FirstOrDefault(x => x.Enabled == 1 && x.VehicleType1 == vehicleType);
+			return vehicle?.VehicleTypeID;
+		}
+
 		public void Dispose()
 		{
 			db.Dispose();
 		}
 
+		public bool Update(RunLog runLog)
+		{
+			db.SubmitChanges();
+			return true;
+		}
 	}
 }
 

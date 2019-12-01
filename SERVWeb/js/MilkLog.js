@@ -26,7 +26,6 @@ Serv.Milklog = {
     VehicleSelected: function (vehicleTypeId, vehicleType)
     {
         $("#btnVehicle").text(vehicleType);
-        Serv.Milklog.SelectedVehicleId = vehicleTypeId;
     },
     InitialisePostcodeField: function() {
         $("#txtCollectPostcode").keypress(function(e) {
@@ -53,16 +52,18 @@ Serv.Milklog = {
         var data = JSON.stringify(Serv.Milklog.GetDataForSave());
         callServerSide("Service/Service.asmx/LogMilkRun", data, Serv.Milklog.OnSave, Serv.Milklog.OnError);
     },
-    GetDataForSave: function() {
+    GetDataForSave: function () {
+        var runLogId = parseInt($("#txtRunLogId").val(), 10);
         return {
             model: {
+                runLogId: runLogId,
                 controllerMemberId: getControllerId($("#txtController").val()),
                 riderMemberId: getMemberId($("#txtRider").val()),
                 runDate: $("#txtShiftDate").val(),
                 collectTime: $("#txtPickupTime").val(),
                 deliverTime: $("#txtDeliverTime").val(),
                 homeSafeTime: $("#txtReturnTime").val(),
-                vehicleTypeId: Serv.Milklog.SelectedVehicleId,
+                vehicleType: $("#btnVehicle").text(),
                 collectPostcode: $("#txtCollectPostcode").val(),
                 collectionLocationId: getLocationId($("#txtCollect").val()),
                 deliverToLocationId: getLocationId($("#txtDrop").val()),
@@ -104,7 +105,7 @@ Serv.Milklog = {
             niceAlert("Please use 24 hour HH:MM time formats (Home Safe Time)");
             return false;
         }
-        if (Serv.Milklog.SelectedVehicleId === 0) {
+        if (!$("#btnVehicle").text()) {
             niceAlert("What did the rider / driver travel on or in?");
             return false;
         }

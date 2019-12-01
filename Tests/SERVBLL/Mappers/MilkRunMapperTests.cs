@@ -137,11 +137,10 @@ namespace Serv.Tests.SERVBLL.Mappers
 		}
 
 		[Test]
-		public void ShouldMapIsVehicleTypeId()
+		public void ShouldNotMapIsVehicleTypeId()
 		{
-			_input.VehicleTypeId = 6;
 			var result = _classUnderTest.Map(_input);
-			result.VehicleTypeID.Should().Be(6);
+			result.VehicleTypeID.HasValue.Should().BeFalse();
 		}
 
 		[Test]
@@ -153,9 +152,10 @@ namespace Serv.Tests.SERVBLL.Mappers
 		}
 
 		[Test]
-		public void ShouldOriginLocationId()
+		public void ShouldMapOriginLocationId_To_CollectionLocationID_When_CollectPostcodeEmpty()
 		{
 			_input.CollectionLocationId = 333;
+			_input.CollectPostcode = string.Empty;
 			var result = _classUnderTest.Map(_input);
 			result.OriginLocationID.Should().Be(333);
 		}
@@ -248,6 +248,16 @@ namespace Serv.Tests.SERVBLL.Mappers
 			_input.CollectionLocationId = 1;
 			var result = _classUnderTest.Map(_input);
 			result.CollectionLocationID.Should().Be(privateAddressLocationId);
+		}
+
+		[Test]
+		public void ShouldMapOriginLocationID_To_PrivateAddress_WhenCollectionPostcode()
+		{
+			const int privateAddressLocationId = 19;
+			_input.CollectPostcode = "GU14";
+			_input.CollectionLocationId = 1;
+			var result = _classUnderTest.Map(_input);
+			result.OriginLocationID.Should().Be(privateAddressLocationId);
 		}
 	}
 }

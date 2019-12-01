@@ -222,6 +222,13 @@ namespace SERVWeb
 			return new ListBLL().ListVehicleTypes();
 		}
 
+	    [WebMethod(EnableSession = true, CacheDuration=120)]
+		public int? GetVehicleId(string vehicleType)
+		{
+			Authenticate();
+			return new MilkLogBLL(null).GetVehicleId(vehicleType);
+		}
+
 		[WebMethod(EnableSession = true, CacheDuration=120)]
 		public List<Group> ListGroups()
 		{
@@ -297,10 +304,10 @@ namespace SERVWeb
 		public bool LogMilkRun(MilkRunViewModel model)
 		{
 			Authenticate();
-			var logMessage = $"controllerMemberId [{model.ControllerMemberId}], riderMemberId [{model.RiderMemberId}], runDate [{model.RunDate}], collectTime [{model.CollectTime}], deliverTime [{model.DeliverTime}], homeSafeTime  [{model.HomeSafeTime}], vehicleTypeId  [{model.VehicleTypeId}], collectPostcode [{model.CollectPostcode}], collectionLocationId [{model.CollectionLocationId}], deliverToLocationId [{model.DeliverToLocationId}], notes [{model.Notes}]";
+			var logMessage = $"RunLogId [{model.RunLogId}], controllerMemberId [{model.ControllerMemberId}], riderMemberId [{model.RiderMemberId}], runDate [{model.RunDate}], collectTime [{model.CollectTime}], deliverTime [{model.DeliverTime}], homeSafeTime  [{model.HomeSafeTime}], vehicleType  [{model.VehicleType}], collectPostcode [{model.CollectPostcode}], collectionLocationId [{model.CollectionLocationId}], deliverToLocationId [{model.DeliverToLocationId}], notes [{model.Notes}]";
 		    _logger.Debug(logMessage);
-			model.CreatedByUserId = CurrentUser().UserID;
-			var result = new MilkLogBLL(new MilkRunMapper()).Save(model);
+			//model.CreatedByUserId = CurrentUser().UserID;
+			var result = new MilkLogBLL(new MilkRunMapper()).Save(model, CurrentUser());
 			return result;
 	    }
 
