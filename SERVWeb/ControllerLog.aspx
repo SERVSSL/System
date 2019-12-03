@@ -190,10 +190,10 @@
 					</button><button type="button" class="btn" onclick="packageBox ++; updateBoxCounts();">+</button>
 				</div><br/><br/>
 				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">Milk</button>
+<%--					<button type="button" class="btn" disabled style="width:90px;">Milk</button>
 					<button type="button" class="btn" disabled onclick="milkBox --; updateBoxCounts();">-</button>
 					<button type="button" class="btn" id="btnMilkBox" disabled>0</button>
-				    <button type="button" class="btn" disabled onclick="milkBox ++; updateBoxCounts();">+</button>
+				    <button type="button" class="btn" disabled onclick="milkBox ++; updateBoxCounts();">+</button>--%>
 				</div>
 				<br/><br/>
 
