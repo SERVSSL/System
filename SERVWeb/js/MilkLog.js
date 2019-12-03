@@ -89,6 +89,7 @@ Serv.Milklog = {
             $("#btnEdit").hide();
         }
         $("#entry").slideUp();
+        window.onbeforeunload = null;
     },
     OnError: function (xhr, ajaxOptions, thrownError) {
         niceAlert("Warning Data not saved. Please try again and if that does not work contact tech support via the forum");
