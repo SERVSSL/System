@@ -30,6 +30,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net" />
     <Reference Include="System.Data" />
@@ -38,6 +39,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\MilkRunMapper.cs" />
+    <Compile Include="MilkLogBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MemberBLL.cs" />
     <Compile Include="PasswordResetBLL.cs" />
@@ -49,6 +52,8 @@
     <Compile Include="ControllerBLL.cs" />
     <Compile Include="ShiftBLL.cs" />
     <Compile Include="CalendarBLL.cs" />
+    <Compile Include="ViewModel\MilkRunEditViewModel.cs" />
+    <Compile Include="ViewModel\MilkRunViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

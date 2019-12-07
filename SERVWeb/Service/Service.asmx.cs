@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using SERVDataContract;
 using SERVBLL;
 using System.Data;
+using SERVBLL.Mappers;
+using SERVBLL.ViewModel;
 
 namespace SERVWeb
 {
 
 	public class Service : System.Web.Services.WebService
     {
-		
+	    private static Logger _logger = new Logger();
+
 		private SERVDataContract.User CurrentUser()
 		{
 			if (System.Web.HttpContext.Current.Session["User"] == null) { return null; }
@@ -219,6 +222,13 @@ namespace SERVWeb
 			return new ListBLL().ListVehicleTypes();
 		}
 
+	    [WebMethod(EnableSession = true, CacheDuration=120)]
+		public int? GetVehicleId(string vehicleType)
+		{
+			Authenticate();
+			return new MilkLogBLL(null).GetVehicleId(vehicleType);
+		}
+
 		[WebMethod(EnableSession = true, CacheDuration=120)]
 		public List<Group> ListGroups()
 		{
@@ -290,6 +300,17 @@ namespace SERVWeb
 				riderMemberId, vehicleTypeId, boxesOutCsv, boxesInCsv, notes);
 		}
 
+	    [WebMethod(EnableSession = true)]
+		public bool LogMilkRun(MilkRunViewModel model)
+		{
+			Authenticate();
+			var logMessage = $"RunLogId [{model.RunLogId}], controllerMemberId [{model.ControllerMemberId}], riderMemberId [{model.RiderMemberId}], runDate [{model.RunDate}], collectTime [{model.CollectTime}], deliverTime [{model.DeliverTime}], homeSafeTime  [{model.HomeSafeTime}], vehicleType  [{model.VehicleType}], collectPostcode [{model.CollectPostcode}], collectionLocationId [{model.CollectionLocationId}], deliverToLocationId [{model.DeliverToLocationId}], notes [{model.Notes}]";
+		    _logger.Debug(logMessage);
+			//model.CreatedByUserId = CurrentUser().UserID;
+			var result = new MilkLogBLL(new MilkRunMapper()).Save(model, CurrentUser());
+			return result;
+	    }
+
 		[WebMethod(EnableSession = true)]
 		public bool SendSMSMessage(string numbers, string message, bool fromServ)
 		{
@@ -338,6 +359,17 @@ namespace SERVWeb
 			return new MemberBLL().Login(username, passwordHash);
 		}
 
+	    [WebMethod(EnableSession = true)]
+	    public bool LoginUser(string username, string password)
+	    {
+		    var user = new MemberBLL().Login(username, SERV.Utils.Authentication.Hash(username.Trim().ToLower() + password));
+		    if (user == null)
+			    return false;
+
+		    SERVGlobal.User = user;
+		    return true;
+	    }
+
 		[WebMethod(EnableSession = true)]
 		public bool Impersonate(int memberId)
 		{
@@ -360,8 +392,7 @@ namespace SERVWeb
 			}
 			return new ShiftBLL().TakeControl(CurrentUser().MemberID, overrideNumber);
 		}
-
-
+		
 		[WebMethod(EnableSession = true)]
 		public string[] GetMemberUniqueRuns()
 		{

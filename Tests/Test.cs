@@ -1,16 +1,15 @@
-using NUnit.Framework;
 using System;
-using SERVDataContract.DbLinq;
+using NUnit.Framework;
 using SERVBLL;
 
-namespace SERVTests
+namespace Serv.Tests
 {
     [TestFixture()]
     public class Tests
     {
 
 		[Test]
-		public void SMS()
+		public void Sms()
 		{
 			//SERV.Utils.Messaging.SendTextMessage("447429386911", "this is a test with some + more ' ! & % characters");
 		}
@@ -23,13 +22,6 @@ namespace SERVTests
 			Assert.IsFalse(new CalendarBLL().IsWeekA(new DateTime(2014,01,08)));
 			Assert.IsTrue(new CalendarBLL().IsWeekA(new DateTime(2014,06,18)));
 			Assert.IsFalse(new CalendarBLL().IsWeekA(new DateTime(2014,06,24)));
-		}
-
-		[Test]
-		public void FindWeekABStarts()
-		{
-			Assert.IsTrue(new CalendarBLL().GetCurrentWeekAStartDate().Day == 16);
-			Assert.IsTrue(new CalendarBLL().GetCurrentWeekBStartDate().Day == 23);
 		}
 
 		[Test]

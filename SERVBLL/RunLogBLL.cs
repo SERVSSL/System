@@ -318,7 +318,7 @@ namespace SERVBLL
 			rep.Heading = "Recent Runs";
 			rep.Description = "Real time information from the controller log.";
 			rep.Anchor = "runLog";
-			rep.Query = "select RunLogID as ID, date_format(DutyDate, '%Y-%m-%d') as 'Duty Date', coalesce(date_format(CallDateTime, '%Y-%m-%d %H:%i'), 'N/A') as 'Call Date & Time', cf.Location as 'Call From', cl.Location as 'From', " +
+			rep.Query = "select RunLogID as ID, date_format(DutyDate, '%Y-%m-%d') as 'Duty Date', coalesce(date_format(CallDateTime, '%Y-%m-%d %H:%i'), 'N/A') as 'Call Date & Time', cf.Location as 'Call From', concat(cl.Location,' ',rl.CollectionPostcode) as 'From', " +
 				"dl.Location as 'To', coalesce(date_format(rl.CollectDateTime, '%H:%i'), 'NOT ACCEPTED') as Collected, date_format(rl.DeliverDateTime, '%H:%i') as Delivered, " +
 			            //"timediff(rl.DeliverDateTime, rl.CollectDateTime) as 'Run Time', " +
 			            "fl.Location as 'Destination', concat(m.FirstName, ' ', m.LastName) as Rider, v.VehicleType as 'Vehicle', rl.Description as 'Consignment', " +
@@ -694,6 +694,12 @@ namespace SERVBLL
 			return new RunLogDAL().Report_RunLog();
 		}
 
+		public bool IsMilkRun(int runLogId)
+		{
+			var dal = new RunLogDAL();
+			var runlog = dal.Get(runLogId);
+			return runlog.RunLogType == "M";
+		}
 	}
 }
 
