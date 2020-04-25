@@ -24,7 +24,8 @@ namespace SERVDataContract
 			this.Lng = metal.Lng;
 			this.InNetwork = metal.InNetwork;
 			this.PostCode = metal.PostCode;
-		}
+            this.What3Words = metal.What3Words;
+        }
 
 		[DataMember]
 		public int LocationID {get;set;}
@@ -68,10 +69,13 @@ namespace SERVDataContract
 		[UpdatePolicy(MinRequiredLevel = UserLevel.Controller)]
 		public string PostCode {get;set;}
 
+        [DataMember]
+		[UpdatePolicy(MinRequiredLevel = UserLevel.Controller)]
+		public string What3Words { get;set;}
+
 		[DataMember]
 		[UpdatePolicy(MinRequiredLevel = UserLevel.Controller)]
 		public sbyte InNetwork {get;set;}
-
-	}
+    }
 }
 
