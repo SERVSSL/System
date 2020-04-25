@@ -304,6 +304,11 @@ function DisplayLocation(locationId)
 			$("#txtLat").val(json.d.Lat);
 			$("#txtLng").val(json.d.Lng);
 			$("#txtPostCode").val(json.d.PostCode);
+			$("#txtWhat3Words").val(json.d.What3Words);
+			if (json.d.What3Words) {
+				var link = '<a href="https://what3words.com/' + json.d.What3Words + '" target="_blank">https://what3words.com/' + json.d.What3Words +'</a>';
+                $("#what3words").html(link);
+            }
 			$("#chkHospital").prop('checked', json.d.Hospital == 1);
 			$("#chkChangeOver").prop('checked', json.d.ChangeOver == 1);
 			$("#chkBloodBank").prop('checked', json.d.BloodBank == 1);
@@ -346,6 +351,7 @@ function JsonifyLocationFromForm(locationId)
 	return '{"location":{"LocationID":' + locationId + ',' + 
 		'"LocationName":"' + $("#txtLocationName").val() + '","Hospital":"' + ($("#chkHospital").prop('checked') ? "1" : "0") + '",' + 
 		'"Lat":"' + $("#txtLat").val() + '","Lng":"' + $("#txtLng").val() + '","PostCode":"' + $("#txtPostCode").val() + '",' +
+		'"What3Words": "' + $("#txtWhat3Words").val() + '", ' +
 		'"ChangeOver":"' + ($("#chkChangeOver").prop('checked')? "1" : "0") + '",' +
 		'"BloodBank":"' + ($("#chkBloodBank").prop('checked')? "1" : "0") + '",' + 
 		'"InNetwork":"' + ($("#chkInNetwork").prop('checked')? "1" : "0") + '", "Enabled":"1"}}';

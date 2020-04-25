@@ -44,8 +44,14 @@
 
 					<label>Location:</label>
 					<input type="text" id="txtLat" />	<input type="text" id="txtLng" />	
-					<label>Post Code:</label>
+					<label>Postcode:</label>
 					<input type="text" id="txtPostCode" />
+
+					<label>What 3 words:</label>
+					<input type="text" id="txtWhat3Words" />
+					<div id="what3words">
+						
+                    </div>
 
 					<div id="map_canvas" class="img-rounded" style="width:500px; height:350px; border:1px solid gainsboro; margin-top: 10px; margin-bottom: 10px;">
 					</div>
