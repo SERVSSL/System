@@ -71,7 +71,7 @@
 	$(function() 
 	{
 		if ("<%=this.Message%>" != "") { niceAlert("<%=this.Message%>"); }
-		if (<%=this.UserLevel%> < 3) // Committee
+        if (<%=this.UserLevel%> < <%=(int)SERVDataContract.UserLevel.Controller%>) 
 		{
 			$("#cmdSave").slideUp();
 		}
