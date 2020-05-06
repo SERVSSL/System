@@ -1676,6 +1676,8 @@ namespace SERVDataContract.DbLinq
 		private int _locationID;
 		
 		private string _postCode;
+
+		private string _what3Words;
 		
 		private EntitySet<RunLog> _runLog;
 		
@@ -1721,6 +1723,10 @@ namespace SERVDataContract.DbLinq
 		partial void OnPostCodeChanged();
 		
 		partial void OnPostCodeChanging(string value);
+
+        partial void OnWhat3WordsChanged();
+		
+		partial void OnWhat3WordsChanging(string value);
 		#endregion
 		
 		
@@ -1940,6 +1946,28 @@ namespace SERVDataContract.DbLinq
 					this._postCode = value;
 					this.SendPropertyChanged("PostCode");
 					this.OnPostCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage= "_what3Words", Name= "What3Words", DbType="varchar(60)", AutoSync=AutoSync.Never)]
+		[DebuggerNonUserCode()]
+		public string What3Words
+		{
+			get
+			{
+				return this._what3Words;
+			}
+			set
+			{
+				if (((_what3Words == value) 
+							== false))
+				{
+					this.OnWhat3WordsChanging(value);
+					this.SendPropertyChanging();
+					this._what3Words = value;
+					this.SendPropertyChanged("What3Words");
+					this.OnWhat3WordsChanged();
 				}
 			}
 		}
