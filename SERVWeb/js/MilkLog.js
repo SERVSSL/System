@@ -52,11 +52,26 @@ Serv.Milklog = {
     },
     SaveRun: function() {
         $("#txtCollectPostcode").val($("#txtCollectPostcode").val().trim());
+        Serv.Milklog.CleanTimes();
         if (!Serv.Milklog.Validate()) {
             return;
         }
         var data = JSON.stringify(Serv.Milklog.GetDataForSave());
         callServerSide("Service/Service.asmx/LogMilkRun", data, Serv.Milklog.OnSave, Serv.Milklog.OnError);
+    },
+    CleanTimes: function() {
+        $("#txtPickupTime").val(Serv.Milklog.CleanTime($("#txtPickupTime").val()));
+        $("#txtDeliverTime").val(Serv.Milklog.CleanTime($("#txtDeliverTime").val()));
+        $("#txtReturnTime").val(Serv.Milklog.CleanTime($("#txtReturnTime").val()));
+    },
+    CleanTime: function (time) {
+        if (!time) return "";
+        if (/^\d{4}$/.test(time)) {
+            return time.substring(0, 2) + ":" + time.substring(2);
+        }
+        time = time.replace('.', ':');
+        time = time.replace(',', ':');
+        return time;
     },
     GetDataForSave: function () {
         var runLogId = parseInt($("#txtRunLogId").val(), 10);

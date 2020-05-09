@@ -106,6 +106,6 @@
         $("#txtNotes").val("<%=Model.Notes%>");
 
     </script>
-    <script src="js/MilkLog.js"></script>
+    <script src="js/MilkLog.js?123"></script>
 </asp:Content>
 
