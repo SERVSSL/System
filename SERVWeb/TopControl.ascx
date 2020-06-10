@@ -65,8 +65,10 @@
 						<li><a href="ControllerLog.aspx" target="_blank"><i class="icon-chevron-right"></i> Controller Logging (New Tab)</a></li>
 						<li><a href="ControllerLog.aspx?AA=y"><i class="icon-plane"></i> Air Ambulance Logging</a></li>
 						<li><a href="MilkRunLog.aspx"><i class="milk-icon"></i> Milk Run Logging</a></li>
-						<li><a href="TakeControl.aspx"><i class="icon-random"></i> Take Control of SERV NOW</a></li>
-						<li class="divider"></li>
+                        <li><a href="TakeControl.aspx"><i class="icon-random"></i> Take Control of SERV NOW</a></li>
+                        <li class="divider"></li>
+                        <li><a href="https://docs.google.com/forms/d/1LczuyKgFdKOT9ZfSHucSS5nwfAask1fn9XwntLrmtBU" target="_blank"><i class="icon-list-alt"></i> Vehicle Usage Logging</a></li>
+                        <li class="divider"></li>
 						<li><a href="SMS.aspx"><i class="icon-envelope"></i> Bulk SMS</a></li>
 					</ul>
 				</li>
