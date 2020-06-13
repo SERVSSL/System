@@ -41,8 +41,8 @@ namespace SERV.Utils.Sms
                 _logger.Error($"Error Sending SMS via AQL. Body is [{requestMessage}]", ex);
                 return false;
             }
-            //var response = JsonConvert.DeserializeObject<SmsSendResponse>(json);
             _logger.Debug($"AQL Send Response [{json}]");
+            //var response = JsonConvert.DeserializeObject<SmsSendResponse>(json);
             return true;
         }
 

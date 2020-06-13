@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
+using log4net;
 
 namespace SERVWeb
 {
@@ -14,7 +11,6 @@ namespace SERVWeb
 
         protected void Application_Start(object sender, EventArgs e)
         {
-
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -52,8 +48,8 @@ namespace SERVWeb
                     }
                 }
 
-                var log = new Logger();
-                log.Error("Unhandled exception", exception);
+                ILog log = LogManager.GetLogger("SERV");
+                log.Error("Unhandled exception Application_Error", exception);
             }
             catch (Exception )
             {

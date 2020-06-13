@@ -51,6 +51,10 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\res\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="mysql.data">
       <HintPath>..\lib\mysql.data.dll</HintPath>
     </Reference>
