@@ -1,5 +1,8 @@
 #define DYNMARK
 
+using System;
+using SERV.Utils.Sms;
+
 namespace SERV.Utils
 {
 	public class Messaging
@@ -47,36 +50,19 @@ namespace SERV.Utils
 							smsUser, smsPassword, to, from, message));
 				}catch{
 				}
-			}
-			else
-			{
-				try
-				{
-					res = new System.Net.WebClient().DownloadString(
-						string.Format("http://gw.aql.com/sms/sms_gw.php?username={0}&password={1}&destination={2}&originator={3}&message={4}", 
-							smsUser, smsPassword, to, from, message));
-				}
-				catch{
-				}
-			}
-			log.Info("SMS: " + res);
+                log.Info("SMS: " + res);
+                return res;
+            }
+            var service = new AqlSmsService();
+            service.SendMessage(to, from, message);
 			return res;
 		}
 
 		public static int GetAQLCreditCount()
 		{
-			string smsUser = System.Configuration.ConfigurationManager.AppSettings["SMSUser"];
-			string smsPassword = System.Configuration.ConfigurationManager.AppSettings["SMSPassword"];
-			string res = new System.Net.WebClient().DownloadString(
-				string.Format("http://gw1.aql.com/sms/postmsg.php?username={0}&password={1}&cmd=credit", smsUser, smsPassword));
-			if (res.Contains("="))
-			{
-				int ret = int.Parse(res.Split('=')[1].Trim());
-				return ret;
-			}
-			return -1;
+			var service = new AqlSmsService();
+            return service.GetCreditCount();
 		}
-
 	}
 }
 

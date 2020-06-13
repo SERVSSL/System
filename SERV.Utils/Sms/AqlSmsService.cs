@@ -41,7 +41,8 @@ namespace SERV.Utils.Sms
                 _logger.Error($"Error Sending SMS via AQL. Body is [{requestMessage}]", ex);
                 return false;
             }
-            var response = JsonConvert.DeserializeObject<SmsSendResponse>(json);
+            //var response = JsonConvert.DeserializeObject<SmsSendResponse>(json);
+            _logger.Debug($"AQL Send Response [{json}]");
             return true;
         }
 
@@ -78,7 +79,7 @@ namespace SERV.Utils.Sms
 
     internal class Datum
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Source { get; set; }
         public string Destination { get; set; }
         public string Received { get; set; }
