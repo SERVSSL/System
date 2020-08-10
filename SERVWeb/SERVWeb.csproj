@@ -51,6 +51,10 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\res\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="mysql.data">
       <HintPath>..\lib\mysql.data.dll</HintPath>
     </Reference>
@@ -141,6 +145,7 @@
     <Content Include="css\smoothness\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="css\smoothness\jquery-ui-1.10.3.custom.css" />
     <Content Include="css\smoothness\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Global.asax" />
     <Content Include="img\GreyHelicopter.png" />
     <Content Include="img\milk-bottle.png" />
     <Content Include="img\Milk.png" />
@@ -250,6 +255,9 @@
     <Content Include="js\GA.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="MilkRunLog.aspx.cs">
       <DependentUpon>MilkRunLog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
