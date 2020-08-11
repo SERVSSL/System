@@ -306,7 +306,6 @@ namespace SERVWeb
 			Authenticate();
 			var logMessage = $"RunLogId [{model.RunLogId}], controllerMemberId [{model.ControllerMemberId}], riderMemberId [{model.RiderMemberId}], runDate [{model.RunDate}], collectTime [{model.CollectTime}], deliverTime [{model.DeliverTime}], homeSafeTime  [{model.HomeSafeTime}], vehicleType  [{model.VehicleType}], collectPostcode [{model.CollectPostcode}], collectionLocationId [{model.CollectionLocationId}], deliverToLocationId [{model.DeliverToLocationId}], notes [{model.Notes}]";
 		    _logger.Debug(logMessage);
-			//model.CreatedByUserId = CurrentUser().UserID;
 			var result = new MilkLogBLL(new MilkRunMapper()).Save(model, CurrentUser());
 			return result;
 	    }

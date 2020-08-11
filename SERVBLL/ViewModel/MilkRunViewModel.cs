@@ -11,8 +11,10 @@
 		public string HomeSafeTime {get;set;}
 		public string VehicleType {get;set;} 
 		public string CollectPostcode {get;set;} 
-		public int CollectionLocationId {get;set;} 
-		public int DeliverToLocationId {get;set;} 
+		public int CollectionLocationId {get;set;}
+        public int DeliverToLocationId { get; set; }
+        public string DeliverToPostcode { get; set; }
+        public int BoxQty { get; set; }
 		public string Notes { get; set; }
 
 		public int CreatedByUserId { get; set; }

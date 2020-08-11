@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using SERVBLL.Mappers;
@@ -24,7 +23,7 @@ namespace SERVBLL
 			const int humanMilkProductId = 5;
 			model.CreatedByUserId = user.UserID;
 			var runLog = _mapper.Map(model);
-			var prods = new List<int> { humanMilkProductId };
+			var prods = Enumerable.Repeat(humanMilkProductId, model.BoxQty).ToList();
 			var dal = new RunLogDAL();
 			var vehicleTypeId= dal.GetVehicleId(model.VehicleType);
 			if (!vehicleTypeId.HasValue)
@@ -60,27 +59,30 @@ namespace SERVBLL
 
 		public MilkRunEditViewModel GetRunLogForEdit(string runLogId)
 		{
-			var dal = new RunLogDAL();
-			var dataTable = dal.GetMilkRunLog(int.Parse(runLogId));
-			var item = dataTable.AsEnumerable().Select(x =>
-				new MilkRunEditViewModel
-				{
-					RunLogId = int.Parse(runLogId),
-					Controller = x.Field<string>("Controller"),
-					Rider = x.Field<string>("Rider"),
-					DutyDate = x.Field<string>("DutyDate"),
-					CollectTime = x.Field<string>("CollectTime"),
-					DeliverTime = x.Field<string>("DeliverTime"),
-					HomeSafeTime = x.Field<string>("HomeSafeTime"),
-					Vehicle = x.Field<string>("Vehicle"),
-					CollectionPostcode = x.Field<string>("CollectionPostcode"),
-					CollectionHospital = x.Field<string>("CollectionHospital"),
-					TakenTo = x.Field<string>("TakenTo"),
-					Notes = x.Field<string>("Notes"),
-				}).FirstOrDefault();
+            using (var dal = new RunLogDAL())
+            {
+                var dataTable = dal.GetMilkRunLog(int.Parse(runLogId));
+                var item = dataTable.AsEnumerable().Select(x =>
+                    new MilkRunEditViewModel
+                    {
+                        RunLogId = int.Parse(runLogId),
+                        Controller = x.Field<string>("Controller"),
+                        Rider = x.Field<string>("Rider"),
+                        DutyDate = x.Field<string>("DutyDate"),
+                        CollectTime = x.Field<string>("CollectTime"),
+                        DeliverTime = x.Field<string>("DeliverTime"),
+                        HomeSafeTime = x.Field<string>("HomeSafeTime"),
+                        Vehicle = x.Field<string>("Vehicle"),
+                        CollectionPostcode = x.Field<string>("CollectionPostcode"),
+                        CollectionHospital = x.Field<string>("CollectionHospital"),
+                        TakenTo = x.Field<string>("TakenTo"),
+                        TakenToPostcode = x.Field<string>("TakenToPostcode"),
+                        BoxQty = x.Field<int>("Quantity"),
+                        Notes = x.Field<string>("Notes"),
+                    }).FirstOrDefault();
 
-			dal.Dispose();
-			return item;
+                return item;
+			}
 		}
 
 		public int? GetVehicleId(string vehicleType)

@@ -13,6 +13,8 @@
 		public string CollectionPostcode { get; set; }
 		public string CollectionHospital { get; set; }
 		public string TakenTo { get; set; }
+        public string TakenToPostcode { get; set; }
+        public int BoxQty { get; set; }
 		public string Notes { get; set; }
-	}
+    }
 }

@@ -44,8 +44,9 @@ namespace SERVBLL.Mappers
 				CallFromLocationID = 42,
 				RiderMemberID = model.RiderMemberId,
 				DeliverToLocationID = model.DeliverToLocationId,
+				DeliverToPostcode = model.DeliverToPostcode,
 				HomeSafeDateTime = homeSafe,
-				Boxes = 1
+				Boxes = model.BoxQty
 			};
 		}
 

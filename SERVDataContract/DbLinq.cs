@@ -4969,7 +4969,9 @@ namespace SERVDataContract.DbLinq
 		private System.Nullable<System.DateTime> _deliverDateTime;
 		
 		private int _deliverToLocationID;
-		
+        
+        private string _deliverToPostcode;
+
 		private string _description;
 		
 		private System.Nullable<System.DateTime> _dutyDate;
@@ -5064,6 +5066,10 @@ namespace SERVDataContract.DbLinq
 		partial void OnDeliverToLocationIDChanged();
 		
 		partial void OnDeliverToLocationIDChanging(int value);
+		
+		partial void OnDeliverToPostcodeChanged();
+		
+		partial void OnDeliverToPostcodeChanging(string value);
 		
 		partial void OnDescriptionChanged();
 		
@@ -5426,6 +5432,28 @@ namespace SERVDataContract.DbLinq
 				}
 			}
 		}
+
+        [Column(Storage = "_deliverToPostcode", Name = "DeliverToPostcode", DbType = "varchar(8)", AutoSync = AutoSync.Never)]
+        [DebuggerNonUserCode()]
+        public string DeliverToPostcode
+		{
+            get
+            {
+                return this._deliverToPostcode;
+            }
+            set
+            {
+                if (((_deliverToPostcode == value)
+                     == false))
+                {
+                    this.OnDeliverToPostcodeChanging(value);
+                    this.SendPropertyChanging();
+                    this._deliverToPostcode = value;
+                    this.SendPropertyChanged("DeliverToPostcode");
+                    this.OnDeliverToPostcodeChanged();
+                }
+            }
+        }
 		
 		[Column(Storage="_description", Name="Description", DbType="varchar(300)", AutoSync=AutoSync.Never)]
 		[DebuggerNonUserCode()]

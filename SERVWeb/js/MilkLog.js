@@ -88,6 +88,8 @@ Serv.Milklog = {
                 collectPostcode: $("#txtCollectPostcode").val(),
                 collectionLocationId: getLocationId($("#txtCollect").val()),
                 deliverToLocationId: getLocationId($("#txtDrop").val()),
+                deliverToPostcode: $("#txtDropPostcode").val(),
+                boxQty: $("#txtBoxes").val(),
                 notes: $("#txtNotes").val()
             }
         };
