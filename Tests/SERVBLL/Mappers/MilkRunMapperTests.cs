@@ -107,11 +107,22 @@ namespace Serv.Tests.SERVBLL.Mappers
 		}
 
 		[Test]
-		public void ShouldMapFinalDestinationLocationId()
+		public void ShouldMapFinalDestinationLocationId_When_DeliverToPostcodeIsNull()
 		{
 			_input.DeliverToLocationId = 234;
+            _input.DeliverToPostcode = null;
 			var result = _classUnderTest.Map(_input);
 			result.FinalDestinationLocationID.Should().Be(234);
+		}
+
+		[Test]
+		public void ShouldMapFinalDestinationLocationId_To_PrivateAddress_When_DeliverToPostcode()
+		{
+            const int privateAddressLocationId = 19;
+			_input.DeliverToLocationId = 234;
+            _input.DeliverToPostcode = "GU14";
+			var result = _classUnderTest.Map(_input);
+			result.FinalDestinationLocationID.Should().Be(privateAddressLocationId);
 		}
 
 		[Test]

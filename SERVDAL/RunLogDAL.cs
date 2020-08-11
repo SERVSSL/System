@@ -292,10 +292,9 @@ namespace SERVDAL
 			string sql = "select RunLogID as ID, date_format(DutyDate, '%Y-%m-%d') as 'DutyDate', " +
 				"coalesce(date_format(CallDateTime, '%Y-%m-%d %H:%i'), 'N/A') as 'CallDateTime', cf.Location as 'CallFrom', " +
 			    "CASE WHEN rl.RunLogType='M' THEN Concat(cl.Location,' ', rl.CollectionPostcode) ELSE cl.Location END 'From', " +
-				"dl.Location as 'To', coalesce(date_format(rl.CollectDateTime, '%H:%i'), 'NOT ACCEPTED') as Collected, " +
+				"CASE WHEN rl.RunLogType = 'M' THEN Concat(dl.Location,' ', rl.DeliverToPostcode) ELSE dl.Location END as 'To', coalesce(date_format(rl.CollectDateTime, '%H:%i'), 'NOT ACCEPTED') as Collected, " +
 				"date_format(rl.DeliverDateTime, '%H:%i') as Delivered, " +
-						 //"timediff(rl.DeliverDateTime, rl.CollectDateTime) as 'Run Time', " +
-						 "fl.Location as 'Destination', concat(m.LastName, ' ', m.FirstName) as Rider, " +
+						 "CASE WHEN rl.RunLogType = 'M' THEN Concat(fl.Location,' ', rl.DeliverToPostcode) ELSE fl.Location END as 'Destination', concat(m.LastName, ' ', m.FirstName) as Rider, " +
 			             "v.VehicleType as 'Vehicle', rl.Description as 'Consignment', " +
 						 "concat(c.LastName, ' ', c.FirstName) as Controller from RunLog rl " +
 			             "left join Member m on m.MemberID = rl.RiderMemberID " +

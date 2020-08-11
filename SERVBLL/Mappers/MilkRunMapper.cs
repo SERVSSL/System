@@ -40,7 +40,6 @@ namespace SERVBLL.Mappers
 				CollectionPostcode = model.CollectPostcode,
 				CollectDateTime = collectDateTime,
 				DeliverDateTime = deliverDateTime,
-				FinalDestinationLocationID = model.DeliverToLocationId,
 				ControllerMemberID = model.ControllerMemberId,
 				Urgency = 2,
 				Notes = model.Notes,
@@ -49,6 +48,7 @@ namespace SERVBLL.Mappers
 				RiderMemberID = model.RiderMemberId,
 				DeliverToLocationID = deliverToLocationId,
 				DeliverToPostcode = model.DeliverToPostcode,
+                FinalDestinationLocationID = deliverToLocationId,
 				HomeSafeDateTime = homeSafe,
 				Boxes = model.BoxQty
 			};
