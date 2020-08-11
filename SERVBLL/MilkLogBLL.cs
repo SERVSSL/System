@@ -47,6 +47,7 @@ namespace SERVBLL
 			destination.ControllerMemberID = source.ControllerMemberID;
 			destination.DeliverDateTime = source.DeliverDateTime;
 			destination.DeliverToLocationID = source.DeliverToLocationID;
+			destination.DeliverToPostcode = source.DeliverToPostcode;
 			destination.DutyDate = source.DutyDate;
 			destination.FinalDestinationLocationID = source.FinalDestinationLocationID;
 			destination.HomeSafeDateTime = source.HomeSafeDateTime;

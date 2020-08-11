@@ -68,7 +68,7 @@
                         <input type="text" id="txtDropPostcode" placeholder="First half of postcode" />
 
                         <label>Taken to hospital:</label>
-                        <input type="text" id="txtDrop" class="locations" placeholder="Type and Choose" />
+                        <input type="text" id="txtDrop" placeholder="Type and Choose" />
 
                         <label>Number of boxes:</label>
                         <input type="text" id="txtBoxes" />

@@ -26,6 +26,10 @@ namespace SERVBLL.Mappers
 				? model.CollectionLocationId
 				: privateAddressLocationId;
 
+			var deliverToLocationId = string.IsNullOrWhiteSpace(model.DeliverToPostcode)
+				? model.DeliverToLocationId
+				: privateAddressLocationId;
+
 			return new RunLog
 			{
 				RunLogType = "M",
@@ -43,7 +47,7 @@ namespace SERVBLL.Mappers
 				OriginLocationID = collectionLocationId,
 				CallFromLocationID = 42,
 				RiderMemberID = model.RiderMemberId,
-				DeliverToLocationID = model.DeliverToLocationId,
+				DeliverToLocationID = deliverToLocationId,
 				DeliverToPostcode = model.DeliverToPostcode,
 				HomeSafeDateTime = homeSafe,
 				Boxes = model.BoxQty

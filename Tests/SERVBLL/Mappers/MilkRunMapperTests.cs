@@ -176,9 +176,28 @@ namespace Serv.Tests.SERVBLL.Mappers
 		}
 
 		[Test]
-		public void ShouldMapDeliverToLocationId()
+		public void ShouldMapDeliverToLocationId_WhenDeliverToPostcodeIsNull()
 		{
 			_input.DeliverToLocationId = 42;
+            _input.DeliverToPostcode = null;
+			var result = _classUnderTest.Map(_input);
+			result.DeliverToLocationID.Should().Be(42);
+		}
+
+        [Test]
+		public void ShouldMapDeliverToLocationId_WhenDeliverToPostcodeIsEmpty()
+		{
+			_input.DeliverToLocationId = 42;
+            _input.DeliverToPostcode = "";
+			var result = _classUnderTest.Map(_input);
+			result.DeliverToLocationID.Should().Be(42);
+		}
+
+        [Test]
+		public void ShouldMapDeliverToLocationId_WhenDeliverToPostcodeIsWhitespace()
+		{
+			_input.DeliverToLocationId = 42;
+            _input.DeliverToPostcode = "  ";
 			var result = _classUnderTest.Map(_input);
 			result.DeliverToLocationID.Should().Be(42);
 		}
@@ -192,9 +211,10 @@ namespace Serv.Tests.SERVBLL.Mappers
 
 		[Test]
 		public void ShouldMapBoxes()
-		{
+        {
+            _input.BoxQty = 2;
 			var result = _classUnderTest.Map(_input);
-			result.Boxes.Should().Be(1);
+			result.Boxes.Should().Be(2);
 		}
 
 		[Test]
@@ -259,5 +279,24 @@ namespace Serv.Tests.SERVBLL.Mappers
 			var result = _classUnderTest.Map(_input);
 			result.OriginLocationID.Should().Be(privateAddressLocationId);
 		}
+
+        [Test]
+        public void ShouldMapDeliverToPostcode()
+        {
+            _input.DeliverToPostcode = "GU14";
+            var result = _classUnderTest.Map(_input);
+            result.DeliverToPostcode.Should().Be("GU14");
+        }
+
+        [Test]
+        public void ShouldMapDeliverToLocationID_To_PrivateAddress_WhenDeliverToPostcode()
+        {
+            const int privateAddressLocationId = 19;
+            _input.DeliverToPostcode = "GU14";
+            _input.DeliverToLocationId = 1;
+            var result = _classUnderTest.Map(_input);
+            result.DeliverToLocationID.Should().Be(privateAddressLocationId);
+        }
+
 	}
 }

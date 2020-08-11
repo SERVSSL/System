@@ -323,7 +323,7 @@ namespace SERVDAL
 	 left join Location cl on cl.LocationID = rl.CollectionLocationID
 	 left join Location dl on dl.LocationID = rl.DeliverToLocationID
      left join RunLog_Product rlp on rl.RunLogID = rlp.RunLogID
-	where RunLogID={runLogId} and RunLogType='M'";
+	where rlp.RunLogID={runLogId} and RunLogType='M'";
 			return ExecuteSQL(sql);
 		}
 
