@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="SERVWeb.MilkRunLog" MasterPageFile="~/Master.master" %>
+<%@ Import Namespace="System.Web.Configuration" %>
 <%@ MasterType VirtualPath="~/Master.master" %>
 
 <asp:Content ContentPlaceHolderID="titlePlaceholder" ID="titlePlaceholderContent" runat="server">Controller Log - Milk</asp:Content>
@@ -63,8 +64,14 @@
                         <label>Collect from hospital:</label>
                         <input type="text" id="txtCollect" placeholder="Type and Choose" />
                         
-                        <label>Taken To:</label>
-                        <input type="text" id="txtDrop" class="locations" placeholder="Type and Choose" />
+                        <label>Taken to postcode:</label>
+                        <input type="text" id="txtDropPostcode" placeholder="First half of postcode" />
+
+                        <label>Taken to hospital:</label>
+                        <input type="text" id="txtDrop" placeholder="Type and Choose" />
+
+                        <label>Number of boxes:</label>
+                        <input type="text" id="txtBoxes" />
 
                         <label>Notes:</label>
                         <textarea id="txtNotes" maxlength="599" data-bind="value: vm.Notes"></textarea>
@@ -102,10 +109,16 @@
         } else {
             $("#txtCollect").val("<%=Model.CollectionHospital%>");
         }
-        $("#txtDrop").val("<%=Model.TakenTo%>");
+        if ("<%=Model.TakenToPostcode%>".length > 0) {
+            $("#txtDropPostcode").val("<%=Model.TakenToPostcode%>");
+        }
+        else {
+            $("#txtDrop").val("<%=Model.TakenTo%>");
+        }
+        $("#txtBoxes").val("<%=Model.BoxQty%>");
         $("#txtNotes").val("<%=Model.Notes%>");
 
     </script>
-    <script src="js/MilkLog.js?123"></script>
+    <script src="js/MilkLog.js?1246"></script>
 </asp:Content>
 

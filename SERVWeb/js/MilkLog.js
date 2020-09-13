@@ -4,6 +4,7 @@ Serv.Milklog = {
     Initialise: function() {
         Serv.Milklog.InitialiseCalendar();
         Serv.Milklog.InitialiseLocationFields();
+        Serv.Milklog.InitialiseBoxQty();
         listControllers(null);
         $(".controllers").autocomplete({ source: controllerNames });
         listMembersWithTag("Milk", null);
@@ -49,9 +50,31 @@ Serv.Milklog = {
                 $("#txtCollect").val("");
             }
         });
+        $("#txtDropPostcode").keypress(function(e) {
+            var charInput = e.keyCode;
+            if ((charInput >= 97) && (charInput <= 122)) { // lowercase
+                if (!e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
+                    var newChar = charInput - 32;
+                    var start = e.target.selectionStart;
+                    var end = e.target.selectionEnd;
+                    e.target.value = e.target.value.substring(0, start) + String.fromCharCode(newChar) + e.target.value.substring(end);
+                    e.target.setSelectionRange(start + 1, start + 1);
+                    e.preventDefault();
+                }
+            }
+            if ($(this).val()) {
+                $("#txtDrop").val("");
+            }
+        });
     },
-    SaveRun: function() {
+    InitialiseBoxQty: function() {
+        if (!$("#txtBoxes").val() || $("#txtBoxes").val()==="0") {
+            $("#txtBoxes").val(1);
+        }
+    },
+    SaveRun: function () {
         $("#txtCollectPostcode").val($("#txtCollectPostcode").val().trim());
+        $("#txtDropPostcode").val($("#txtDropPostcode").val().trim());
         Serv.Milklog.CleanTimes();
         if (!Serv.Milklog.Validate()) {
             return;
@@ -88,6 +111,8 @@ Serv.Milklog = {
                 collectPostcode: $("#txtCollectPostcode").val(),
                 collectionLocationId: getLocationId($("#txtCollect").val()),
                 deliverToLocationId: getLocationId($("#txtDrop").val()),
+                deliverToPostcode: $("#txtDropPostcode").val(),
+                boxQty: $("#txtBoxes").val(),
                 notes: $("#txtNotes").val()
             }
         };
@@ -146,20 +171,25 @@ Serv.Milklog = {
             return false;
         }
 
-        if (!$("#btnVehicle").text()) {
+        if (!$("#btnVehicle").text() || $("#btnVehicle").text() === "Select the vehicle") {
             niceAlert("What did the rider / driver travel on or in?");
             return false;
         }
-        var collectResult = Serv.Milklog.CollectValidate($("#txtCollectPostcode").val(), $("#txtCollect").val());
+        var collectResult = Serv.Milklog.LocationValidate($("#txtCollectPostcode").val(), $("#txtCollect").val(), "collect");
         if (!collectResult.isvalid) {
             niceAlert(collectResult.errorMessage);
             return false;
         }
-        var dropLocationId = getLocationId($("#txtDrop").val());
-        if (dropLocationId === 0) {
-            niceAlert("Where did we drop off?  You MUST choose an item from the list or type it exactly.");
+        var takentoResult = Serv.Milklog.LocationValidate($("#txtDropPostcode").val(), $("#txtDrop").val(), "takento");
+        if (!takentoResult.isvalid) {
+            niceAlert(takentoResult.errorMessage);
             return false;
         }
+        if ($("#txtBoxes").val()<1) {
+            niceAlert("How many boxes did we carry?");
+            return false;
+        }
+
         return true;
     },
     IsValidTime: function(timeValue) {
@@ -171,21 +201,27 @@ Serv.Milklog = {
         }
         return false;
     },
-    CollectValidate: function (collectPostcode, collectHospitalName) {
-        var collectionLocationId = getLocationId(collectHospitalName);
-        if (collectPostcode) {
-            if (collectPostcode.length > 1 && collectPostcode.length < 5) {
+    LocationValidate: function (postcode, hospitalName, collectDeliver) {
+        var locationId = getLocationId(hospitalName);
+        if (postcode) {
+            if (postcode.length > 1 && postcode.length < 5) {
                 return { isvalid: true };
             }
-            return { isvalid: false, errorMessage: "Collection postcode should be between 1 and 4 characters long" };
-        } else if (collectionLocationId > 0) {
+            return { isvalid: false, errorMessage: collectDeliver === "collect" ? "Collection postcode should be between 1 and 4 characters long" : "Taken to postcode should be between 1 and 4 characters long" };
+        } else if (locationId > 0) {
             return { isvalid: true };
         }
-        return { isvalid: false, errorMessage: "Where did we collect? Must enter either a collection postcode or hospital" };
+        return { isvalid: false, errorMessage: collectDeliver === "collect" ? "Where did we collect? Must enter either a collection postcode or hospital" : "Where did we take to? Must enter either a taken to postcode or hospital" };
     },
     InitialiseLocationFields: function () {
         listLocations(null);
-        $(".locations").autocomplete({ source: locationNames });
+        $("#txtDrop").autocomplete({
+            source: locationNames, change: function (event, ui) {
+                if ($(this).val()) {
+                    $("#txtDropPostcode").val("");
+                }
+            }
+        });
         $("#txtCollect").autocomplete({
             source: locationNames, change: function (event, ui) {
                 if ($(this).val()) {

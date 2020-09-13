@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace SERVDAL
 {
-	public class RunLogDAL
+	public class RunLogDAL : IDisposable
 	{
 		private SERVDataContract.DbLinq.SERVDB db;
 
@@ -292,10 +292,9 @@ namespace SERVDAL
 			string sql = "select RunLogID as ID, date_format(DutyDate, '%Y-%m-%d') as 'DutyDate', " +
 				"coalesce(date_format(CallDateTime, '%Y-%m-%d %H:%i'), 'N/A') as 'CallDateTime', cf.Location as 'CallFrom', " +
 			    "CASE WHEN rl.RunLogType='M' THEN Concat(cl.Location,' ', rl.CollectionPostcode) ELSE cl.Location END 'From', " +
-				"dl.Location as 'To', coalesce(date_format(rl.CollectDateTime, '%H:%i'), 'NOT ACCEPTED') as Collected, " +
+				"CASE WHEN rl.RunLogType = 'M' THEN Concat(dl.Location,' ', rl.DeliverToPostcode) ELSE dl.Location END as 'To', coalesce(date_format(rl.CollectDateTime, '%H:%i'), 'NOT ACCEPTED') as Collected, " +
 				"date_format(rl.DeliverDateTime, '%H:%i') as Delivered, " +
-						 //"timediff(rl.DeliverDateTime, rl.CollectDateTime) as 'Run Time', " +
-						 "fl.Location as 'Destination', concat(m.LastName, ' ', m.FirstName) as Rider, " +
+						 "CASE WHEN rl.RunLogType = 'M' THEN Concat(fl.Location,' ', rl.DeliverToPostcode) ELSE fl.Location END as 'Destination', concat(m.LastName, ' ', m.FirstName) as Rider, " +
 			             "v.VehicleType as 'Vehicle', rl.Description as 'Consignment', " +
 						 "concat(c.LastName, ' ', c.FirstName) as Controller from RunLog rl " +
 			             "left join Member m on m.MemberID = rl.RiderMemberID " +
@@ -315,14 +314,15 @@ namespace SERVDAL
 		{
 			var sql = $@"select concat(cm.LastName, ' ', cm.FirstName) as Controller, concat(rm.LastName, ' ', rm.FirstName) as Rider,
 	DATE_FORMAT(rl.DutyDate,'%d %b %Y') as DutyDate, DATE_FORMAT(rl.CollectDateTime,'%H:%i') as CollectTime, DATE_FORMAT(rl.DeliverDateTime,'%H:%i') as DeliverTime,DATE_FORMAT(rl.HomeSafeDateTime,'%H:%i') as HomeSafeTime,v.VehicleType as 'Vehicle',rl.CollectionPostcode,
-	cl.Location as 'CollectionHospital', dl.Location as 'TakenTo', rl.Notes
+	cl.Location as 'CollectionHospital', dl.Location as 'TakenTo', rl.DeliverToPostcode as 'TakenToPostcode', rlp.Quantity, rl.Notes
 	from RunLog rl 
 	 left join Member rm on rm.MemberID = rl.RiderMemberID 
 	 left join Member cm on cm.MemberID = rl.ControllerMemberID
 	 left join VehicleType v on v.VehicleTypeID = rl.VehicleTypeID
 	 left join Location cl on cl.LocationID = rl.CollectionLocationID
 	 left join Location dl on dl.LocationID = rl.DeliverToLocationID
-	where RunLogID={runLogId} and RunLogType='M'";
+     left join RunLog_Product rlp on rl.RunLogID = rlp.RunLogID
+	where rlp.RunLogID={runLogId} and RunLogType='M'";
 			return ExecuteSQL(sql);
 		}
 
