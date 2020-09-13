@@ -252,6 +252,7 @@ function loadCalendar(memberId, userLevel)
 						today=true;
 						$("#titleDay" + (day + 1)).addClass('today');
 					}
+                    var dayShift = 0;
 					for (var sched = 0; sched < json.d[day].length; sched++)
 					{
 						var slotMemberId = json.d[day][sched].MemberID;
@@ -268,10 +269,15 @@ function loadCalendar(memberId, userLevel)
 						if (slotMemberId == memberId) { strong = "<strong>"; italic="<i>" }
 						var icon = "<i class='icon icon-calendar'></i> ";
 						if (calendarName == null) { calendarName = ""; }
+						if (calendarName === "Controller - Days" || calendarName === "AA Daytime" || calendarName === "Daytime Blood" || calendarName === "Daytime Sample" || calendarName === "Milk") {
+                            dayShift++;
+						}
+                        var spaceClass = dayShift === 1 ? " mt-15" : "";
+                            
 						if (adHoc) { icon = "<i class='icon icon-heart icon-star icon-green'></i> ";}
 						if (swapMarked) { strikeout="text-decoration: line-through"; icon = "<i class='icon icon-exclamation-sign icon-red'></i> ";}
 						if (calendarName == "") { icon = ""; }
-						var toAppend = '<div title="' + calendarName + '" class="calendarSlot calendarSlot' + calendarId + '" style="w--idth:150px">' + icon +
+						var toAppend = '<div title="' + calendarName + '" class="calendarSlot calendarSlot' + calendarId +  spaceClass+ '" style="w--idth:150px">' + icon +
 									strong + italic + '<a style="' + strikeout + '" href="#" onclick="' +
 									'calSlotClicked(' + slotMemberId + ', ' + calendarId + ', \'' + calendarName + '\', \'' + shiftDate + '\', \'' + niceShiftDate + '\', ' + swapMarked + ');' + 
 									'">' + memberName + '</a></i></strong>' + 
