@@ -21,14 +21,14 @@
 	
 	$(function() 
 	{
-		if (<%=this.UserLevel%> < 3)
+		if (<%=this.UserLevel%> < <%=(int)SERVDataContract.UserLevel.Controller %>)
 		{
 			$("#cmdAdd").hide();
 		}
 		ListLocations(<%=this.UserLevel%>);
 	});
 
-	</script>
+    </script>
 
 </asp:Content>
 
