@@ -104,6 +104,12 @@
 			<h5><a href="#" onclick="$('#changeLog').slideDown();">Recent Changes</a></h5>
 			<div id="changeLog" style="display:none">
 				<ul>
+					<li>Formatting on calendar</li>
+					<li>new member icon for Ops map</li>
+					<li>Added deliver to private address for milk logging</li>
+					<li>Improved logging for exceptions</li>
+					<li>Updated AQL api</li>
+					<li>Improved milk logging time validation</li>
 					<li>Added What 3 words to locations</li>
                     <li>Removed old reports</li>
                     <li>Added milk runs</li>

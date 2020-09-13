@@ -1,4 +1,3 @@
-using System;
 using SERVDataContract;
 
 namespace SERVWeb
@@ -8,7 +7,7 @@ namespace SERVWeb
 
 		public static Service Service = new Service();
 
-		public static string SERVVersion = "1.9.9.2";
+		public static string SERVVersion = "1.9.9.3";
 
 		public static User User
 		{
