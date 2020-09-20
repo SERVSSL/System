@@ -17,9 +17,10 @@ namespace SERVBLL
 		private static System.Net.Mail.SmtpClient c = new SmtpClient(SERVER);
 		private static Logger log = new Logger();
 
-		private const string FROM = "noreply@system.servssl.org.uk";
+		private readonly string FROM = System.Configuration.ConfigurationManager.AppSettings["EmailFrom"];
 		private const string SERVER = "localhost";
 		public static string FOOTER = "\r\n\r\n\r\nThis message was sent from an unattended mailbox by the SERV SSL System.  Do not reply to this mail.  If you need to make contact, please use the Forum http://servssl.org.uk/members/ \r\n";
+        private readonly string _domain = System.Configuration.ConfigurationManager.AppSettings["Domain"];
 
 		public MessageBLL()
 		{
@@ -123,7 +124,7 @@ namespace SERVBLL
 			SendEmail(m.EmailAddress, "You have been given a shift on " + c.EntryDateShortStringWithDay, 
 				"Hi " + m.FirstName + ",\n\n" +
 				"This is an email to let you know that you have been put down for a shift on the " + c.CalendarName + " calendar on " + c.EntryDateShortStringWithDay + ".  This is not a recurring shift.  Why not add this to your personal calendar now?\n\n" +
-				"The SERV SSL Calendar can be found here: http://system.servssl.org.uk/Calendar\n\n" +
+				$"The SERV SSL Calendar can be found here: https://{_domain}/Calendar\n\n" +
 				"Thanks,\n\n" +
 				"SERV SSL System" + FOOTER, new MemberBLL().GetUserIdForMember(cargs.MemberId));
 		}
@@ -151,7 +152,7 @@ namespace SERVBLL
 			SendEmail(m.EmailAddress, "You volunteered for a shift on " + c.EntryDateShortStringWithDay + ", Thanks!", 
 				"Hi " + m.FirstName + ",\n\n" +
 				"You are a star!  Thank you very much for putting your name down on the " + c.CalendarName + " calendar on " + c.EntryDateShortStringWithDay + ".  Why not add this to your personal calendar now?\n\n" +
-				"The SERV SSL Calendar can be found here: http://system.servssl.org.uk/Calendar\n\n" +
+				$"The SERV SSL Calendar can be found here: https://{_domain}/Calendar\n\n" +
 				"Thanks,\n\n" +
 				"SERV SSL System" + FOOTER, new MemberBLL().GetUserIdForMember(cargs.MemberId));
 		}
@@ -219,7 +220,7 @@ namespace SERVBLL
 							"Hi " + mailToMember.FirstName + ",\n\n" +
 							"Sadly, " + shiftSwapper.FirstName + " cannot perform his/her " + calendar.Name + " duty on " + cargs.ShiftDate.ToString("ddd dd MMM") + ".\n\n" +
 							"We really could use your help!  Are you free?  If you have a few hours spare please put your name down.\n\n" +
-							"The SERV SSL Calendar can be found here: http://system.servssl.org.uk/Calendar\n\n" +
+							$"The SERV SSL Calendar can be found here: https://{_domain}/Calendar\n\n" +
 							"Thanks very much in advance!\n\n" +
 							"SERV SSL System" + FOOTER, new MemberBLL().GetUserIdForMember(shiftSwapper.MemberID));
 					}
@@ -232,7 +233,7 @@ namespace SERVBLL
 							"Hi " + shiftSwapper.FirstName + ",\n\n" +
 							"As requested, you have been removed from " + calendar.Name + " duty on " + cargs.ShiftDate.ToString("ddd dd MMM") + ".\n\n" +
 							"An email has been sent out to see if someone can cover for you.\n\n" +
-							"The SERV SSL Calendar can be found here: http://system.servssl.org.uk/Calendar\n\n" +
+							$"The SERV SSL Calendar can be found here: https://{_domain}/Calendar\n\n" +
 							"Thanks,\n\n" +
 							"SERV SSL System" + FOOTER, new MemberBLL().GetUserIdForMember(cargs.MemberId));
 					}
@@ -270,7 +271,7 @@ namespace SERVBLL
 				    lastLoginDate == null ? 
 						"We notice you have not yet logged into your account.  " +
 				              "It is essential that you do so to keep your contact details and volunteering preferences up to date.\r\n\r\n  " +
-				              "Please goto http://system.servssl.org.uk ASAP.\r\n" +
+				              $"Please goto https://{_domain} ASAP.\r\n" +
 				              "More information regarding the new Membership System and login instructions can be found in this SERV Forum topic: http://servssl.org.uk/members/index.php?/topic/1437-serv-system-action-required-by-all/\r\n\r\n" 
 						: 
 					    "You last logged onto the system on " + ((DateTime)lastLoginDate).ToString("dd MMM yy HH:mm") + "\r\n\r\n"
@@ -403,14 +404,13 @@ namespace SERVBLL
 		public void SendPasswordResetEmail(Member m, string token, int userID)
 		{
 			SendEmail(m.EmailAddress, "SERV System Password Reset", 
-				string.Format("Hi {0},\r\n\r\n" + 
+				     $"Hi {m.FirstName},\r\n\r\n" + 
 					"Somebody requested a new password for your SERV SSL System account (NOT the Forum).\r\n\r\n" +
 					"To reset your password please click this link:\r\n\r\n" + 
-					"https://system.servssl.org.uk/SetPassword.aspx?t={1} \r\n\r\n" +
-					"If you don't use this link within 1 hour, it will expire. To get a new password reset link, visit https://system.servssl.org.uk/PasswordReset.aspx \r\n\r\n" +
+					$"https://{_domain}/SetPassword.aspx?t={token} \r\n\r\n" +
+					$"If you don't use this link within 1 hour, it will expire. To get a new password reset link, visit https://{_domain}/PasswordReset.aspx \r\n\r\n" +
 					"Thanks,\r\n\r\n" + 
-					"SERV SSL System {2}", 
-					m.FirstName, token, MessageBLL.FOOTER), userID);
+					$"SERV SSL System {MessageBLL.FOOTER}", userID);
 		}
 
 		public void SendNewMemberEmail(Member member, int userId)
