@@ -19,7 +19,7 @@
 <label>Send To <small>(This is now an intersection, so AND combination. Each member must have ALL the selected tags)</small>:</label>
 <div class="checkbox">
 	<label>
-		<input type="checkbox" id="chkEmergencyList" onchange="genTags();" /> Emergency List
+		<input type="checkbox" id="chkEmergencyList" onchange="genTags();" disabled /> Emergency List
 	</label>
 	<label>
 		<input type="checkbox" id="chkControllers" onchange="genTags();" /> Controllers
@@ -60,8 +60,9 @@
 	loaded();
 	var smsCount = 0;
 	var fromServ = true;
-
+	$('#chkEmergencyList').prop('checked', true);
 	GetSMSCreditCount("lblCredits");
+    genTags();
 
 	function genTags()
 	{
