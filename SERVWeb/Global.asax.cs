@@ -49,7 +49,7 @@ namespace SERVWeb
                 }
 
                 ILog log = LogManager.GetLogger("SERV");
-                log.Error("Unhandled exception Application_Error", exception);
+                log.Error("Unhandled exception Application_Error", ex);
             }
             catch (Exception )
             {
