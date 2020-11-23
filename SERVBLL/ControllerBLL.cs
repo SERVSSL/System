@@ -55,28 +55,37 @@ namespace SERVBLL
 		{
 			log.LogStart();
 			System.Net.ServicePointManager.ServerCertificateValidationCallback += SERV.Utils.Authentication.AcceptAllCertificates;
-			string num = mobile.Replace(" ","");
-			string servNow = System.Configuration.ConfigurationManager.AppSettings["FlextelNumber"];
-			string pin = System.Configuration.ConfigurationManager.AppSettings["FlextelPin"];
-			string format = System.Configuration.ConfigurationManager.AppSettings["FlextelFormat"];
-			try
-			{
-				log.Info("Diverting flextel to " + num);
-				string res = new System.Net.WebClient().DownloadString(string.Format(format, servNow, pin, num));
-				log.Info(res);
-				res = res.Trim();
-				if (res.Contains(","))
-				{
-					return res.Split(',')[0].Replace(" ","") == num;
-				}
-				return false;
-			}
-			catch
-			{
-				return false;
-			}
-		}
+			var num = mobile.Replace(" ","");
+			var servNow = System.Configuration.ConfigurationManager.AppSettings["FlextelNumber"];
+			var pin = System.Configuration.ConfigurationManager.AppSettings["FlextelPin"];
+			var format = System.Configuration.ConfigurationManager.AppSettings["FlextelFormat"];
+			var mainDivertOk =  DivertSingleNumber(num, format, servNow, pin);
+            var servNow2 = System.Configuration.ConfigurationManager.AppSettings["FlextelNumber2"];
+            var pin2 = System.Configuration.ConfigurationManager.AppSettings["FlextelPin2"];
+            var secondDivertOk = DivertSingleNumber(num, format, servNow2, pin2);
+            return mainDivertOk && secondDivertOk;
+        }
 
-	}
+		private static bool DivertSingleNumber(string num, string format, string servNow, string pin)
+        {
+            try
+            {
+                log.Info("Diverting flextel to " + num);
+                string res = new System.Net.WebClient().DownloadString(string.Format(format, servNow, pin, num));
+                log.Info(res);
+                res = res.Trim();
+                if (res.Contains(","))
+                {
+                    return res.Split(',')[0].Replace(" ", "") == num;
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
 }
 
