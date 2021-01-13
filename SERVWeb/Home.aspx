@@ -104,6 +104,8 @@
 			<h5><a href="#" onclick="$('#changeLog').slideDown();">Recent Changes</a></h5>
 			<div id="changeLog" style="display:none">
 				<ul>
+                    <li>Removed feedback form</li>
+					<li>Last run report</li>
 					<li>Formatting on calendar</li>
 					<li>new member icon for Ops map</li>
 					<li>Added deliver to private address for milk logging</li>
@@ -300,7 +302,6 @@
 				<ul>
 					<li>Do <strong>not</strong> use IE.  Use Chrome or Firefox.</li>
 				</ul>
-				<p>Found an issue? PM <a target="_blank" href="http://servssl.org.uk/members/index.php?/user/29-tristan-phillips/">Tris</a></p>
 			</div>
 		</div>
 			

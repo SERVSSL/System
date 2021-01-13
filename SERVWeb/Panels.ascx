@@ -40,17 +40,6 @@
   <strong>CAUTION!</strong> <%=SERVGlobal.SystemName%> is currently in <strong>Read Only mode</strong>.  You will not be able to save any changes.
 </div>
 
-<div id="feedbackDialog" style="display:none; background-color:#fcfcfc" title="Feedback">
-	<p>Use this form to provide <strong>anonymous</strong> feedback on <i>any</i> aspect of SERV or the <%=SERVGlobal.SystemName%> system.</p>
-	<textarea id="txtFeedback" cols="40" rows="5" style="width:450px" onkeypress="filterKeys()"></textarea>
-	<br/><br/>
-	<input type="button" value="Submit" class="btn btn-primary btn-lg" onclick="cmdSubmitFeedbackClicked();"></input> <input type="button" value="Cancel" class="btn btn-lg" onclick="$('#feedbackDialog').dialog('close');"></input>
-	<br/><br/>
-</div>
-
-<button onmouseover="showFeedbackButton();" onmouseout="hideFeedbackButton();" onclick="showFeedbackForm()" id="cmdFeedback" class="btn btn-lg" style="position:fixed;top:50%;right:-7px;display:none;"><img src="img/Feedback.png"></img></button>
-
-
 <script>
 
 	$("#imgError").attr('src', getErrorImage());

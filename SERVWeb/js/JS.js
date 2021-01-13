@@ -30,65 +30,6 @@ function _loaded()
 	$("#loading").hide();
 }
 
-function initFeedback()
-{
-	$("#feedbackDialog").dialog({
-		width:493,
-		show: { effect: "clip", duration: 200 },
-		hide: { effect: "clip", duration: 200 },
-		autoOpen: false
-	});
-	$("#cmdFeedback").fadeIn(2000);
-	//window.setTimeout('hideFeedbackButton()', 1500);
-	//window.setTimeout('showFeedbackButton()', 1600);
-	//window.setTimeout('hideFeedbackButton()', 2100);
-}
-
-function showFeedbackButton()
-{
-
-	/*
-	$("#cmdFeedback").animate({
-		right: "+=95",
-		}, 500, function() {
-		// Animation complete.
-	});
-	*/
-}
-
-function hideFeedbackButton()
-{
-	/*
-	$("#cmdFeedback").animate({
-		right: "-100",
-		}, 500, function() {
-		// Animation complete.
-	});
-	*/
-}
-
-function cmdSubmitFeedbackClicked()
-{
-	callServerSide(
-		"Service/Service.asmx/SendFeedback", 
-		"{'feedback':'" + $("#txtFeedback").val() + "'}",
-		function(json)
-		{
-			$("#feedbackDialog").dialog('close');
-			$("#txtFeedback").val("");
-			niceAlert("Thanks, your feedback has been sent.");
-		},
-		function(json)
-		{
-			
-		}
-	);
-}	
-
-function showFeedbackForm()
-{
-	$("#feedbackDialog").dialog('open');
-}
 
 function filterKeys()
 {

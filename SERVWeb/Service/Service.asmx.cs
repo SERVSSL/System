@@ -322,14 +322,6 @@ namespace SERVWeb
 		}
 
 		[WebMethod(EnableSession = true)]
-		public bool SendFeedback(string feedback)
-		{
-			Authenticate();
-			new MessageBLL().SendFeedback(CurrentUser(), feedback);
-			return true;
-		}
-
-		[WebMethod(EnableSession = true)]
 		public bool SendTestEmail(string address)
 		{
 			Authenticate();
