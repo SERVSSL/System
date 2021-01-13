@@ -43,9 +43,9 @@
 								<li><a href="RunStats.aspx#todaysUsers">Today's Users</a></li>
 <%--								<li><a href="RunStats.aspx#newMembers">New Members</a></li>
 								<li><a href="RunStats.aspx#membersNotOnRota">Members Not on Rota</a></li>
-								<li><a href="RunStats.aspx#activeNoLogin">Active Member No Login</a></li>
-								<li><a href="RunStats.aspx#lastRunByMember">Latest Run by Member</a></li>
-								<li><a href="RunStats.aspx#adQualMembers">AdQual Members</a></li>
+								<li><a href="RunStats.aspx#activeNoLogin">Active Member No Login</a></li> --%>
+								<li><a href="RunStats.aspx#lastRunByMember">Latest Run/Controller Date by Member</a></li>
+                                <%--							<li><a href="RunStats.aspx#adQualMembers">AdQual Members</a></li>
 								<li><a href="RunStats.aspx#lastGdpDates">Last GDP Dates</a></li>
 								<li><a href="RunStats.aspx#riderAssessmentDates">Rider Assessment Dates</a></li>--%>
 							</ul>
