@@ -34,13 +34,6 @@ namespace SERVBLL
 			public DateTime ShiftDate;
 		}
 
-		struct FeedbackEmailArgs
-		{
-			public User user;
-			public string feedback;
-
-		}
-
 		public bool SendTestTweet(int memberId)
 		{
 			return Tweet("Test System Tweet");
@@ -393,7 +386,7 @@ namespace SERVBLL
 		public void SendNewMemberEmail(Member member, int userId)
 		{
 		
-			foreach (Member m in new MemberBLL().ListAdministrators())
+			foreach (var m in new MemberBLL().RegistrationEmailNotificationList())
 			{
 				SendEmail(m.EmailAddress, "New System Member Registration", 
 					string.Format("Hi {0},\r\n\r\n" +

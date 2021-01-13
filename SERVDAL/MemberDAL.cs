@@ -242,6 +242,14 @@ namespace SERVDAL
 				"join User u on u.MemberID = m.MemberID where u.UserLevelID = " + (int)SERVDataContract.UserLevel.Admin + " order by m.LastName";
 			return db.ExecuteQuery<Member>(sql).ToList();
 		}
+		public List<Member> GetMembersByEmail(IEnumerable<string> emails)
+		{
+			var whereClause = string.Join(",", emails.Select(x => $"'{x}'"));
+
+			var sql = "select distinct m.MemberID, m.FirstName, m.LastName, m.EmailAddress from Member m " + 
+                      $"where m.EmailAddress in ({whereClause}) order by m.LastName";
+			return db.ExecuteQuery<Member>(sql).ToList();
+		}
 
 		public void SetMemberUserLevel(int memberId, int userLevelId)
 		{

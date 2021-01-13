@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using SERVDataContract;
 using SERV.Utils;
 using SERVDAL;
@@ -335,15 +336,12 @@ namespace SERVBLL
 			return ret;
 		}
 
-		public List<Member> ListAdministrators()
+		public List<Member> RegistrationEmailNotificationList()
 		{
-			List<Member> ret = new List<Member>();
-			List<SERVDataContract.DbLinq.Member> ms = new MemberDAL().ListAdministrators();
-			foreach (SERVDataContract.DbLinq.Member m in ms)
-			{
-				ret.Add(new Member() { MemberID = m.MemberID, FirstName = m.FirstName, LastName = m.LastName, EmailAddress = m.EmailAddress});
-			}
-			return ret;
+			var config = System.Configuration.ConfigurationManager.AppSettings["RegistrationEmailNotification"];
+            var registrationEmailNotificationList = config.Split(',');
+            var ms = new MemberDAL().GetMembersByEmail(registrationEmailNotificationList);
+            return ms.Select(m => new Member {MemberID = m.MemberID, FirstName = m.FirstName, LastName = m.LastName, EmailAddress = m.EmailAddress}).ToList();
 		}
 
 		public void SetMemberUserLevel(int memberId, int userLevelId)
