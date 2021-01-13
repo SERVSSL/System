@@ -41,29 +41,6 @@ namespace SERVBLL
 
 		}
 
-		public void SendFeedback(User user, string feedback)
-		{
-			ParameterizedThreadStart pts = new ParameterizedThreadStart(_SendFeedback);
-			FeedbackEmailArgs args = new FeedbackEmailArgs();
-			args.feedback = feedback;
-			args.user = user;
-			Thread t = new Thread(pts);
-			t.IsBackground = true;
-			t.Start(args);
-		}
-
-		public void _SendFeedback(object args)
-		{
-			FeedbackEmailArgs cargs = (FeedbackEmailArgs)args;
-			foreach (Member m in new MemberBLL().ListAdministrators())
-			{
-				SendEmail(m.EmailAddress, "SERV System - Feedback Sent", 
-					string.Format("Hi {0},\r\n\r\n" +
-						"A member left feedback on the system or SERV: \r\n\r\n{1}{2}", 
-						m.FirstName, cargs.feedback, MessageBLL.FOOTER), cargs.user.UserID);
-			}
-		}
-
 		public bool SendTestTweet(int memberId)
 		{
 			return Tweet("Test System Tweet");
