@@ -341,7 +341,10 @@ namespace SERVBLL
 			var config = System.Configuration.ConfigurationManager.AppSettings["RegistrationEmailNotification"];
             var registrationEmailNotificationList = config.Split(',');
             var ms = new MemberDAL().GetMembersByEmail(registrationEmailNotificationList);
-            return ms.Select(m => new Member {MemberID = m.MemberID, FirstName = m.FirstName, LastName = m.LastName, EmailAddress = m.EmailAddress}).ToList();
+            return (from e in registrationEmailNotificationList
+                join m in ms on e equals m.EmailAddress into x
+                from y in x.DefaultIfEmpty()
+                select new Member { EmailAddress = e, FirstName = y?.FirstName ?? "Membership Admin" }).ToList();
 		}
 
 		public void SetMemberUserLevel(int memberId, int userLevelId)
