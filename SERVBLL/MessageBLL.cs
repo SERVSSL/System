@@ -19,7 +19,7 @@ namespace SERVBLL
 
 		private readonly string FROM = System.Configuration.ConfigurationManager.AppSettings["EmailFrom"];
 		private const string SERVER = "localhost";
-		public static string FOOTER = "\r\n\r\n\r\nThis message was sent from an unattended mailbox by the SERV SSL System.  Do not reply to this mail.  If you need to make contact, please use the Forum http://servssl.org.uk/members/ \r\n";
+		public static string FOOTER = "\r\n\r\n\r\nThis message was sent from an unattended mailbox by the SERV SL System.  Do not reply to this mail.  If you need to make contact, please use the Forum https://members.servsl.org.uk \r\n";
         private readonly string _domain = System.Configuration.ConfigurationManager.AppSettings["Domain"];
 
 		public MessageBLL()
