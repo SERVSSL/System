@@ -21,7 +21,7 @@
 			<asp:Button runat="server" id="cmdLogin" Text="Login" class="btn btn-primary btn-lg" onclick="cmdLoginClick" Style="width:265px; height:40px;"/><br/>
 			<asp:Literal runat="server" id="litServerClient"></asp:Literal><br/>
 		    <a href="PasswordReset.aspx">Forgot password</a><br/><br/>
-			<p class="small">If you are interested in using the SERV system<br/>for your organisation, please <a href="http://www.servssl.org.uk/contact">contact us</a>.</p>
+			<p class="small">If you are interested in using the SERV system<br/>for your organisation, please <a href="https://servsl.org.uk/index.php/contact-us/">contact us</a>.</p>
 		</div>
 	</div>
 		
@@ -61,8 +61,8 @@
 			</table>
 			<br/>
 			<br/>
-			<h4><a href="http://www.servssl.org.uk/contact">Contact Us</a> Today for a Demonstration</h4>
-			<p><a class="btn btn-large btn-success" href="http://www.servssl.org.uk/contact">Contact Us</a></p>
+			<h4><a href="https://servsl.org.uk/index.php/contact-us/">Contact Us</a> Today for a Demonstration</h4>
+			<p><a class="btn btn-large btn-success" href="https://servsl.org.uk/index.php/contact-us/">Contact Us</a></p>
 		</center>
 	</div>
 
@@ -84,8 +84,8 @@
 		</div>
 		<div style="clear:both">
 			<br/>
-			<h4><a href="http://www.servssl.org.uk/contact">Contact Us</a> Today for a Demonstration</h4>
-			<p><a class="btn btn-large btn-success" href="http://www.servssl.org.uk/contact">Contact Us</a></p>
+			<h4><a href="https://servsl.org.uk/index.php/contact-us/">Contact Us</a> Today for a Demonstration</h4>
+			<p><a class="btn btn-large btn-success" href="https://servsl.org.uk/index.php/contact-us/">Contact Us</a></p>
 		</div>
 	</div>
 
