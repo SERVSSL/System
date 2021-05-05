@@ -94,9 +94,9 @@ namespace SERVBLL
 			SendEmail(m.EmailAddress, "You have been given a shift on " + c.EntryDateShortStringWithDay, 
 				"Hi " + m.FirstName + ",\n\n" +
 				"This is an email to let you know that you have been put down for a shift on the " + c.CalendarName + " calendar on " + c.EntryDateShortStringWithDay + ".  This is not a recurring shift.  Why not add this to your personal calendar now?\n\n" +
-				$"The SERV SSL Calendar can be found here: https://{_domain}/Calendar\n\n" +
+				$"The SERV SL Calendar can be found here: https://{_domain}/Calendar\n\n" +
 				"Thanks,\n\n" +
-				"SERV SSL System" + FOOTER, new MemberBLL().GetUserIdForMember(cargs.MemberId));
+				"SERV SL System" + FOOTER, new MemberBLL().GetUserIdForMember(cargs.MemberId));
 		}
 
 		public void SendCalendarVolunteeringThanksEmail(int memberID, int calendarEntryID)
@@ -122,9 +122,9 @@ namespace SERVBLL
 			SendEmail(m.EmailAddress, "You volunteered for a shift on " + c.EntryDateShortStringWithDay + ", Thanks!", 
 				"Hi " + m.FirstName + ",\n\n" +
 				"You are a star!  Thank you very much for putting your name down on the " + c.CalendarName + " calendar on " + c.EntryDateShortStringWithDay + ".  Why not add this to your personal calendar now?\n\n" +
-				$"The SERV SSL Calendar can be found here: https://{_domain}/Calendar\n\n" +
+				$"The SERV SL Calendar can be found here: https://{_domain}/Calendar\n\n" +
 				"Thanks,\n\n" +
-				"SERV SSL System" + FOOTER, new MemberBLL().GetUserIdForMember(cargs.MemberId));
+				"SERV SL System" + FOOTER, new MemberBLL().GetUserIdForMember(cargs.MemberId));
 		}
 
 		public void SendShiftSwapNeededEmail(int memberID, int calendarID, DateTime date)
@@ -190,9 +190,9 @@ namespace SERVBLL
 							"Hi " + mailToMember.FirstName + ",\n\n" +
 							"Sadly, " + shiftSwapper.FirstName + " cannot perform his/her " + calendar.Name + " duty on " + cargs.ShiftDate.ToString("ddd dd MMM") + ".\n\n" +
 							"We really could use your help!  Are you free?  If you have a few hours spare please put your name down.\n\n" +
-							$"The SERV SSL Calendar can be found here: https://{_domain}/Calendar\n\n" +
+							$"The SERV SL Calendar can be found here: https://{_domain}/Calendar\n\n" +
 							"Thanks very much in advance!\n\n" +
-							"SERV SSL System" + FOOTER, new MemberBLL().GetUserIdForMember(shiftSwapper.MemberID));
+							"SERV SL System" + FOOTER, new MemberBLL().GetUserIdForMember(shiftSwapper.MemberID));
 					}
 				}
 				else
@@ -203,9 +203,9 @@ namespace SERVBLL
 							"Hi " + shiftSwapper.FirstName + ",\n\n" +
 							"As requested, you have been removed from " + calendar.Name + " duty on " + cargs.ShiftDate.ToString("ddd dd MMM") + ".\n\n" +
 							"An email has been sent out to see if someone can cover for you.\n\n" +
-							$"The SERV SSL Calendar can be found here: https://{_domain}/Calendar\n\n" +
+							$"The SERV SL Calendar can be found here: https://{_domain}/Calendar\n\n" +
 							"Thanks,\n\n" +
-							"SERV SSL System" + FOOTER, new MemberBLL().GetUserIdForMember(cargs.MemberId));
+							"SERV SL System" + FOOTER, new MemberBLL().GetUserIdForMember(cargs.MemberId));
 					}
 				}
 			}
@@ -261,8 +261,8 @@ namespace SERVBLL
 			              "NOK Phone: " + m.NextOfKinPhone + "\r\n\r\n" +
 				"Your preferences (Tags):\r\n\r\n" +
 				tags + "\r\n\r\n" +
-				"Thanks,\r\n\r\nSERV SSL System" + FOOTER;
-			return SendEmail(m.EmailAddress, "SERV SSL Member Update", body, senderUserID);
+				"Thanks,\r\n\r\nSERV SL System" + FOOTER;
+			return SendEmail(m.EmailAddress, "SERV SL Member Update", body, senderUserID);
 		}
 
 		public bool SendAllActiveMembersMembershipEmailInBackground(int senderUserID, bool onlyNeverLoggedIn)
@@ -375,12 +375,12 @@ namespace SERVBLL
 		{
 			SendEmail(m.EmailAddress, "SERV System Password Reset", 
 				     $"Hi {m.FirstName},\r\n\r\n" + 
-					"Somebody requested a new password for your SERV SSL System account (NOT the Forum).\r\n\r\n" +
+					"Somebody requested a new password for your SERV SL System account (NOT the Forum).\r\n\r\n" +
 					"To reset your password please click this link:\r\n\r\n" + 
 					$"https://{_domain}/SetPassword.aspx?t={token} \r\n\r\n" +
 					$"If you don't use this link within 1 hour, it will expire. To get a new password reset link, visit https://{_domain}/PasswordReset.aspx \r\n\r\n" +
 					"Thanks,\r\n\r\n" + 
-					$"SERV SSL System {MessageBLL.FOOTER}", userID);
+					$"SERV SL System {MessageBLL.FOOTER}", userID);
 		}
 
 		public void SendNewMemberEmail(Member member, int userId)
@@ -392,7 +392,7 @@ namespace SERVBLL
 					string.Format("Hi {0},\r\n\r\n" +
 						"{1} has just signed up as a new volunteer!\r\n\r\n" +
 					"Thanks,\r\n\r\n" +
-						"SERV SSL System {2}", 
+						"SERV SL System {2}", 
 						m.FirstName, member.Name, MessageBLL.FOOTER), userId);
 			}
 
@@ -402,7 +402,7 @@ namespace SERVBLL
 					"Volunteering for SERV as a Rider, Driver, Controller or Fundraiser is a very rewarding endeavour and supports a service that makes a real difference.\r\n\r\n" +
 					"If you have not yet attended an induction session, a member of our training team will be in touch shortly.  If you have, then our calendar manager will contact you regarding your availability.\r\n\r\n" +
 					"Thanks for your interest and support,\r\n\r\n" + 
-					"SERV SSL System {1}", 
+					"SERV SL System {1}", 
 					member.FirstName, MessageBLL.FOOTER), userId);
 
 		}
