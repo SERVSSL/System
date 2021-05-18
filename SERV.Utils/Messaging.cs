@@ -1,6 +1,7 @@
 #define DYNMARK
 
 using System;
+using System.Configuration;
 using SERV.Utils.Sms;
 
 namespace SERV.Utils
@@ -62,7 +63,13 @@ namespace SERV.Utils
 
 		public static int GetAQLCreditCount()
 		{
-			var service = new AqlSmsService();
+            var provider = ConfigurationManager.AppSettings["SMSProvider"];
+            if (provider=="Curl")
+            {
+                var curlService = new CurlSmsService();
+                return curlService.GetCreditCount();
+            }
+            var service = new AqlSmsService();
             return service.GetCreditCount();
 		}
 	}

@@ -60,6 +60,7 @@
     <Compile Include="Math.cs" />
     <Compile Include="Sms\AqlMessageBuilder.cs" />
     <Compile Include="Sms\AqlSmsService.cs" />
+    <Compile Include="Sms\CurlSmsService.cs" />
     <Compile Include="String.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\PageStateAdaptor.cs" />
