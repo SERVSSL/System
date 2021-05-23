@@ -1,8 +1,8 @@
 #define DYNMARK
 
-using System;
 using System.Configuration;
 using SERV.Utils.Sms;
+using SERV.Utils.Sms.Model;
 
 namespace SERV.Utils
 {
@@ -10,10 +10,6 @@ namespace SERV.Utils
 	{
 
 		static Logger log = new Logger();
-
-		public Messaging()
-		{
-		}
 
 		public static bool SendTextMessages(string numbers, string message)
 		{
@@ -61,7 +57,7 @@ namespace SERV.Utils
             return res;
         }
 
-		public static int GetAQLCreditCount()
+		public static SmsCreditCountResponse GetAqlCreditCount()
 		{
             var provider = ConfigurationManager.AppSettings["SMSProvider"];
             if (provider=="Curl")

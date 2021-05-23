@@ -463,7 +463,12 @@ function GetSMSCreditCount(targetElementName)
 		"{}",
 		function(json)
 		{
-			$("#" + targetElementName).text(json.d);
+            if (json.d.IsSuccess) {
+				$("#" + targetElementName).text(json.d.CreditCount);
+			} else {
+				$("#" + targetElementName).text(json.d.ErrorMessage);
+				$("#" + targetElementName).attr("class", "text-error");
+            }
 		},
 		function()
 		{

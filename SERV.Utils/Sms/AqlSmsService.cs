@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using Newtonsoft.Json;
+using SERV.Utils.Sms.Model;
 
 namespace SERV.Utils.Sms
 {
@@ -10,7 +11,7 @@ namespace SERV.Utils.Sms
     public interface ISmsService
     {
         bool SendMessage(string to, string from, string message);
-        int GetCreditCount();
+        SmsCreditCountResponse GetCreditCount();
     }
 
     public class AqlSmsService : ISmsService
@@ -46,7 +47,7 @@ namespace SERV.Utils.Sms
             return true;
         }
 
-        public int GetCreditCount()
+        public SmsCreditCountResponse GetCreditCount()
         {
             var client = new WebClient();
             client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -58,11 +59,12 @@ namespace SERV.Utils.Sms
             }
             catch (Exception ex)
             {
-                _logger.Error("Error getting AQL Credit Count",ex);
-                return 0;
+                _logger.Error("Error getting AQL Credit Count", ex);
+                return new SmsCreditCountResponse
+                    {ErrorMessage = "Error getting credit count from AQL, check log for details"};
             }
             var response = JsonConvert.DeserializeObject<CreditCountResponse>(json);
-            return response.Data.Credit;
+            return new SmsCreditCountResponse {CreditCount = response.Data.Credit, IsSuccess = true};
         }
     }
 

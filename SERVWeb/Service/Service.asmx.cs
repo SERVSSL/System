@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SERVDataContract;
 using SERVBLL;
 using System.Data;
+using SERV.Utils.Sms.Model;
 using SERVBLL.Mappers;
 using SERVBLL.ViewModel;
 
@@ -191,10 +192,10 @@ namespace SERVWeb
 		}
 
 		[WebMethod(EnableSession = true)]
-		public int GetSMSCreditCount()
+		public SmsCreditCountResponse GetSMSCreditCount()
 		{
 			Authenticate();
-			return SERV.Utils.Messaging.GetAQLCreditCount();
+			return SERV.Utils.Messaging.GetAqlCreditCount();
 		}
 
 		[WebMethod(EnableSession = true)]
