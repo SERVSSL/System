@@ -61,6 +61,7 @@
     <Compile Include="Sms\AqlMessageBuilder.cs" />
     <Compile Include="Sms\AqlSmsService.cs" />
     <Compile Include="Sms\CurlSmsService.cs" />
+    <Compile Include="Sms\Model\SmsSendResponse.cs" />
     <Compile Include="Sms\Model\SmsCreditCountResponse.cs" />
     <Compile Include="String.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

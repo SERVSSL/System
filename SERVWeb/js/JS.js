@@ -300,6 +300,7 @@ function JsonifyLocationFromForm(locationId)
 
 function sendSMSMessage(numbers, message)
 {
+    $("#smsSendError").hide();
 	loading();
 	$("#entry").slideUp();
 	callServerSide(
@@ -308,11 +309,17 @@ function sendSMSMessage(numbers, message)
 		function(json)
 		{
 			loaded();
-			$("#success").slideDown();
-		},
-		function()
-		{
-		}
+			if (json.d.IsSuccess) {
+                $("#success").slideDown();
+			}
+            else {
+				$("#smsSendError").text("SMS send failed with error: " + json.d.ErrorMessage);
+                $("#smsSendError").show();
+            }
+        },
+		function (request, status, error) {
+            
+        }
 	);
 }
 

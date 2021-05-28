@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Threading;
 using System.Net;
 using System.IO;
+using SERV.Utils.Sms.Model;
 using SERVDAL;
 
 namespace SERVBLL
@@ -211,19 +212,17 @@ namespace SERVBLL
 			}
 		}
 
-		public bool SendSMSMessage(string numbers, string message, int senderUserID, bool fromServ)
+		public SmsSendMessageResponse SendSMSMessage(string numbers, string message, int senderUserID, bool fromServ)
 		{
 			numbers = numbers.Trim().Replace(" ", "");
 			if (numbers.EndsWith(",")) { numbers = numbers.Substring(0, numbers.Length - 1); }
 			new MessageDAL().LogSentSMSMessage(numbers, message, senderUserID);
 			if (!fromServ)
 			{
-				Member sender = new MemberBLL().GetByUserID(senderUserID);
-				SERV.Utils.Messaging.SendTextMessage(numbers, message, sender.MobileNumber);
-				return true;
+				var sender = new MemberBLL().GetByUserID(senderUserID);
+				return SERV.Utils.Messaging.SendTextMessage(numbers, message, sender.MobileNumber);
 			}
-			SERV.Utils.Messaging.SendTextMessage(numbers, message);
-			return true;
+			return SERV.Utils.Messaging.SendTextMessage(numbers, message);
 		}
 
 		public bool SendMemberUpdateEmail(Member m, User u, int senderUserID)

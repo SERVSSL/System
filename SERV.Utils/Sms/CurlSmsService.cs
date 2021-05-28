@@ -18,14 +18,32 @@ namespace SERV.Utils.Sms
             _logger = new Logger();
         }
 
-        public bool SendMessage(string to, string @from, string message)
+        public SmsSendMessageResponse SendMessage(string to, string from, string message)
         {
-            throw new System.NotImplementedException();
+            var requestMessage = new AqlMessageBuilder().Build(to, from, message);
+            var rawResponse = CallAqlApiForSend(requestMessage);
+            var statusCode = GetStatusCode(rawResponse);
+            if (statusCode == null)
+            {
+                return new SmsSendMessageResponse { ErrorMessage = "Invalid API response, check logs for details" };
+            }
+            if (statusCode.Substring(0, 1) != "2")
+            {
+                _logger.Error($"AQL status code was [{statusCode}], response was [{rawResponse}]", null);
+                return new SmsSendMessageResponse { ErrorMessage = $"Received status code {statusCode} from AQL, check logs for details" };
+            }
+            var json = GetJson(rawResponse);
+            if (json == null)
+            {
+                return new SmsSendMessageResponse { ErrorMessage = "Invalid API response body, check logs for details" };
+            }
+
+            return new SmsSendMessageResponse { IsSuccess = true };
         }
 
         public SmsCreditCountResponse GetCreditCount()
         {
-            var rawResponse =  CallAqlApi();
+            var rawResponse =  CallAqlApiForCreditCount();
             var statusCode = GetStatusCode(rawResponse);
             if (statusCode == null)
             {
@@ -46,7 +64,21 @@ namespace SERV.Utils.Sms
             return new SmsCreditCountResponse {IsSuccess = true, CreditCount = response.Data.Credit};
         }
 
-        private string CallAqlApi()
+        private string CallAqlApiForSend(string requestMessage)
+        {
+            var process = new Process();
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.FileName = "/usr/bin/curl";
+            process.StartInfo.Arguments =
+                $"-i -H \"Accept: application/json\" -H \"Content-Type: application/json\" -H \"x-auth-token: {_authToken}\" --request POST --data '{requestMessage}' https://api.aql.com/v2/sms/send";
+            process.Start();
+            var output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            _logger.Debug("CurlSmsService.SendMessage output\n" + output + "\n");
+            return output;
+        }
+        private string CallAqlApiForCreditCount()
         {
             var process = new Process();
             process.StartInfo.UseShellExecute = false;
@@ -63,7 +95,7 @@ namespace SERV.Utils.Sms
 
         private string GetJson(string output)
         {
-            var pos = output.IndexOf("\r\n\r\n");
+            var pos = output.IndexOf("\r\n\r\n", StringComparison.Ordinal);
             if (pos == -1)
             {
                 _logger.Error($"Cannot find json body in AQL response error. Response is [{output}]", null);

@@ -312,7 +312,7 @@ namespace SERVWeb
 	    }
 
 		[WebMethod(EnableSession = true)]
-		public bool SendSMSMessage(string numbers, string message, bool fromServ)
+		public SmsSendMessageResponse SendSMSMessage(string numbers, string message, bool fromServ)
 		{
 			Authenticate();
 			if (CurrentUser().UserLevelID < (int)UserLevel.Controller)

@@ -10,7 +10,7 @@ namespace SERV.Utils.Sms
 
     public interface ISmsService
     {
-        bool SendMessage(string to, string from, string message);
+        SmsSendMessageResponse SendMessage(string to, string from, string message);
         SmsCreditCountResponse GetCreditCount();
     }
 
@@ -25,7 +25,7 @@ namespace SERV.Utils.Sms
             _logger = new Logger();
         }
 
-        public bool SendMessage(string to, string from, string message)
+        public SmsSendMessageResponse SendMessage(string to, string from, string message)
         {
             var requestMessage = new AqlMessageBuilder().Build(to, from, message);
             var client = new WebClient();
@@ -40,11 +40,11 @@ namespace SERV.Utils.Sms
             catch (Exception ex)
             {
                 _logger.Error($"Error Sending SMS via AQL. Body is [{requestMessage}]", ex);
-                return false;
+                return new SmsSendMessageResponse {ErrorMessage = "Error sending messages, see log for details"};
             }
             _logger.Debug($"AQL Send Response [{json}]");
             //var response = JsonConvert.DeserializeObject<SmsSendResponse>(json);
-            return true;
+            return new SmsSendMessageResponse{IsSuccess = true};
         }
 
         public SmsCreditCountResponse GetCreditCount()
