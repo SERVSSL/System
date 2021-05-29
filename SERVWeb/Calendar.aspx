@@ -177,7 +177,6 @@
 		initCalendar(false, 28);
 		calendarPage = <%=this.PageNum%>;
 		loadCalendar(<%=this.MemberId%>, <%=this.UserLevel%>);
-		//initFeedback();
 	});
 
 </script>

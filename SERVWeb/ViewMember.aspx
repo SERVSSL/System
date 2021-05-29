@@ -216,7 +216,6 @@
 		$(".date").datepicker({ dateFormat: 'dd M yy' });
 		writeGroups("lstGroups", groupSelected);
 		DisplayMember(<%=this.MemberId%>);
-		initFeedback();
 	});
 
 	function onChkEmergencyListChanged()
@@ -236,8 +235,8 @@
 				return;
 			}
 		}
-		onTagChecked('chkEmergencyList', 'EmergencyList')
-	}
+        onTagChecked('chkEmergencyList', 'EmergencyList');
+    }
 
 	function SaveMember()
 	{

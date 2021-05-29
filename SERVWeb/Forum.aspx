@@ -7,13 +7,12 @@
 
 	<div class="row">
 		<div class="span12">
-			<p><a href="<%=SERVGlobal.ForumURL%>" target="_blank" class="btn btn-primary">Open the SERV S&SL Forum</a></p>
+			<p><a href="<%=SERVGlobal.ForumURL%>" target="_blank" class="btn btn-primary">Open the SERV S&amp;L Forum</a></p>
 		</div>
 	</div>
 
 	<script>
 		_loaded();
-		initFeedback();
 	</script>
 
 </asp:Content>

@@ -262,8 +262,6 @@
 		$("#txtController").val("<%=this.MemberName%>");
 	}
 
-	initFeedback();
-
 	if ('<%=this.ShowAA.ToString()%>' == 'False')
 	{
 		showBloodPanel();

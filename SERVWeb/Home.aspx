@@ -326,7 +326,6 @@
 		loadCalendar(<%=this.MemberId%>, <%=this.UserLevel%>);
 		listCalendarBulletins();
 		listRecentRuns();
-		initFeedback();
 	</script>
 	
 </asp:Content>
