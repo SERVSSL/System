@@ -7,7 +7,13 @@
 	<div class="row">
 		<div class="span12">
 			<h3>Recent Runs</h3>
-			<p>Recent runs with view / edit links.</p>  
+			<div>
+                <%--OnSelectedIndexChanged="Selection_Change"--%>
+				Select year <br/>
+                <asp:DropDownList ID="RunYear" AutoPostBack="True" runat="server" />
+            </div>
+			<p>Recent runs with view / edit links.</p>
+            <strong><asp:Literal runat="server" ID="runMessage" /></strong>
 			<asp:GridView runat="server" id="dgRecentRuns" CssClass="table table-striped table-bordered table-condensed" AutoGenerateColumns="false">
 				<Columns>
 					<asp:BoundField HeaderText="ID" DataField="ID" />

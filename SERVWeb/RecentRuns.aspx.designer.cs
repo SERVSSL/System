@@ -18,7 +18,11 @@ namespace SERVWeb {
 		protected System.Web.UI.WebControls.Content contentPlaceholderContent;
 		
 		protected System.Web.UI.WebControls.GridView dgRecentRuns;
-		
+
+        protected System.Web.UI.WebControls.DropDownList RunYear;
+
+        protected System.Web.UI.WebControls.Literal runMessage;
+
 		public new SERVWeb.Master Master {
 			get {
 				return ((SERVWeb.Master)(base.Master));
