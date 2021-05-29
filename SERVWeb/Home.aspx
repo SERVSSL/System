@@ -104,6 +104,7 @@
 			<h5><a href="#" onclick="$('#changeLog').slideDown();">Recent Changes</a></h5>
 			<div id="changeLog" style="display:none">
 				<ul>
+                    <li>Sending SMS messages via AQL using curl</li>
                     <li>Removed feedback form</li>
 					<li>Last run report</li>
 					<li>Formatting on calendar</li>

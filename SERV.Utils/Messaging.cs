@@ -1,7 +1,8 @@
 #define DYNMARK
 
-using System;
+using System.Configuration;
 using SERV.Utils.Sms;
+using SERV.Utils.Sms.Model;
 
 namespace SERV.Utils
 {
@@ -10,25 +11,13 @@ namespace SERV.Utils
 
 		static Logger log = new Logger();
 
-		public Messaging()
+		public static SmsSendMessageResponse SendTextMessage(string to, string message)
 		{
-		}
-
-		public static bool SendTextMessages(string numbers, string message)
-		{
-			numbers = numbers.Trim().Replace(" ", "");
-			if (numbers.EndsWith(",")) { numbers = numbers.Substring(0, numbers.Length - 1); }
-			SendTextMessage(numbers, message);
-			return true;
-		}
-
-		public static string SendTextMessage(string to, string message)
-		{
-			string smsFrom = System.Configuration.ConfigurationManager.AppSettings["SMSFrom"];
+			var smsFrom = ConfigurationManager.AppSettings["SMSFrom"];
 			return SendTextMessage(to, message, smsFrom);
 		}
 
-		public static string SendTextMessage(string to, string message, string from)
+		public static SmsSendMessageResponse SendTextMessage(string to, string message, string from)
 		{
             from = from.Replace(" ", "");
             to = to.Replace(" ", "");
@@ -37,32 +26,24 @@ namespace SERV.Utils
             message = message.Replace("\r", " ").Replace("\n", " ").Replace("\t", " ");
             string provider = System.Configuration.ConfigurationManager.AppSettings["SMSProvider"];
             log.Info(string.Format("SMS using {0} To {1} - {2}", provider, to, message));
-            string smsUser = System.Configuration.ConfigurationManager.AppSettings["SMSUser"];
-            string smsPassword = System.Configuration.ConfigurationManager.AppSettings["SMSPassword"];
-            string res = "";
-            if (provider == "Dynmark")
+            if (provider == "Curl")
             {
-                message = System.Web.HttpUtility.UrlEncode(message);
-                try
-                {
-                    res = new System.Net.WebClient().DownloadString(
-                        string.Format("http://services.dynmark.com/HttpServices/SendMessage.ashx?user={0}&password={1}&to={2}&from={3}&text={4}",
-                            smsUser, smsPassword, to, from, message));
-                }
-                catch
-                {
-                }
-                log.Info("SMS: " + res);
-                return res;
+                var curlService = new CurlSmsService();
+                return curlService.SendMessage(to, from, message);
             }
             var service = new AqlSmsService();
-            service.SendMessage(to, from, message);
-            return res;
+            return service.SendMessage(to, from, message);
         }
 
-		public static int GetAQLCreditCount()
+		public static SmsCreditCountResponse GetAqlCreditCount()
 		{
-			var service = new AqlSmsService();
+            var provider = ConfigurationManager.AppSettings["SMSProvider"];
+            if (provider=="Curl")
+            {
+                var curlService = new CurlSmsService();
+                return curlService.GetCreditCount();
+            }
+            var service = new AqlSmsService();
             return service.GetCreditCount();
 		}
 	}

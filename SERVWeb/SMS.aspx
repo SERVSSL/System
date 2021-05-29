@@ -5,15 +5,15 @@
 <asp:Content ContentPlaceHolderID="contentPlaceholder" ID="contentPlaceholderContent" runat="server">
 
 <div id="entry">
-<h3>Bulk SMS</h3>
-<p>Credits remaining: <strong><span id="lblCredits">...</span></strong></p>
-<label>Send From:</label>
+    <h3>Bulk SMS</h3>
+    <p>Credits remaining: <strong><span id="lblCredits">...</span></strong></p>
+    <label>Send From:</label>
 
-<div class="btn-group" data-toggle="buttons-radio">
-    <button type="button" class="btn active" onclick="fromServ = true;" id="btnSERVSSL">SERVSSL</button>
-    <button type="button" class="btn" onclick="fromServ = false;" id="btnYou">You</button>
-</div>
-<br/><br/>
+    <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" class="btn active" onclick="fromServ = true;" id="btnSERVSSL">SERVSSL</button>
+        <button type="button" class="btn" onclick="fromServ = false;" id="btnYou">You</button>
+    </div>
+    <br/><br/>
 
 </div>
 <label>Send To <small>(This is now an intersection, so AND combination. Each member must have ALL the selected tags)</small>:</label>
@@ -54,8 +54,9 @@
 <textarea type="text" id="txtSMS" textmode="multiline" cols="40" rows=3 maxlength="150" onkeypress="filterKeys()" ></textarea>
 
 <br/><br/>
-<input type="button" id="cmdSend" value="Send" class="btn btn-primary btn-lg" onclick="sendSMSMessage($('#txtNumbers').val(), $('#txtSMS').val());"></input>
-</div>
+    <input type="button" id="cmdSend" value="Send" class="btn btn-primary btn-lg" onclick="sendSMSMessage($('#txtNumbers').val(), $('#txtSMS').val());" />
+<span id="smsSendError" class="text-error"></span>
+
 <script>
 	loaded();
 	var smsCount = 0;
