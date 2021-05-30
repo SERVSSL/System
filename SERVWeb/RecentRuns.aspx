@@ -8,7 +8,6 @@
 		<div class="span12">
 			<h3>Recent Runs</h3>
 			<div>
-                <%--OnSelectedIndexChanged="Selection_Change"--%>
 				Select year <br/>
                 <asp:DropDownList ID="RunYear" AutoPostBack="True" runat="server" />
             </div>
