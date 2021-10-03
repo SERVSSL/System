@@ -82,6 +82,12 @@
 					<button type="button" class="btn" id="btnOutBox2" disabled>0
 					</button><button type="button" class="btn" onclick="outBox2 ++; updateBoxCounts();">+</button>
 				</div><br/><br/>
+				<div class="btn-group">
+					<button type="button" class="btn" disabled style="width:90px;">ESHP</button>
+					<button type="button" class="btn" onclick="updatePlasma('btnOutBox3',-1);">-</button>
+					<button type="button" class="btn" id="btnOutBox3" disabled>0</button>
+					<button type="button" class="btn" onclick="updatePlasma('btnOutBox3',1);">+</button>
+				</div><br/><br/>
 
 				<label>Back:</label>
 				<div class="btn-group">
@@ -95,6 +101,12 @@
 					<button type="button" class="btn" onclick="inBox2 --; updateBoxCounts();">-</button>
 					<button type="button" class="btn" id="btnInBox2" disabled>0
 					</button><button type="button" class="btn" onclick="inBox2 ++; updateBoxCounts();">+</button>
+				</div><br/><br/>
+				<div class="btn-group">
+					<button type="button" class="btn" disabled style="width:90px;">ESHP</button>
+					<button type="button" class="btn" onclick="updatePlasma('btnInBox3',-1);">-</button>
+					<button type="button" class="btn" id="btnInBox3" disabled>0</button>
+					<button type="button" class="btn" onclick="updatePlasma('btnInBox3',1);">+</button>
 				</div><br/><br/>
 
 				<label>Notes:</label>
