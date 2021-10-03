@@ -17,7 +17,8 @@ var RH7			 	= 13;
 var RH8			 	= 14;
 var DRUGS			= 15;
 var PACKAGE			= 16;
-var OTHER			= 17;
+var OTHER = 17;
+var ESHPBASE = 19;
 
 var DEFAULT_URGENCY = 2;
 var MAX_URGENCY = 3;
@@ -25,7 +26,7 @@ var MIN_URGENCY = 1;
 
 var bloodBox = 0;
 var plasmaBox = 0;
-var plateletsBox = 0
+var plateletsBox = 0;
 var sampleBox = 0;
 var packageBox = 0;
 var milkBox = 0;
@@ -153,6 +154,18 @@ function LoadRunLog()
 	}
 }
 
+function updatePlasma(id, increment) {
+	var currentValue = parseInt($("#" + id).text(), 10);
+	currentValue += increment;
+    if (currentValue<0) {
+        currentValue = 0;
+    }
+    if (currentValue>4) {
+        currentValue = 4;
+	}
+    $("#" + id).text(currentValue);
+}
+
 function productCsv()
 {
 	var ret = "";
@@ -206,7 +219,11 @@ function outCsv()
 {
 	var ret = "";
 	if (outBox1 > 0) { ret += RH1 + (outBox1-1) + ","; }
-	if (outBox2 > 0) { ret += RH1 + (outBox2-1) + ","; }
+	if (outBox2 > 0) { ret += RH1 + (outBox2 - 1) + ","; }
+	var outPlasma = parseInt($("#btnOutBox3").text(), 10);
+    if (outPlasma>0) {
+        ret += ESHPBASE + outPlasma + ",";
+    }
 	return ret;
 }	
 
@@ -215,6 +232,10 @@ function inCsv()
 	var ret = "";
 	if (inBox1 > 0) { ret += RH1 + (inBox1-1) + ","; }
 	if (inBox2 > 0) { ret += RH1 + (inBox2-1) + ","; }
+	var inPlasma = parseInt($("#btnInBox3").text(), 10);
+    if (inPlasma > 0) {
+        ret += ESHPBASE + inPlasma + ",";
+    }
 	return ret;
 }
 
