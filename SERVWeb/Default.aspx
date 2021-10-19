@@ -8,7 +8,7 @@
 
 	<div class="row" style="margin:0px;background-color:white; background-image:url(img/HeaderBg.jpg); background-position:center; padding:50px;text-align:center">
 		<div class="span6">
-			<img src="img/logo.png"/>
+			<img src="img/heart-logo.png"/>
 			<br/><br/>
 			<h2><%=SERVGlobal.GroupName%></h2>	
 			<h5 style="color:#999999;">System for Emergency Rider Volunteers</h5>

@@ -147,6 +147,7 @@
     <Content Include="css\smoothness\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="Global.asax" />
     <Content Include="img\GreyHelicopter.png" />
+    <Content Include="img\heart-logo.png" />
     <Content Include="img\milk-bottle.png" />
     <Content Include="img\Milk.png" />
     <Content Include="img\quesPin.png" />
@@ -185,7 +186,6 @@
     <Content Include="img\hiderow.png" />
     <Content Include="img\home-2.png" />
     <Content Include="img\hospital-building.png" />
-    <Content Include="img\logo.png" />
     <Content Include="img\pin.png" />
     <Content Include="OpsMap.aspx" />
     <Content Include="js\opsMap.js" />
