@@ -13,7 +13,7 @@
             </div>
 			<p>Recent runs with view / edit links.</p>
             <strong><asp:Literal runat="server" ID="runMessage" /></strong>
-			<asp:GridView runat="server" id="dgRecentRuns" CssClass="table table-striped table-bordered table-condensed" AutoGenerateColumns="false">
+			<asp:GridView runat="server" id="dgRecentRuns" CssClass="table table-striped table-bordered table-condensed" AutoGenerateColumns="false" EnableViewState="False">
 				<Columns>
 					<asp:BoundField HeaderText="ID" DataField="ID" />
 					<asp:BoundField HeaderText="Duty Date" DataField="DutyDate" />
