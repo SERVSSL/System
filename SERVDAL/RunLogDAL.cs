@@ -287,7 +287,7 @@ namespace SERVDAL
 
 		*/
 
-		public DataTable Report_RunLog()
+		public DataTable Report_RunLog(string year)
 		{
 			string sql = "select RunLogID as ID, date_format(DutyDate, '%Y-%m-%d') as 'DutyDate', " +
 				"coalesce(date_format(CallDateTime, '%Y-%m-%d %H:%i'), 'N/A') as 'CallDateTime', cf.Location as 'CallFrom', " +
@@ -304,8 +304,8 @@ namespace SERVDAL
 			             "join Location dl on dl.LocationID = rl.DeliverToLocationID " +
 			             "join Location fl on fl.LocationID = rl.FinalDestinationLocationID " +
 			             "left join VehicleType v on v.VehicleTypeID = rl.VehicleTypeID " +
-			             "where DutyDate > '2016-12-31' or CallDateTime > '2016-12-31' " +
-			             "order by rl.DutyDate desc, rl.CallDateTime desc;";
+						 "where YEAR(DutyDate) = " + year + 
+			             " order by rl.DutyDate desc, rl.CallDateTime desc;";
 			DataTable ret = DBHelperFactory.DBHelper().ExecuteDataTable(sql);
 			return ret;
 		}

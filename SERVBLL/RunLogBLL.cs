@@ -693,9 +693,9 @@ namespace SERVBLL
 			return ret.ToArray();
 		}
 
-		public DataTable Report_RunLog()
+		public DataTable Report_RunLog(string year)
 		{
-			return new RunLogDAL().Report_RunLog();
+			return new RunLogDAL().Report_RunLog(year);
 		}
 
 		public bool IsMilkRun(int runLogId)
