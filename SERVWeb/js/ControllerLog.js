@@ -19,6 +19,7 @@ var DRUGS			= 15;
 var PACKAGE			= 16;
 var OTHER = 17;
 var ESHPBASE = 19;
+var VACCINE = 24;
 
 var DEFAULT_URGENCY = 2;
 var MAX_URGENCY = 3;
@@ -30,6 +31,7 @@ var plateletsBox = 0;
 var sampleBox = 0;
 var packageBox = 0;
 var milkBox = 0;
+var vaccineBox = 0;
 
 var outBox1 = 0;
 var outBox2 = 0;
@@ -209,6 +211,13 @@ function productCsv()
 		for (var x = 0; x < milkBox; x++)
 		{
 			ret += HUMAN_MILK + ",";
+		}
+	}
+	if (vaccineBox > 0)
+	{
+		for (var x = 0; x < vaccineBox; x++)
+		{
+			ret += VACCINE + ",";
 		}
 	}
 
@@ -491,7 +500,7 @@ function validate(notRun)
 		{
 			niceAlert("What time did the call come in?"); return false;
 		}
-		if (bloodBox + plasmaBox + plateletsBox + sampleBox + packageBox + milkBox == 0)
+		if (bloodBox + plasmaBox + plateletsBox + sampleBox + packageBox + milkBox + vaccineBox == 0)
 		{
 			niceAlert("What did the rider / driver carry?"); return false;
 		}
@@ -544,6 +553,7 @@ function updateBoxCounts()
 	if (sampleBox < 0) { sampleBox = 0; }
 	if (packageBox < 0) { packageBox = 0; }
 	if (milkBox < 0) { milkBox = 0; }
+	if (vaccineBox < 0) { vaccineBox = 0; }
 	if (outBox1 < 0) { outBox1 = 0; }
 	if (outBox2 < 0) { outBox2 = 0; }
 	if (inBox1 < 0) { inBox1 = 0; }
@@ -554,6 +564,7 @@ function updateBoxCounts()
 	$("#btnSampleBox").text(sampleBox);
 	$("#btnPackageBox").text(packageBox);
 	$("#btnMilkBox").text(milkBox);
+	$("#btnVaccineBox").text(vaccineBox);
 	$("#btnOutBox1").text(outBox1);
 	$("#btnOutBox2").text(outBox2);
 	$("#btnInBox1").text(inBox1);
