@@ -255,6 +255,7 @@
     <Content Include="js\GA.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssetVersion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

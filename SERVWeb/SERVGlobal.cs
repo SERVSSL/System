@@ -57,45 +57,45 @@ namespace SERVWeb
 		public static string CSSInclude()
 		{
 			#if DEBUG
-			return "<link rel=\"stylesheet\" href=\"/css/style.css\" />";
-			#else
-			return "<link rel=\"stylesheet\" href=\"/css/style." + SERVVersion + ".css\" />";
-			#endif
+			return string.Format("<link rel=\"stylesheet\" href=\"/css/style.css?v={0}\" />", AssetVersion.Instance.Number);
+#else
+			return string.Format("<link rel=\"stylesheet\" href=\"/css/style.min.css?v={0}\" />", AssetVersion.Instance.Number);
+#endif
 		}
 
 		public static string CalendarJSInclude()
 		{
 #if DEBUG
-			return "<script language=\"JavaScript\" src=\"js/Calendar.js\"></script>";
+			return string.Format("<script language=\"JavaScript\" src=\"js/Calendar.js?v={0}\"></script>", AssetVersion.Instance.Number);
 #else
-			return "<script language=\"JavaScript\" src=\"js/Calendar." + SERVVersion + ".min.js\"></script>";
+			return string.Format("<script language=\"JavaScript\" src=\"js/Calendar.min.js?v={0}\"></script>", AssetVersion.Instance.Number);
 #endif
 		}
 
 		public static string MainJSInclude()
 		{
 #if DEBUG
-			return "<script language=\"JavaScript\" src=\"js/JS.js\"></script>";
+			return string.Format("<script language=\"JavaScript\" src=\"js/JS.js?v={0}\"></script>", AssetVersion.Instance.Number);
 #else
-		return "<script language=\"JavaScript\" src=\"js/JS." + SERVVersion + ".min.js\"></script>";
+		return string.Format("<script language=\"JavaScript\" src=\"js/JS.min.js?v={0}\"></script>", AssetVersion.Instance.Number);
 #endif
 		}
 
 		public static string ControllerLogJSInclude()
 		{
 #if DEBUG
-			return "<script language=\"JavaScript\" src=\"js/ControllerLog.js\"></script>";
+			return string.Format("<script language=\"JavaScript\" src=\"js/ControllerLog.js?v={0}\"></script>", AssetVersion.Instance.Number);
 #else
-			return "<script language=\"JavaScript\" src=\"js/ControllerLog." + SERVVersion + ".min.js\"></script>";
+			return string.Format("<script language=\"JavaScript\" src=\"js/ControllerLog.min.js?v={0}\"></script>", AssetVersion.Instance.Number);
 #endif
 		}
 
 		public static string OpsMapJSInclude()
 		{
 #if DEBUG
-			return "<script language=\"JavaScript\" src=\"js/opsMap.js\"></script>";
+			return string.Format("<script language=\"JavaScript\" src=\"js/opsMap.js?v={0}\"></script>", AssetVersion.Instance.Number);
 #else
-			return "<script language=\"JavaScript\" src=\"js/opsMap." + SERVVersion + ".min.js\"></script>";
+			return string.Format("<script language=\"JavaScript\" src=\"js/opsMap.min.js?v={0}\"></script>", AssetVersion.Instance.Number);
 #endif
 		}
 
