@@ -420,7 +420,9 @@ function validate(notRun)
 		{
 			niceAlert("What AA shift date are you logging against?"); return false;
 		}
-		if (outBox1 + inBox1 + outBox2 + inBox2 == 0)
+        var outPlasma = parseInt($("#btnOutBox3").text(), 10);
+        var inPlasma = parseInt($("#btnInBox3").text(), 10);
+		if (outBox1 + inBox1 + outBox2 + inBox2 + outPlasma + inPlasma == 0)
 		{
 			niceAlert("Please choose the box numbers we took to / from KSSAA."); return false;
 		}
