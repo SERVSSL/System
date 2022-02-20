@@ -27,7 +27,7 @@ namespace SERV.Utils.Sms
             {
                 return new SmsSendMessageResponse { ErrorMessage = "Invalid API response, check logs for details" };
             }
-            if (statusCode.Substring(0, 1) != "2")
+            if (statusCode.Substring(0, 1) != "2" && statusCode.Substring(0, 1) != "1")
             {
                 _logger.Error($"AQL status code was [{statusCode}], response was [{rawResponse}]", null);
                 return new SmsSendMessageResponse { ErrorMessage = $"Received status code {statusCode} from AQL, check logs for details" };
