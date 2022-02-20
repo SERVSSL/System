@@ -19,6 +19,10 @@ var DRUGS			= 15;
 var PACKAGE			= 16;
 var OTHER = 17;
 var ESHPBASE = 19;
+var ESH1P = 20;
+var ESH2P = 21;
+var ESH3P = 22;
+var ESH4P = 23;
 var VACCINE = 24;
 
 var DEFAULT_URGENCY = 2;
@@ -118,15 +122,35 @@ function LoadRunLog()
 				$("#txtController").val(getControllerName(json.d.ControllerMemberID));
 				$("#txtRider").val(getMemberName(json.d.RiderMemberID));
 				vehicleSelected(json.d.VehicleTypeID, json.d.Vehicle);
-				for(var prod in json.d.Products)
-				{
-					if (prod == BLOOD) { bloodBox = json.d.Products[prod]; }
-					if (prod == PLASMA) { plasmaBox = json.d.Products[prod]; }
-					if (prod == PLATELETS) { plateletsBox = json.d.Products[prod]; }
-					if (prod == SAMPLE) { sampleBox = json.d.Products[prod]; }
-					if (prod == HUMAN_MILK) { milkBox = json.d.Products[prod]; }
-					if (prod == PACKAGE) { packageBox = json.d.Products[prod]; }
-				}
+                if (json.d.BloodRun) {
+                    for (var prod in json.d.Products) {
+                        if (prod == BLOOD) { bloodBox = json.d.Products[prod]; }
+                        if (prod == PLASMA) { plasmaBox = json.d.Products[prod]; }
+                        if (prod == PLATELETS) { plateletsBox = json.d.Products[prod]; }
+                        if (prod == SAMPLE) { sampleBox = json.d.Products[prod]; }
+                        if (prod == HUMAN_MILK) { milkBox = json.d.Products[prod]; }
+                        if (prod == PACKAGE) { packageBox = json.d.Products[prod]; }
+                    }
+				} else {
+                    $("#bloodConsignment").hide();
+					$("#aaConsignment").show();
+                    var html = "";
+                    for (var aaProd in json.d.Products) {
+						if (aaProd == RH1) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH1</button></div><br/><br/>' }
+						if (aaProd == RH2) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH2</button></div><br/><br/>' }
+						if (aaProd == RH3) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH3</button></div><br/><br/>' }
+						if (aaProd == RH4) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH4</button></div><br/><br/>' }
+						if (aaProd == RH5) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH5</button></div><br/><br/>' }
+						if (aaProd == RH6) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH6</button></div><br/><br/>' }
+						if (aaProd == RH7) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH7</button></div><br/><br/>' }
+						if (aaProd == RH8) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH8</button></div><br/><br/>' }
+						if (aaProd == ESH1P) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH1P</button></div><br/><br/>' }
+						if (aaProd == ESH2P) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH2P</button></div><br/><br/>' }
+						if (aaProd == ESH3P) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH3P</button></div><br/><br/>' }
+						if (aaProd == ESH4P) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH4P</button></div><br/><br/>' }
+					}
+                    $("#aaConsignment").html(html);
+                }
 				updateBoxCounts();
 				urgency = json.d.Urgency; 
 				updateUrgency();

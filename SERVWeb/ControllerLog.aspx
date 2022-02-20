@@ -171,41 +171,45 @@
 				</div><br/><br/>
 
 				<label>Consignment:</label>
-				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">Blood</button>
-					<button type="button" class="btn" onclick="bloodBox --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnBloodBox" disabled>0
-					</button><button type="button" class="btn" onclick="bloodBox ++; updateBoxCounts();">+</button>
-				</div><br/><br/>
-				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">Plasma</button>
-					<button type="button" class="btn" onclick="plasmaBox --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnPlasmaBox" disabled>0
-					</button><button type="button" class="btn" onclick="plasmaBox ++; updateBoxCounts();">+</button>
-				</div><br/><br/>
-				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">Platelets</button>
-					<button type="button" class="btn" onclick="plateletsBox --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnPlateletsBox" disabled>0
-					</button><button type="button" class="btn" onclick="plateletsBox ++; updateBoxCounts();">+</button>
-				</div><br/><br/>
-				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">Sample</button>
-					<button type="button" class="btn" onclick="sampleBox --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnSampleBox" disabled>0
-					</button><button type="button" class="btn" onclick="sampleBox ++; updateBoxCounts();">+</button>
-				</div><br/><br/>
-				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">Package</button>
-					<button type="button" class="btn" onclick="packageBox --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnPackageBox" disabled>0
-					</button><button type="button" class="btn" onclick="packageBox ++; updateBoxCounts();">+</button>
-				</div><br/><br/>
-				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">Vaccine</button>
-					<button type="button" class="btn" onclick="vaccineBox --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnVaccineBox" disabled>0</button>
-				    <button type="button" class="btn" onclick="vaccineBox ++; updateBoxCounts();">+</button>
+				<div id="bloodConsignment">
+				    <div class="btn-group">
+					    <button type="button" class="btn" disabled style="width:90px;">Blood</button>
+					    <button type="button" class="btn" onclick="bloodBox --; updateBoxCounts();">-</button>
+					    <button type="button" class="btn" id="btnBloodBox" disabled>0
+					    </button><button type="button" class="btn" onclick="bloodBox ++; updateBoxCounts();">+</button>
+				    </div><br/><br/>
+				    <div class="btn-group">
+					    <button type="button" class="btn" disabled style="width:90px;">Plasma</button>
+					    <button type="button" class="btn" onclick="plasmaBox --; updateBoxCounts();">-</button>
+					    <button type="button" class="btn" id="btnPlasmaBox" disabled>0
+					    </button><button type="button" class="btn" onclick="plasmaBox ++; updateBoxCounts();">+</button>
+				    </div><br/><br/>
+				    <div class="btn-group">
+					    <button type="button" class="btn" disabled style="width:90px;">Platelets</button>
+					    <button type="button" class="btn" onclick="plateletsBox --; updateBoxCounts();">-</button>
+					    <button type="button" class="btn" id="btnPlateletsBox" disabled>0
+					    </button><button type="button" class="btn" onclick="plateletsBox ++; updateBoxCounts();">+</button>
+				    </div><br/><br/>
+				    <div class="btn-group">
+					    <button type="button" class="btn" disabled style="width:90px;">Sample</button>
+					    <button type="button" class="btn" onclick="sampleBox --; updateBoxCounts();">-</button>
+					    <button type="button" class="btn" id="btnSampleBox" disabled>0
+					    </button><button type="button" class="btn" onclick="sampleBox ++; updateBoxCounts();">+</button>
+				    </div><br/><br/>
+				    <div class="btn-group">
+					    <button type="button" class="btn" disabled style="width:90px;">Package</button>
+					    <button type="button" class="btn" onclick="packageBox --; updateBoxCounts();">-</button>
+					    <button type="button" class="btn" id="btnPackageBox" disabled>0
+					    </button><button type="button" class="btn" onclick="packageBox ++; updateBoxCounts();">+</button>
+				    </div><br/><br/>
+				    <div class="btn-group">
+					    <button type="button" class="btn" disabled style="width:90px;">Vaccine</button>
+					    <button type="button" class="btn" onclick="vaccineBox --; updateBoxCounts();">-</button>
+					    <button type="button" class="btn" id="btnVaccineBox" disabled>0</button>
+				        <button type="button" class="btn" onclick="vaccineBox ++; updateBoxCounts();">+</button>
+				    </div>
+				</div>
+                <div id="aaConsignment" style="display: none;">
 				</div>
 				<br/><br/>
 
