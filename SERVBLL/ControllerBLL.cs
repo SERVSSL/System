@@ -66,13 +66,17 @@ namespace SERVBLL
             return mainDivertOk && secondDivertOk;
         }
 
-		private static bool DivertSingleNumber(string num, string format, string servNow, string pin)
+        private static bool DivertSingleNumber(string num, string format, string servNow, string pin)
         {
             try
             {
-                log.Info("Diverting flextel to " + num);
-                string res = new System.Net.WebClient().DownloadString(string.Format(format, servNow, pin, num));
-                log.Info(res);
+                log.Info("Diverting flextel [" + servNow+"] to [" + num+"]");
+                var res = new System.Net.WebClient().DownloadString(string.Format(format, servNow, pin, num));
+                if (res==null)
+                {
+                    log.Info("Flextel result is null");
+                }
+                log.Info("Flextel result: ["+ res + "]");
                 res = res.Trim();
                 if (res.Contains(","))
                 {
@@ -81,8 +85,9 @@ namespace SERVBLL
 
                 return false;
             }
-            catch
+            catch (Exception ex)
             {
+                log.Error("Flextel send error", ex);
                 return false;
             }
         }
