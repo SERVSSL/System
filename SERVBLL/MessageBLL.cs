@@ -230,11 +230,21 @@ namespace SERVBLL
         {
             if (string.IsNullOrWhiteSpace(mobileNumber)) return numbers;
 
+            var ukPrefixedNumber = "";
             if (mobileNumber.StartsWith("07"))
-                mobileNumber = "44"+ mobileNumber.Substring(1, mobileNumber.Length - 1);
+            {
+                ukPrefixedNumber = mobileNumber;
+                mobileNumber = "44" + mobileNumber.Substring(1, mobileNumber.Length - 1);
+            }
 
             if (string.Format(",{0},", numbers).Contains(string.Format(",{0},", mobileNumber)))
                 return numbers;
+
+            if (!string.IsNullOrEmpty(ukPrefixedNumber))
+            {
+                if (string.Format(",{0},", numbers).Contains(string.Format(",{0},", ukPrefixedNumber)))
+                    return numbers;
+            }
 
             return string.Format("{0},{1}", numbers, mobileNumber);
         }
