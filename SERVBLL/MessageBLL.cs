@@ -216,16 +216,40 @@ namespace SERVBLL
 		{
 			numbers = numbers.Trim().Replace(" ", "");
 			if (numbers.EndsWith(",")) { numbers = numbers.Substring(0, numbers.Length - 1); }
-			new MessageDAL().LogSentSMSMessage(numbers, message, senderUserID);
+            var sender = new MemberBLL().GetByUserID(senderUserID);
+            numbers = AppendSendersNumber(numbers, sender.MobileNumber);
+            new MessageDAL().LogSentSMSMessage(numbers, message, senderUserID);
 			if (!fromServ)
 			{
-				var sender = new MemberBLL().GetByUserID(senderUserID);
 				return SERV.Utils.Messaging.SendTextMessage(numbers, message, sender.MobileNumber);
 			}
 			return SERV.Utils.Messaging.SendTextMessage(numbers, message);
 		}
 
-		public bool SendMemberUpdateEmail(Member m, User u, int senderUserID)
+        private string AppendSendersNumber(string numbers, string mobileNumber)
+        {
+            if (string.IsNullOrWhiteSpace(mobileNumber)) return numbers;
+
+            var ukPrefixedNumber = "";
+            if (mobileNumber.StartsWith("07"))
+            {
+                ukPrefixedNumber = mobileNumber;
+                mobileNumber = "44" + mobileNumber.Substring(1, mobileNumber.Length - 1);
+            }
+
+            if (string.Format(",{0},", numbers).Contains(string.Format(",{0},", mobileNumber)))
+                return numbers;
+
+            if (!string.IsNullOrEmpty(ukPrefixedNumber))
+            {
+                if (string.Format(",{0},", numbers).Contains(string.Format(",{0},", ukPrefixedNumber)))
+                    return numbers;
+            }
+
+            return string.Format("{0},{1}", numbers, mobileNumber);
+        }
+
+        public bool SendMemberUpdateEmail(Member m, User u, int senderUserID)
 		{
 			DateTime? lastLoginDate = u.LastLoginDate;
 			m = new MemberBLL().Get(m.MemberID);
