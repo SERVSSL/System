@@ -6,7 +6,7 @@
 	<div class="hero-unit">
 		<div class="row">
 			<div class="span2">
-				<img src="img/logo.png"/>
+				<img src="img/heart-logo.png"/>
 			</div>
 			<div class="span8">
 				<p>By this point you should have already spoken to our recruitment manager and decided 
