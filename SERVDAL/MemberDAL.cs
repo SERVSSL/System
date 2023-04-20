@@ -125,7 +125,7 @@ namespace SERVDAL
 
 		public User Login(string username, string passwordHash)
 		{
-			SERVDataContract.DbLinq.User ret = (from u in db.User where u.Member.EmailAddress == username select u).FirstOrDefault();
+			var ret = (from u in db.User where u.Member.EmailAddress == username && u.Member.LeaveDate==null select u).FirstOrDefault();
 			if (ret == null) { return null; }
 			if (!String.IsNullOrEmpty(ret.PasswordHash))
 			{
@@ -133,16 +133,16 @@ namespace SERVDAL
 				{
 					return ret;
 				}
-			}
-			else
-			{
-				string comp = SERV.Utils.Authentication.Hash(ret.Member.EmailAddress.ToLower().Trim() + ret.Member.MobileNumber);
-				if (passwordHash == comp)
-				{
-					return ret;
-				}
-			}
-			return null;
+
+                return null;
+            }
+
+            var comp = SERV.Utils.Authentication.Hash(ret.Member.EmailAddress.ToLower().Trim() + ret.Member.MobileNumber);
+            if (passwordHash == comp)
+            {
+                return ret;
+            }
+            return null;
 		}
 
 		public void SetPasswordHash(string username, string passwordHash)
