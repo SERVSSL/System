@@ -180,14 +180,26 @@ function LoadRunLog()
 	}
 }
 
-function updatePlasma(id, increment) {
+//function updatePlasma(id, increment) {
+//	var currentValue = parseInt($("#" + id).text(), 10);
+//	currentValue += increment;
+//    if (currentValue<0) {
+//        currentValue = 0;
+//    }
+//    if (currentValue>4) {
+//        currentValue = 4;
+//	}
+//    $("#" + id).text(currentValue);
+//}
+
+function updateAABoxCounts(id, increment) {
 	var currentValue = parseInt($("#" + id).text(), 10);
 	currentValue += increment;
     if (currentValue<0) {
         currentValue = 0;
     }
-    if (currentValue>4) {
-        currentValue = 4;
+    if (currentValue>10) {
+        currentValue = 10;
 	}
     $("#" + id).text(currentValue);
 }
@@ -409,7 +421,6 @@ function saveAARun()
 	);
 }
 
-
 function getLocation(locationName)
 {
 	for(var x = 0; x < locations.length; x++)
@@ -580,10 +591,11 @@ function updateBoxCounts()
 	if (packageBox < 0) { packageBox = 0; }
 	if (milkBox < 0) { milkBox = 0; }
 	if (vaccineBox < 0) { vaccineBox = 0; }
-	if (outBox1 < 0) { outBox1 = 0; }
-	if (outBox2 < 0) { outBox2 = 0; }
-	if (inBox1 < 0) { inBox1 = 0; }
-	if (inBox2 < 0) { inBox2 = 0; }
+	//if (outBox1 < 0) { outBox1 = 0; }
+	//if (outBox2 < 0) { outBox2 = 0; }
+	//if (outBox3 < 0) { outBox3 = 0; }
+	//if (inBox1 < 0) { inBox1 = 0; }
+	//if (inBox2 < 0) { inBox2 = 0; }
 	$("#btnBloodBox").text(bloodBox);
 	$("#btnPlasmaBox").text(plasmaBox);
 	$("#btnPlateletsBox").text(plateletsBox);
@@ -591,10 +603,10 @@ function updateBoxCounts()
 	$("#btnPackageBox").text(packageBox);
 	$("#btnMilkBox").text(milkBox);
 	$("#btnVaccineBox").text(vaccineBox);
-	$("#btnOutBox1").text(outBox1);
-	$("#btnOutBox2").text(outBox2);
-	$("#btnInBox1").text(inBox1);
-	$("#btnInBox2").text(inBox2);
+	//$("#btnOutBox1").text(outBox1);
+	//$("#btnOutBox2").text(outBox2);
+	//$("#btnInBox1").text(inBox1);
+	//$("#btnInBox2").text(inBox2);
 }
 
 function warnOnUnload()
