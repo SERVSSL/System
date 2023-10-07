@@ -37,10 +37,10 @@ var packageBox = 0;
 var milkBox = 0;
 var vaccineBox = 0;
 
-var outBox1 = 0;
-var outBox2 = 0;
-var inBox1 = 0;
-var inBox2 = 0;
+//var outBox1 = 0;
+//var outBox2 = 0;
+//var inBox1 = 0;
+//var inBox2 = 0;
 var notCompletedPresses = 0;
 
 var urgency = DEFAULT_URGENCY;
@@ -455,13 +455,21 @@ function validate(notRun)
 		{
 			niceAlert("What AA shift date are you logging against?"); return false;
 		}
-        var outPlasma = parseInt($("#btnOutBox3").text(), 10);
-        var inPlasma = parseInt($("#btnInBox3").text(), 10);
-		if (outBox1 + inBox1 + outBox2 + inBox2 + outPlasma + inPlasma == 0)
+        var outBox1 = parseInt($("#btnOutBox1").text());
+        var outBox2 = parseInt($("#btnOutBox2").text());
+		var outBox3 = parseInt($("#btnOutBox3").text());
+        var inBox1 = parseInt($("#btnInBox1").text());
+		var inBox2 = parseInt($("#btnInBox2").text());
+		var inBox3 = parseInt($("#btnInBox3").text());
+		if (outBox1 + inBox1 + outBox2 + inBox2 + outBox3 + inBox3 === 0)
 		{
 			niceAlert("Please choose the box numbers we took to / from KSSAA."); return false;
 		}
-		if (aaVehicleId == 0)
+        var aaBoxResult = validateAaBoxes(outBox1, outBox2, outBox3, inBox1, inBox2, inBox3);
+		if (!aaBoxResult.isValid) {
+			niceAlert(aaBoxResult.errorMessage); return false;
+        }
+		if (aaVehicleId === 0)
 		{
 			niceAlert("What did the rider / driver travel on or in?"); return false;
 		}
@@ -572,6 +580,15 @@ function validate(notRun)
 		}
 	}
 	return true;
+}
+
+function validateAaBoxes(outBox1, outBox2, outBox3, inBox1, inBox2, inBox3) {
+	var inBoxes = (`${inBox1},${inBox2},${inBox3}`).split(',').map(Number).filter(x => x !== 0);
+	if (outBox1 > 0 && inBoxes.includes(outBox1)) return { isValid: false, errorMessage: `RH${outBox1} cannot be both Out and Back`};
+	if (outBox2 > 0 && inBoxes.includes(outBox2)) return { isValid: false, errorMessage: `RH${outBox2} cannot be both Out and Back`};
+	if (outBox3 > 0 && inBoxes.includes(outBox3)) return { isValid: false, errorMessage: `RH${outBox3} cannot be both Out and Back`};
+
+    return { isValid: true };
 }
 
 function updateUrgency()
