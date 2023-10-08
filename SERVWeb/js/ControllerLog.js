@@ -24,6 +24,7 @@ var ESH2P = 21;
 var ESH3P = 22;
 var ESH4P = 23;
 var VACCINE = 24;
+var RHBASE = 24;
 
 var DEFAULT_URGENCY = 2;
 var MAX_URGENCY = 3;
@@ -263,24 +264,30 @@ function productCsv()
 function outCsv()
 {
 	var ret = "";
-	if (outBox1 > 0) { ret += RH1 + (outBox1-1) + ","; }
-	if (outBox2 > 0) { ret += RH1 + (outBox2 - 1) + ","; }
-	var outPlasma = parseInt($("#btnOutBox3").text(), 10);
-    if (outPlasma>0) {
-        ret += ESHPBASE + outPlasma + ",";
-    }
+    var outBox1 = parseInt($("#btnOutBox1").text());
+    var outBox2 = parseInt($("#btnOutBox2").text());
+    var outBox3 = parseInt($("#btnOutBox3").text());
+	if (outBox1 > 0)
+         ret += RHBASE + outBox1 + ",";
+	if (outBox2 > 0)
+         ret += RHBASE + outBox2 + ",";
+	if (outBox3 > 0)
+         ret += RHBASE + outBox3 + ",";
 	return ret;
 }	
 
 function inCsv()
 {
 	var ret = "";
-	if (inBox1 > 0) { ret += RH1 + (inBox1-1) + ","; }
-	if (inBox2 > 0) { ret += RH1 + (inBox2-1) + ","; }
-	var inPlasma = parseInt($("#btnInBox3").text(), 10);
-    if (inPlasma > 0) {
-        ret += ESHPBASE + inPlasma + ",";
-    }
+    var inBox1 = parseInt($("#btnInBox1").text());
+    var inBox2 = parseInt($("#btnInBox2").text());
+    var inBox3 = parseInt($("#btnInBox3").text());
+	if (inBox1 > 0)
+		ret += RHBASE + inBox1 + ","; 
+	if (inBox2 > 0)
+		ret += RHBASE + inBox2 + ","; 
+	if (inBox3 > 0)
+		ret += RHBASE + inBox3 + ","; 
 	return ret;
 }
 
@@ -497,7 +504,8 @@ function validate(notRun)
 		{
 			niceAlert("Please use 24 hour HH:MM time formats (Return Time)"); return false;
 		}
-	}
+        return true;
+    }
 	if (runType=="blood")
 	{
 		
@@ -587,7 +595,13 @@ function validateAaBoxes(outBox1, outBox2, outBox3, inBox1, inBox2, inBox3) {
 	if (outBox1 > 0 && inBoxes.includes(outBox1)) return { isValid: false, errorMessage: `RH${outBox1} cannot be both Out and Back`};
 	if (outBox2 > 0 && inBoxes.includes(outBox2)) return { isValid: false, errorMessage: `RH${outBox2} cannot be both Out and Back`};
 	if (outBox3 > 0 && inBoxes.includes(outBox3)) return { isValid: false, errorMessage: `RH${outBox3} cannot be both Out and Back`};
-
+    var outBoxes = (`${outBox1},${outBox2},${outBox3}`).split(',').map(Number).filter(x => x !== 0);
+	var outDupes = outBoxes.filter((e, i, a) => a.indexOf(e) !== i);
+    if (outDupes.length > 0) 
+        return { isValid: false, errorMessage: `Out: RH${outDupes[0]} entered twice` };
+	var inDupes = inBoxes.filter((e, i, a) => a.indexOf(e) !== i);
+    if (inDupes.length > 0) 
+        return { isValid: false, errorMessage: `Back: RH${inDupes[0]} entered twice` };
     return { isValid: true };
 }
 
