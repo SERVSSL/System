@@ -11,19 +11,19 @@
 	<div class="alert" id="editWarn" style="display:none">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
 		<strong>CAUTION!</strong> You are <strong>editing an existing run</strong>!! Are you sure that is what you want?<br/>
-		When you save your changes, the run will be assigned a new ID.  The old run ID will be deleted.</strong>
+		When you save your changes, the run will be assigned a new ID.  The old run ID will be deleted.
 	</div>
 
 	<div class="alert" id="readOnlyWarn" style="display:none">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		<strong>Read Only:</strong> You are unable to save changes to this run as you are not the controller who logged it, nor are you an administrator.</strong>
+		<strong>Read Only:</strong> You are unable to save changes to this run as you are not the controller who logged it, nor are you an administrator.
 	</div>
 
 	<h3>Controller Log</h3>
 
 	<div class="row">
 		<div class="span4 input-prepend">
-			<button type="button" class="btn" onclick="" id="btnBloodRun" disabled>Controller</button>
+			<button type="button" class="btn" onclick="" disabled>Controller</button>
 			<input type="text" id="txtController" style="width:150px" class="controllers" placeholder="Choose the controller" /> 
 		</div>
 		<div class="span4 btn-group text-right" style="display:none">
@@ -71,42 +71,42 @@
 
 				<label>Out:</label>
 				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">ESH</button>
-					<button type="button" class="btn" onclick="outBox1 --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnOutBox1" disabled>0
-					</button><button type="button" class="btn" onclick="outBox1 ++; updateBoxCounts();">+</button>
+					<button type="button" class="btn" disabled style="width:90px;">RH</button>
+					<button type="button" class="btn" onclick="updateAABoxCounts('btnOutBox1',-1);">-</button>
+					<button type="button" class="btn" id="btnOutBox1" disabled>0</button>
+                    <button type="button" class="btn" onclick="updateAABoxCounts('btnOutBox1',1);">+</button>
 				</div><br/><br/>
 				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">ESH</button>
-					<button type="button" class="btn" onclick="outBox2 --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnOutBox2" disabled>0
-					</button><button type="button" class="btn" onclick="outBox2 ++; updateBoxCounts();">+</button>
+					<button type="button" class="btn" disabled style="width:90px;">RH</button>
+					<button type="button" class="btn" onclick="updateAABoxCounts('btnOutBox2',-1);">-</button>
+					<button type="button" class="btn" id="btnOutBox2" disabled>0</button>
+                    <button type="button" class="btn" onclick="updateAABoxCounts('btnOutBox2',1);">+</button>
 				</div><br/><br/>
 				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">ESHP</button>
-					<button type="button" class="btn" onclick="updatePlasma('btnOutBox3',-1);">-</button>
+					<button type="button" class="btn" disabled style="width:90px;">RH</button>
+					<button type="button" class="btn" onclick="updateAABoxCounts('btnOutBox3',-1);">-</button>
 					<button type="button" class="btn" id="btnOutBox3" disabled>0</button>
-					<button type="button" class="btn" onclick="updatePlasma('btnOutBox3',1);">+</button>
+					<button type="button" class="btn" onclick="updateAABoxCounts('btnOutBox3',1);">+</button>
 				</div><br/><br/>
 
 				<label>Back:</label>
 				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">ESH</button>
-					<button type="button" class="btn" onclick="inBox1 --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnInBox1" disabled>0
-					</button><button type="button" class="btn" onclick="inBox1 ++; updateBoxCounts();">+</button>
+					<button type="button" class="btn" disabled style="width:90px;">RH</button>
+					<button type="button" class="btn" onclick="updateAABoxCounts('btnInBox1',-1);">-</button>
+					<button type="button" class="btn" id="btnInBox1" disabled>0</button>
+                    <button type="button" class="btn" onclick="updateAABoxCounts('btnInBox1',1);">+</button>
 				</div><br/><br/>
 				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">ESH</button>
-					<button type="button" class="btn" onclick="inBox2 --; updateBoxCounts();">-</button>
-					<button type="button" class="btn" id="btnInBox2" disabled>0
-					</button><button type="button" class="btn" onclick="inBox2 ++; updateBoxCounts();">+</button>
+					<button type="button" class="btn" disabled style="width:90px;">RH</button>
+					<button type="button" class="btn" onclick="updateAABoxCounts('btnInBox2',-1);">-</button>
+					<button type="button" class="btn" id="btnInBox2" disabled>0</button>
+                    <button type="button" class="btn" onclick="updateAABoxCounts('btnInBox2',1);">+</button>
 				</div><br/><br/>
 				<div class="btn-group">
-					<button type="button" class="btn" disabled style="width:90px;">ESHP</button>
-					<button type="button" class="btn" onclick="updatePlasma('btnInBox3',-1);">-</button>
+					<button type="button" class="btn" disabled style="width:90px;">RH</button>
+					<button type="button" class="btn" onclick="updateAABoxCounts('btnInBox3',-1);">-</button>
 					<button type="button" class="btn" id="btnInBox3" disabled>0</button>
-					<button type="button" class="btn" onclick="updatePlasma('btnInBox3',1);">+</button>
+					<button type="button" class="btn" onclick="updateAABoxCounts('btnInBox3',1);">+</button>
 				</div><br/><br/>
 
 				<label>Notes:</label>
