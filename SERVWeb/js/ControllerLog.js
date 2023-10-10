@@ -7,24 +7,36 @@ var PLASMA			= 3;
 var SAMPLE			= 4;
 var HUMAN_MILK		= 5;
 var WATER_SAMPLE	= 6;
-var RH1			 	= 7;
-var RH2			 	= 8;
-var RH3			 	= 9;
-var RH4			 	= 10;
-var RH5			 	= 11;
-var RH6			 	= 12;
-var RH7			 	= 13;
-var RH8			 	= 14;
 var DRUGS			= 15;
 var PACKAGE			= 16;
 var OTHER = 17;
-var ESHPBASE = 19;
-var ESH1P = 20;
-var ESH2P = 21;
-var ESH3P = 22;
-var ESH4P = 23;
 var VACCINE = 24;
 var RHBASE = 24;
+
+var aaProducts = {};
+aaProducts[7] = 'ESH1';
+aaProducts[8] = 'ESH2';
+aaProducts[9] = 'ESH3';
+aaProducts[10] = 'ESH4';
+aaProducts[11] = 'ESH5';
+aaProducts[12] = 'ESH6';
+aaProducts[13] = 'ESH7';
+aaProducts[14] = 'ESH8';
+aaProducts[20] = 'ESH1P';
+aaProducts[21] = 'ESH2P';
+aaProducts[22] = 'ESH3P';
+aaProducts[23] = 'ESH4P';
+aaProducts[25] = 'RH1';
+aaProducts[26] = 'RH2';
+aaProducts[27] = 'RH3';
+aaProducts[28] = 'RH4';
+aaProducts[29] = 'RH5';
+aaProducts[30] = 'RH6';
+aaProducts[31] = 'RH7';
+aaProducts[32] = 'RH8';
+aaProducts[33] = 'RH9';
+aaProducts[34] = 'RH10';
+
 
 var DEFAULT_URGENCY = 2;
 var MAX_URGENCY = 3;
@@ -38,10 +50,6 @@ var packageBox = 0;
 var milkBox = 0;
 var vaccineBox = 0;
 
-//var outBox1 = 0;
-//var outBox2 = 0;
-//var inBox1 = 0;
-//var inBox2 = 0;
 var notCompletedPresses = 0;
 
 var urgency = DEFAULT_URGENCY;
@@ -131,24 +139,17 @@ function LoadRunLog()
                         if (prod == SAMPLE) { sampleBox = json.d.Products[prod]; }
                         if (prod == HUMAN_MILK) { milkBox = json.d.Products[prod]; }
                         if (prod == PACKAGE) { packageBox = json.d.Products[prod]; }
+						if (prod == VACCINE) { vaccineBox = json.d.Products[prod]; }
                     }
 				} else {
                     $("#bloodConsignment").hide();
 					$("#aaConsignment").show();
                     var html = "";
-                    for (var aaProd in json.d.Products) {
-						if (aaProd == RH1) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH1</button></div><br/><br/>' }
-						if (aaProd == RH2) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH2</button></div><br/><br/>' }
-						if (aaProd == RH3) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH3</button></div><br/><br/>' }
-						if (aaProd == RH4) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH4</button></div><br/><br/>' }
-						if (aaProd == RH5) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH5</button></div><br/><br/>' }
-						if (aaProd == RH6) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH6</button></div><br/><br/>' }
-						if (aaProd == RH7) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH7</button></div><br/><br/>' }
-						if (aaProd == RH8) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH8</button></div><br/><br/>' }
-						if (aaProd == ESH1P) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH1P</button></div><br/><br/>' }
-						if (aaProd == ESH2P) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH2P</button></div><br/><br/>' }
-						if (aaProd == ESH3P) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH3P</button></div><br/><br/>' }
-						if (aaProd == ESH4P) { html += '<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">ESH4P</button></div><br/><br/>' }
+					for (var aaProd in json.d.Products) {
+						var boxDescription = aaProducts[aaProd];
+                        if (boxDescription) {
+                            html += `<div class="btn-group"><button type="button" class="btn" disabled style="width:90px;">${boxDescription}</button></div><br/><br/>`;
+                        }
 					}
                     $("#aaConsignment").html(html);
                 }
@@ -180,18 +181,6 @@ function LoadRunLog()
 		window.onbeforeunload = null;
 	}
 }
-
-//function updatePlasma(id, increment) {
-//	var currentValue = parseInt($("#" + id).text(), 10);
-//	currentValue += increment;
-//    if (currentValue<0) {
-//        currentValue = 0;
-//    }
-//    if (currentValue>4) {
-//        currentValue = 4;
-//	}
-//    $("#" + id).text(currentValue);
-//}
 
 function updateAABoxCounts(id, increment) {
 	var currentValue = parseInt($("#" + id).text(), 10);
@@ -622,11 +611,6 @@ function updateBoxCounts()
 	if (packageBox < 0) { packageBox = 0; }
 	if (milkBox < 0) { milkBox = 0; }
 	if (vaccineBox < 0) { vaccineBox = 0; }
-	//if (outBox1 < 0) { outBox1 = 0; }
-	//if (outBox2 < 0) { outBox2 = 0; }
-	//if (outBox3 < 0) { outBox3 = 0; }
-	//if (inBox1 < 0) { inBox1 = 0; }
-	//if (inBox2 < 0) { inBox2 = 0; }
 	$("#btnBloodBox").text(bloodBox);
 	$("#btnPlasmaBox").text(plasmaBox);
 	$("#btnPlateletsBox").text(plateletsBox);
@@ -634,10 +618,6 @@ function updateBoxCounts()
 	$("#btnPackageBox").text(packageBox);
 	$("#btnMilkBox").text(milkBox);
 	$("#btnVaccineBox").text(vaccineBox);
-	//$("#btnOutBox1").text(outBox1);
-	//$("#btnOutBox2").text(outBox2);
-	//$("#btnInBox1").text(inBox1);
-	//$("#btnInBox2").text(inBox2);
 }
 
 function warnOnUnload()
