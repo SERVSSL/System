@@ -36,6 +36,8 @@ aaProducts[31] = 'RH7';
 aaProducts[32] = 'RH8';
 aaProducts[33] = 'RH9';
 aaProducts[34] = 'RH10';
+aaProducts[35] = 'RH11';
+aaProducts[36] = 'RH12';
 
 
 var DEFAULT_URGENCY = 2;
@@ -188,8 +190,8 @@ function updateAABoxCounts(id, increment) {
     if (currentValue<0) {
         currentValue = 0;
     }
-    if (currentValue>10) {
-        currentValue = 10;
+    if (currentValue>12) {
+        currentValue = 12;
 	}
     $("#" + id).text(currentValue);
 }
