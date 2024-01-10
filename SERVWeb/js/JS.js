@@ -953,12 +953,15 @@ function promptForLogin()
 	niceAlert("Session / Connection error!! You may have temporarily lost your connection to the internet, or a release may have been performed.  Don't panic. Open a NEW tab and log in again.  If you are attempting to make a sumbission, for example logging a run, you NEED to log back in before that will work.  There is no need to close this tab and lose your work. Wait for the globe in the top right (next to your name) to be green before retrying.");
 }
 
-function isValidTime(val)
+function isValidTime(timeValue)
 {
-	if (val.length < 4){ return false; }
-	if (val.indexOf("-") != -1) { return false; }
-	if (val.indexOf("+") != -1) { return false; }
-	return true;
+	if (!timeValue) {
+		return false;
+	}
+	if (/^([01]\d|2[0-3]):([0-5]\d)$/.test(timeValue)) {
+		return true;
+	}
+	return false;
 }
 
 function niceAlert(msg)
