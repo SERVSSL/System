@@ -575,6 +575,9 @@ function validate(notRun)
 		if (!datesInOrder($("#txtPickupDate").val(), $("#txtPickupTime").val(), $("#txtDeliverDate").val(), $("#txtDeliverTime").val())) {
 			niceAlert("Delivery/Exchange Date & Time should be after Pickup Date & Time"); return false;
 		}
+		if (!datesInOrder($("#txtCallDate").val(), $("#txtCallTime").val(),$("#txtPickupDate").val(), $("#txtPickupTime").val())) {
+			niceAlert("Pickup Date & Time should be after Call Date & Time"); return false;
+		}
 
 		finalLocationId = getLocationId($("#txtFinalDest").val());
 		if (finalLocationId == 0) {
