@@ -572,16 +572,18 @@ function validate(notRun)
 		{
 			niceAlert("Please use 24 hour HH:MM time formats (Call Time)"); return false;
 		}
-		if (!datesInOrder($("#txtPickupDate").val(), $("#txtPickupTime").val(), $("#txtDeliverDate").val(), $("#txtDeliverTime").val())) {
-			niceAlert("Delivery/Exchange Date & Time should be after Pickup Date & Time"); return false;
-		}
-		if (!datesInOrder($("#txtCallDate").val(), $("#txtCallTime").val(),$("#txtPickupDate").val(), $("#txtPickupTime").val())) {
-			niceAlert("Pickup Date & Time should be after Call Date & Time"); return false;
-		}
+		if (!notRun) {
+			if (!datesInOrder($("#txtPickupDate").val(), $("#txtPickupTime").val(), $("#txtDeliverDate").val(), $("#txtDeliverTime").val())) {
+				niceAlert("Delivery/Exchange Date & Time should be after Pickup Date & Time"); return false;
+			}
+			if (!datesInOrder($("#txtCallDate").val(), $("#txtCallTime").val(), $("#txtPickupDate").val(), $("#txtPickupTime").val())) {
+				niceAlert("Pickup Date & Time should be after Call Date & Time"); return false;
+			}
 
-		finalLocationId = getLocationId($("#txtFinalDest").val());
-		if (finalLocationId == 0) {
-			niceAlert("What was the consignments final destination? (This may not be where we dropped off).  You MUST choose an item from the list or type it exactly."); return false;
+			finalLocationId = getLocationId($("#txtFinalDest").val());
+			if (finalLocationId == 0) {
+				niceAlert("What was the consignments final destination? (This may not be where we dropped off).  You MUST choose an item from the list or type it exactly."); return false;
+			}
 		}
 	}
 	return true;
