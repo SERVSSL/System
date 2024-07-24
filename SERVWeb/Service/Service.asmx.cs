@@ -485,7 +485,7 @@ namespace SERVWeb
 		public bool AddVolunteerToCalendar(int calendarId, int memberId, DateTime shiftDate)
 		{
 			Authenticate();
-			if (CurrentUser().MemberID != memberId && CurrentUser().UserLevelID < (int)UserLevel.Committee)
+			if (CurrentUser().MemberID != memberId && CurrentUser().UserLevelID < (int)UserLevel.Controller)
 			{
 				throw new System.Security.Authentication.AuthenticationException();
 			}

@@ -1,6 +1,6 @@
 ﻿
 var userLevel = -1;
-var MANAGE_CALENDAR_USER_LEVEL = 3;
+var MANAGE_CALENDAR_USER_LEVEL = 2;
 
 var rosteringMemberId = -1;
 var rosteringDay = -1;
