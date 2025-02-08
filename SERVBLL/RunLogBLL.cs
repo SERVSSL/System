@@ -674,7 +674,7 @@ namespace SERVBLL
             rep = new Report
             {
                 Heading = "Volunteered but not used",
-                Description = "Members who volunteered for a shift but where not used (excludes entries before 2024)",
+                Description = "Members who volunteered for a night shift but where not used (excludes entries before 2024)",
                 Anchor = "volunteeredNoRun",
                 Query = "select date_format(ce.EntryDate,'%d/%m/%Y') as 'Calendar Date',m.FirstName as 'First name',m.LastName as 'Last name',c.Name as 'Shift Type' " +
                         "from CalendarEntry ce " +
