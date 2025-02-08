@@ -312,9 +312,9 @@ namespace SERVBLL
 
 		public List<Report> RunReports()
 		{
-			List<Report> reports = new List<Report>();
+			var reports = new List<Report>();
 
-			Report rep = new Report();
+			var rep = new Report();
 			rep.Heading = "Recent Runs";
 			rep.Description = "Real time information from the controller log.";
 			rep.Anchor = "runLog";
@@ -671,7 +671,22 @@ namespace SERVBLL
 			rep.Query = "call ThisMonthRunStats;";
 			reports.Add(rep);
 
-			foreach (Report r in reports)
+            rep = new Report
+            {
+                Heading = "Volunteered but not used",
+                Description = "Members who volunteered for a shift but where not used (excludes entries before 2024)",
+                Anchor = "volunteeredNoRun",
+                Query = "select date_format(ce.EntryDate,'%d/%m/%Y') as 'Calendar Date',m.FirstName as 'First name',m.LastName as 'Last name',c.Name as 'Shift Type' " +
+                        "from CalendarEntry ce " +
+                        "inner join Member m on ce.MemberID=m.MemberID " +
+                        "left join RunLog rl on ce.MemberID = rl.RiderMemberID and ce.EntryDate = rl.DutyDate " +
+                        "inner join Calendar c on ce.CalendarID=c.CalendarID " +
+                        "where ce.EntryDate>'2023/12/31' and ce.EntryDate<CURDATE() and CoverNeeded=false and rl.RunLogID is null and ce.CalendarID in (1,2,7) " +
+                        "order by ce.EntryDate desc"
+            };
+            reports.Add(rep);
+
+			foreach (var r in reports)
 			{
 				r.Results = new RunLogDAL().RunReport(r);
 			}
