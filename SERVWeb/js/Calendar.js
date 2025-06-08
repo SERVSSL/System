@@ -190,9 +190,10 @@ function volunteerClicked()
 			niceAlert('Thank you! You have been added to that shift');
 			loadCalendar(calMemberId, calUserLevel);
 		},
-		function()
+		function(request, status, error)
 		{
-			niceAlert('Sorry, An error occured. Please try again or contact the tech team');
+			var message = `request.responseText: [${request.responseText} status: [${status}] error: [${error}]`;
+			niceAlert(`Sorry, An error occured. Please try again or contact the tech team. Debug info: ${message}` );
 		}
 	);
 }
