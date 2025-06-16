@@ -289,24 +289,24 @@ namespace SERVDAL
 
 		public DataTable Report_RunLog(string year)
 		{
-			string sql = "select RunLogID as ID, date_format(DutyDate, '%Y-%m-%d') as 'DutyDate', " +
-				"coalesce(date_format(CallDateTime, '%Y-%m-%d %H:%i'), 'N/A') as 'CallDateTime', cf.Location as 'CallFrom', " +
-			    "CASE WHEN rl.RunLogType='M' THEN Concat(cl.Location,' ', rl.CollectionPostcode) ELSE cl.Location END 'From', " +
-				"CASE WHEN rl.RunLogType = 'M' THEN Concat(dl.Location,' ', rl.DeliverToPostcode) ELSE dl.Location END as 'To', coalesce(date_format(rl.CollectDateTime, '%H:%i'), 'NOT ACCEPTED') as Collected, " +
-				"date_format(rl.DeliverDateTime, '%H:%i') as Delivered, " +
-						 "CASE WHEN rl.RunLogType = 'M' THEN Concat(fl.Location,' ', rl.DeliverToPostcode) ELSE fl.Location END as 'Destination', concat(m.LastName, ' ', m.FirstName) as Rider, " +
-			             "v.VehicleType as 'Vehicle', rl.Description as 'Consignment', " +
-						 "concat(c.LastName, ' ', c.FirstName) as Controller from RunLog rl " +
-			             "left join Member m on m.MemberID = rl.RiderMemberID " +
-			             "join Member c on c.MemberID = rl.ControllerMemberID " +
-			             "join Location cf on cf.LocationID = rl.CallFromLocationID " +
-			             "join Location cl on cl.LocationID = rl.CollectionLocationID " +
-			             "join Location dl on dl.LocationID = rl.DeliverToLocationID " +
-			             "join Location fl on fl.LocationID = rl.FinalDestinationLocationID " +
-			             "left join VehicleType v on v.VehicleTypeID = rl.VehicleTypeID " +
-						 "where YEAR(DutyDate) = " + year + 
-			             " order by rl.DutyDate desc, rl.CallDateTime desc;";
-			DataTable ret = DBHelperFactory.DBHelper().ExecuteDataTable(sql);
+			var sql = "select RunLogID as ID, date_format(DutyDate, '%Y-%m-%d') as 'DutyDate', " +
+                      "coalesce(date_format(CallDateTime, '%Y-%m-%d %H:%i'), 'N/A') as 'CallDateTime', cf.Location as 'CallFrom', " +
+                      "CASE WHEN rl.RunLogType='M' THEN Concat(cl.Location,' ', rl.CollectionPostcode) ELSE cl.Location END 'From', " +
+                      "CASE WHEN rl.RunLogType = 'M' THEN Concat(dl.Location,' ', rl.DeliverToPostcode) ELSE dl.Location END as 'To', coalesce(date_format(rl.CollectDateTime, '%H:%i'), 'NOT ACCEPTED') as Collected, " +
+                      "date_format(rl.DeliverDateTime, '%H:%i') as Delivered, " +
+                      "CASE WHEN rl.RunLogType = 'M' THEN Concat(fl.Location,' ', rl.DeliverToPostcode) ELSE fl.Location END as 'Destination', concat(m.LastName, ' ', m.FirstName) as Rider, " +
+                      "v.VehicleType as 'Vehicle', rl.Description as 'Consignment', " +
+                      "concat(c.LastName, ' ', c.FirstName) as Controller from RunLog rl " +
+                      "left join Member m on m.MemberID = rl.RiderMemberID " +
+                      "join Member c on c.MemberID = rl.ControllerMemberID " +
+                      "left join Location cf on cf.LocationID = rl.CallFromLocationID " +
+                      "left join Location cl on cl.LocationID = rl.CollectionLocationID " +
+                      "left join Location dl on dl.LocationID = rl.DeliverToLocationID " +
+                      "left join Location fl on fl.LocationID = rl.FinalDestinationLocationID " +
+                      "left join VehicleType v on v.VehicleTypeID = rl.VehicleTypeID " +
+                      "where YEAR(DutyDate) = " + year + 
+                      " order by rl.DutyDate desc, rl.CallDateTime desc;";
+			var ret = DBHelperFactory.DBHelper().ExecuteDataTable(sql);
 			return ret;
 		}
 
